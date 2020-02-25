@@ -14,30 +14,40 @@ public class SphereHandler : MonoBehaviour
     #endregion
 
     #region Character Attributes
-    internal Rigidbody rb;
+    internal CharacterController controller;
     internal Animator anim;
-    [Header("Engineer Game Object")]
-    [SerializeField] internal GameObject engineer;
-    [Space]
     [Header("Colliders of Sphere Body")]
     [Tooltip("Collider located on the body of the sphere so the game object can handle it during movements ")]
     [SerializeField] internal SphereCollider scol;
     [SerializeField] internal BoxCollider bcol;
+    [Space]
+    #endregion
 
-    private float speed = 2.0f;
+    #region Movement Attributes
+    private float speedOpen = 2.0f;
+    private float speedClosed = 2.5f;
+    private float jumpForce = 5.0f;
+    private float verticalVelocity;
     internal bool sphereMove = true; //variable to control whether the Engineer or the Sphere sphereMove
     #endregion
 
     #region Follow Engineer Attributes
+    [Header("Engineer Game Object")]
+    [SerializeField] internal GameObject engineer;
+    [SerializeField] private Transform engineerPos;
+    [Tooltip("Engineer Tag is the string to be parsed into the script. Need to be the same as the tag of the Engineer GameObject")]
+    public string engineerTag = "PlayerEngineer";
     private float followMaxDistance = 3.0f;
-    private float followMinDistance = 0.5f;
-    private float followSpeed = 3.0f;
+    private float followMinDistance = 0.2f;
+    private float followSpeed = 1.8f;
     #endregion
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        controller = GetComponent<CharacterController>();
+        engineer = GameObject.FindGameObjectWithTag(engineerTag);
+        engineerPos = GameObject.FindGameObjectWithTag(engineerTag).transform;
         bcol.enabled = false;
     }
 
@@ -45,15 +55,14 @@ public class SphereHandler : MonoBehaviour
     {
         if (sphereMove)
         {
-            if (Input.GetKeyUp(KeyCode.Q)) { Open(); }
-            if (Input.GetKeyUp(KeyCode.Space)) { Jump(); }
-            if (Input.GetKey(KeyCode.LeftAlt)) { Attack(true); }
-            if (Input.GetKeyUp(KeyCode.LeftAlt)) { Attack(false); }
-            if (Input.GetKey(KeyCode.E)) { Action(); }
-        }
-        else
-        {
-            FollowMove();
+            if (controller.isGrounded)
+            {
+                if (Input.GetKeyUp(KeyCode.Q)) { Open(); }
+                if (Input.GetKeyUp(KeyCode.Space)) { Jump(); }
+                if (Input.GetKey(KeyCode.LeftAlt)) { Attack(true); }
+                if (Input.GetKeyUp(KeyCode.LeftAlt)) { Attack(false); }
+                if (Input.GetKey(KeyCode.E)) { Action(); }
+            }
         }
     }
 
@@ -69,15 +78,19 @@ public class SphereHandler : MonoBehaviour
 
             if ((Input.GetAxis("Horizontal") == 0) && (Input.GetAxis("Vertical") == 0))
             {
-                rb.velocity = Vector3.zero;
+                controller.Move(Vector3.zero);
                 anim.SetBool("Movement", false);
             }
+        }
+        else
+        {
+            FollowMove();
         }
     }
 
     public void Attack(bool cond)
     {
-        rb.transform.rotation = Quaternion.identity;
+        controller.transform.rotation = Quaternion.identity;
         anim.SetBool("Attack", cond);
     }
 
@@ -85,68 +98,81 @@ public class SphereHandler : MonoBehaviour
     {
         if (anim.GetBool("Open"))
         {
-            rb.transform.rotation = Quaternion.identity;
+            controller.transform.rotation = Quaternion.identity;
             anim.SetTrigger("Action");
         }
     }
 
     public void Open()
     {
-        rb.transform.rotation = Quaternion.identity;
+        controller.transform.rotation = Quaternion.identity;
         anim.SetBool("Open", !anim.GetBool("Open"));
         if (anim.GetBool("Open"))
         {
             bcol.enabled = true;
-            rb.freezeRotation = true;
         }
         else
         {
             bcol.enabled = false;
-            rb.freezeRotation = false;
         }
     }
 
     public void Move()
     {
+        if (!controller.isGrounded)
+        {
+            verticalVelocity -= 10.0f * Time.deltaTime;
+        }
+        else if (controller.isGrounded)
+        {
+            verticalVelocity = -9.8f * Time.deltaTime;
+        }
         if (anim.GetBool("Open"))
         {
-            rb.velocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            Vector3 move = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * input;
+            controller.Move(move * Time.deltaTime * speedOpen);
+       
         }
-        else
+        else if (!anim.GetBool("Open"))
         {
-            rb.velocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            rb.AddForce(Input.GetAxis("Horizontal") * speed, 0, Input.GetAxis("Vertical") * speed, ForceMode.Acceleration);
+            Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            Vector3 move = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * input;
+            controller.Move(move * Time.deltaTime * speedClosed);
         }
     }
 
     private void FollowMove()
     {
-        if (Vector3.Distance(transform.position, engineer.transform.position) >= followMaxDistance)
+        if (GameManager.sphereOn)
         {
-            rb.AddForce((engineer.transform.position - transform.position) * followSpeed * Time.deltaTime, ForceMode.VelocityChange);
-            transform.LookAt(engineer.transform);
-        }
-        else if (Vector3.Distance(transform.position, engineer.transform.position) <= followMinDistance)
-        {
-            rb.velocity = Vector3.zero;
+            if (Vector3.Distance(transform.position, engineer.transform.position) >= followMaxDistance)
+            {
+                Vector3 follow = new Vector3((engineer.transform.position.x - transform.position.x), 0, (engineer.transform.position.z - transform.position.z));
+                controller.Move(follow.normalized * Time.deltaTime * followSpeed);
+                transform.LookAt(engineer.transform);
+            }
+            else if (Vector3.Distance(transform.position, engineer.transform.position) <= followMinDistance)
+            {
+                controller.Move(Vector3.zero);
+            }
         }
     }
 
     public void Jump()
     {
-        rb.transform.rotation = Quaternion.Euler(Vector3.zero);
+        controller.transform.rotation = Quaternion.identity;
         anim.SetTrigger("Jump");
         StartCoroutine(Jump(3.0f));
     }
 
     IEnumerator Jump(float time)
     {
-        rb.freezeRotation = true;
-        rb.velocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        controller.detectCollisions = false;
         yield return new WaitForSeconds(time * 0.2f);
-        scol.radius = 0.004f;
-        yield return new WaitForSeconds(time * 0.8f);
-        if (!anim.GetBool("Open")) rb.freezeRotation = false;
+        scol.radius = 0.002f;
+        yield return new WaitForSeconds(time * 0.7f);
+        controller.detectCollisions = true;
         scol.radius = 0.002f;
         StopCoroutine("Jump");
     }

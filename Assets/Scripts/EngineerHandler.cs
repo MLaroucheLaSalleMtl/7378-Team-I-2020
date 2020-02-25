@@ -15,33 +15,46 @@ public class EngineerHandler : MonoBehaviour
 
     #region Character Attributesd
     private BoxCollider bcol;
-    private Rigidbody rb;
+    private CharacterController controller;
     internal Animator anim;
+    private bool canMove = true;
 
     [Header("Sphere Game Object")]
     [SerializeField] internal GameObject sphere;
+    [Tooltip("Sphere Tag is the string to be parsed into the script. Need to be the same as the tag of the Sphere GameObject")]
+    public string sphereTag = "PlayerSphere";
 
-    private float speed = 1.5f;
+    private float speed = 4.0f;
+    private float rotateSpeed = 0.5f;
     internal bool engineerMove = true; //variable to be used by the GameManager.cs in order to control whether the Engineer Robot can move
     #endregion
 
-    public GameObject objectToCarry;
+    [Space]
+    [Tooltip("This inspector variable is to check if the box to be carried is being parsed to the Engineer Script when triggered")]
+    public GameObject boxToCarry; //This inspector variable is to check if the box to be carried is being parsed to the Engineer Script when triggered
 
     void Start()
     {
         bcol = GetComponent<BoxCollider>();
-        rb = GetComponent<Rigidbody>();
+        controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        sphere = GameObject.FindGameObjectWithTag(sphereTag);
     }
 
     void Update()
     {
         if (engineerMove)
         {
-            if (Input.GetKeyUp(KeyCode.Q)) { TakeObject(); }
-            if (Input.GetKeyUp(KeyCode.E)) { Action(); }
-            if (Input.GetKeyUp(KeyCode.Space)) { Jump(); }
-            if (Input.GetKeyUp(KeyCode.LeftAlt)) { Punch(); }
+            if (controller.isGrounded)
+            {
+                if (Input.GetKeyUp(KeyCode.Q)) { TakeObject(); }
+                if (!anim.GetBool("CarryObject"))
+                {
+                    if (Input.GetKeyUp(KeyCode.E)) { Action(); }
+                    if (Input.GetKeyUp(KeyCode.Space)) { Jump(); }
+                    if (Input.GetKeyUp(KeyCode.LeftAlt)) { Punch(); }
+                }
+            }
         }
     }
 
@@ -49,10 +62,20 @@ public class EngineerHandler : MonoBehaviour
     {
         if (engineerMove)
         {
-            anim.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
-            anim.SetFloat("Vertical", Input.GetAxis("Vertical"));
-            anim.SetBool("Movement", true); //To be removed
-            Move();
+            if (controller.isGrounded && canMove)
+            {
+                if ((Input.GetAxis("Horizontal") != 0) || (Input.GetAxis("Vertical") > 0))
+                {
+                    anim.SetBool("Movement", true);
+                    Move();
+                }
+
+                if ((Input.GetAxis("Horizontal") == 0) && (Input.GetAxis("Vertical") == 0))
+                {
+                    anim.SetBool("Movement", false);
+                    controller.Move(Vector3.zero);
+                }
+            }
         }
         else
         {
@@ -62,19 +85,20 @@ public class EngineerHandler : MonoBehaviour
 
     public void TakeObject()
     {
-        if (!anim.GetBool("CarryObject"))
+        if (anim.GetBool("CarryObject"))
         {
-            anim.SetTrigger("TakeObject");
-            if (objectToCarry) 
-            {
-                objectToCarry.GetComponent<PuzzleCubes>().OnCarry();
-                anim.SetBool("CarryObject", true);
-            }
+            StartCoroutine(CantMove(3.0f));
+            anim.SetBool("CarryObject", false);
+            if (boxToCarry) boxToCarry.GetComponent<PuzzleCubes>().OnRelease();
         }
         else
         {
-            anim.SetBool("CarryObject", false);
-            if (objectToCarry) objectToCarry.GetComponent<PuzzleCubes>().OnRelease();
+            StartCoroutine(CantMove(3.0f));
+            anim.SetTrigger("TakeObject");
+            if (boxToCarry)
+            {
+                anim.SetBool("CarryObject", true);
+            }
         }
     }
 
@@ -95,9 +119,23 @@ public class EngineerHandler : MonoBehaviour
 
     public void Move()
     {
-        // anim.SetFloat("Horizontal", Input.GetAxis("Horizontal") * speed * Time.deltaTime);
-        // anim.SetFloat("Vertical", Input.GetAxis("Vertical") * speed * Time.deltaTime);
+        if (controller.isGrounded)
+        {
+            anim.SetFloat("Horizontal", Input.GetAxis("Horizontal") * speed);
+            anim.SetFloat("Vertical", Input.GetAxis("Vertical") * rotateSpeed);
+        }
+    }
 
-        rb.velocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical") * speed);
+    public void PickItem()
+    {
+        if (boxToCarry) boxToCarry.GetComponent<PuzzleCubes>().OnCarry();
+    }
+
+    IEnumerator CantMove(float time)
+    {
+        canMove = false;
+        yield return new WaitForSeconds(time);
+        canMove = true;
+        StopCoroutine("CantMove");
     }
 }
