@@ -5,7 +5,7 @@ Marc-Andre Larouche
       
       
 
-![Cover](./Manual/Background.png)
+->![Cover](./Manual/Background.png)<-
 
       
 7378-Team-I-2020
@@ -44,12 +44,12 @@ Philipe Gouveia
 
 
 
-![ControlScheme](./Manual/ControlScheme.png?style=centerme)
+->![ControlScheme](./Manual/ControlScheme.png?)<-
 
 
 
 
-![ControlScheme2](./Manual/ControlScheme2.png?style=centerme)
+->![ControlScheme2](./Manual/ControlScheme2.png)<-
 
 
 
@@ -62,7 +62,7 @@ Philipe Gouveia
 
  
       
-![Iconography](./Manual/Iconography.png?style=centerme)
+->![Iconography](./Manual/Iconography.png)<-
 
 
   
