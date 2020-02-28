@@ -62,7 +62,7 @@ Philipe Gouveia
 
  
       
-      ![Legend](./Manual/Legend.png)
+![Iconography](./Manual/Iconography.png)
 
 
   
