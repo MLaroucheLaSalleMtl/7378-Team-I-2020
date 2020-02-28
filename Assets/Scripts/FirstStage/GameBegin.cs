@@ -56,6 +56,7 @@ public class GameBegin : MonoBehaviour
             GameObject.FindObjectOfType<SwitchBridge>().OnClick();
             GameObject.FindObjectOfType<SwitchSphere>().OnClick();
             GameObject.FindObjectOfType<SwitchDoor>().OnOpen();
+            FindObjectOfType<AIInstructions>().beginTutorial = true;
         }
     }
 
@@ -63,9 +64,11 @@ public class GameBegin : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         engineerAnim.SetBool("shutOff", false);
-        yield return new WaitForSeconds(10.0f);
+        yield return new WaitForSeconds(7.0f);
         zionAnim.SetBool("walkAway", true);
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(3.0f);
+        FindObjectOfType<AIInstructions>().beginTutorial = true;
+        yield return new WaitForSeconds(2.0f);
         Destroy(zionLight);
         Destroy(zion);
         GameManager.engineerOn = true;

@@ -11,6 +11,7 @@ public class CameraSchemeSelector : MonoBehaviour
     {
         if (other.gameObject.tag == GameManager.sphereTag)
         {
+            CameraRigHandler.doOnce = true;
             CameraRigHandler.camScheme = schemeSelected;
         }
     }

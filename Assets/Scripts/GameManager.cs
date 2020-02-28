@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Tab) && sphereOn && engineerOn)
+        if (Input.GetButtonUp("CharSwitcher") && sphereOn && engineerOn)
         {
             if (Vector3.Magnitude(sphereCharacter.transform.position - engineerCharacter.transform.position) < charChangeDistance)
             {
@@ -53,8 +53,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("show dialogue of not being possible to change from sphere to engineer with such great distance");
-                //show dialogue of not being possible to change from sphere to engineer with such great distance
+                FindObjectOfType<AIUI>().ShowText("Your link to the engineer is made of a radio frequency which is weak within this distance. Get closer to him.");
             }
         }
     }

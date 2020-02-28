@@ -18,16 +18,16 @@ public class EngineerHandler : MonoBehaviour
     private CharacterController controller;
     internal Animator anim;
     private bool canMove = true;
+    private float speed = 4.0f;
+    private float rotateSpeed = 0.5f;
+    internal bool engineerMove = true; //variable to be used by the GameManager.cs in order to control whether the Engineer Robot can move
+    #endregion
+
 
     [Header("Sphere Game Object")]
     [SerializeField] internal GameObject sphere;
     [Tooltip("Sphere Tag is the string to be parsed into the script. Need to be the same as the tag of the Sphere GameObject")]
     public string sphereTag = "PlayerSphere";
-
-    private float speed = 4.0f;
-    private float rotateSpeed = 0.5f;
-    internal bool engineerMove = true; //variable to be used by the GameManager.cs in order to control whether the Engineer Robot can move
-    #endregion
 
     [Space]
     [Tooltip("This inspector variable is to check if the box to be carried is being parsed to the Engineer Script when triggered")]
@@ -47,12 +47,16 @@ public class EngineerHandler : MonoBehaviour
         {
             if (controller.isGrounded)
             {
-                if (Input.GetKeyUp(KeyCode.Q)) { TakeObject(); }
+                if (Input.GetButtonUp("Action3")) { TakeObject(); }
                 if (!anim.GetBool("CarryObject"))
                 {
-                    if (Input.GetKeyUp(KeyCode.E)) { Action(); }
-                    if (Input.GetKeyUp(KeyCode.Space)) { Jump(); }
-                    if (Input.GetKeyUp(KeyCode.LeftAlt)) { Punch(); }
+                    if (Input.GetButtonUp("Action4")) { Action(); }
+                    if (Input.GetButtonUp("Action1")) 
+                    { 
+                        Jump();
+                        FindObjectOfType<AIUI>().ShowText("You can not jump, Sir. You are very heavy. Try to ask the ___SPHERE___ to jump for you.");
+                    }
+                    if (Input.GetButtonUp("Action2")) { Punch(); }
                 }
             }
         }
@@ -70,7 +74,7 @@ public class EngineerHandler : MonoBehaviour
                     Move();
                 }
 
-                if ((Input.GetAxis("Horizontal") == 0) && (Input.GetAxis("Vertical") == 0))
+                else if ((Input.GetAxis("Horizontal") == 0) && (Input.GetAxis("Vertical") == 0))
                 {
                     anim.SetBool("Movement", false);
                     controller.Move(Vector3.zero);

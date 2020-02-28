@@ -17,7 +17,7 @@ public class SwitchBridge : MonoBehaviour
     {
         if (other.gameObject.tag == playerTag)
         {
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetButton("Action4"))
             {
                 OnClick();
             }
@@ -28,5 +28,7 @@ public class SwitchBridge : MonoBehaviour
     {
         mat.SetColor("_EmissionColor", Color.green);
         bridge.GetComponent<Animator>().SetBool("liftBridge", true);
+        FindObjectOfType<AIUI>().ShowText("<< _to_player: You can lift heavy objects with the __ENGINEER__ using the keyboard key [Q]. To drop them, press the same key again.>>");
+
     }
 }

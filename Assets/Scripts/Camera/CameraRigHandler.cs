@@ -24,6 +24,7 @@ public class CameraRigHandler : MonoBehaviour
     public static int stageIndex; //index of whole rig target position inside the stage
     public bool isTopView; //in case we decide to use the back view as well
     public float moveSpeed = 2.0f; //camera move speed from one placeholder to another inside the rig
+    public static bool doOnce;
 
     //schemes to control the camera used scheme 1 - SE, SW, NW, NE / 2 - S, W, N, E / 3 - S, N / 4 - E, W
     [Range(1,4)] public static int camScheme; //variable to be changed/controlled with triggers on the stage
@@ -43,6 +44,7 @@ public class CameraRigHandler : MonoBehaviour
         index = 0;
         stageIndex = 0;
         isTopView = true;
+        doOnce = true;
         camScheme = 1;
         CameraHandler.target = camPlaceHolder1[0];
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -101,14 +103,20 @@ public class CameraRigHandler : MonoBehaviour
 
     void TopViewHandler(Transform[] placeHolder)
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (doOnce)
+        {
+            CameraHandler.target = placeHolder[0];
+            doOnce = false;
+        }
+
+        if (Input.GetButtonDown("CameraLeft"))
         {
             index++;
             if (index > 3) index = 0;
 
             CameraHandler.target = placeHolder[index];
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetButtonDown("CameraRight"))
         {
             index--;
             if (index < 0) index = 3;

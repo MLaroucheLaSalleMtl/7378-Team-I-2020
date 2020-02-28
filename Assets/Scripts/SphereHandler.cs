@@ -57,11 +57,11 @@ public class SphereHandler : MonoBehaviour
         {
             if (controller.isGrounded)
             {
-                if (Input.GetKeyUp(KeyCode.Q)) { Open(); }
-                if (Input.GetKeyUp(KeyCode.Space)) { Jump(); }
-                if (Input.GetKey(KeyCode.LeftAlt)) { Attack(true); }
-                if (Input.GetKeyUp(KeyCode.LeftAlt)) { Attack(false); }
-                if (Input.GetKey(KeyCode.E)) { Action(); }
+                if (Input.GetButtonUp("Action3")) { Open(); }
+                if (Input.GetButtonUp("Action1")) { Jump(); }
+                if (Input.GetButton("Action2")) { Attack(true); }
+                if (Input.GetButtonUp("Action2")) { Attack(false); }
+                if (Input.GetButton("Action4")) { Action(); }
             }
         }
     }
