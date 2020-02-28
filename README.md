@@ -62,17 +62,11 @@ Philipe Gouveia
 
  
       
-      
-![Visuals](./Manual/Visuals.png)
+      ![Legend](./Manual/Legend.png)
+
+
   
-      
-      
-      
-      
-      
-      
-      
-      
+
 **Section 4: References**
 
 * Engineer Character Design:
