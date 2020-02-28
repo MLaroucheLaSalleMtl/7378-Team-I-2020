@@ -44,12 +44,12 @@ Philipe Gouveia
 
 
 
-![ControlScheme](./Manual/ControlScheme.png)
+![ControlScheme](./Manual/ControlScheme.png?style=centerme)
 
 
 
 
-![ControlScheme2](./Manual/ControlScheme2.png)
+![ControlScheme2](./Manual/ControlScheme2.png?style=centerme)
 
 
 
@@ -62,7 +62,7 @@ Philipe Gouveia
 
  
       
-![Iconography](./Manual/Iconography.png)
+![Iconography](./Manual/Iconography.png?style=centerme)
 
 
   
