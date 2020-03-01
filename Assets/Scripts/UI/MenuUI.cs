@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuUI : MonoBehaviour
 {
@@ -32,6 +33,10 @@ public class MenuUI : MonoBehaviour
         if (Input.GetButtonDown("Cancel"))
         {
             HideBtn();
+        }
+        if (Input.GetButtonDown("Pause"))
+        {
+            Pause();
         }
     }
 

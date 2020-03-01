@@ -64,9 +64,9 @@ public class GameBegin : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         engineerAnim.SetBool("shutOff", false);
-        yield return new WaitForSeconds(7.0f);
+        yield return new WaitForSeconds(4.0f);
         zionAnim.SetBool("walkAway", true);
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(2.0f);
         FindObjectOfType<AIInstructions>().beginTutorial = true;
         yield return new WaitForSeconds(2.0f);
         Destroy(zionLight);

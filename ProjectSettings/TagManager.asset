@@ -13,6 +13,8 @@ TagManager:
   - CameraRig
   - PlayerEngineerImg
   - PlayerSphereImg
+  - Car
+  - PlayerSphereLeg
   layers:
   - Default
   - TransparentFX

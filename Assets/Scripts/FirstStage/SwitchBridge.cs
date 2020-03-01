@@ -25,10 +25,10 @@ public class SwitchBridge : MonoBehaviour
     }
 
     public void OnClick()
-    {
+    {   
         mat.SetColor("_EmissionColor", Color.green);
         bridge.GetComponent<Animator>().SetBool("liftBridge", true);
-        FindObjectOfType<AIUI>().ShowText("<< _to_player: You can lift heavy objects with the __ENGINEER__ using the keyboard key [Q]. To drop them, press the same key again.>>");
+        FindObjectOfType<AIUI>().ShowText("<< _to_player: You can lift heavy objects with the __ENGINEER__ using -> keyboard [Q] / Joystick [X]. To drop them, press the same key again.>>");
 
     }
 }
