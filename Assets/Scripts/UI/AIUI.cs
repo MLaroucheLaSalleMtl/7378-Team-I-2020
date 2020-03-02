@@ -87,10 +87,10 @@ public class AIUI : MonoBehaviour
             foreach (char item in _text)
             {
                 aiText.GetComponent<Text>().text += item;
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.085f);
             }
 
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(1.5f);
             aiText.GetComponent<Text>().text = "";
         }
 

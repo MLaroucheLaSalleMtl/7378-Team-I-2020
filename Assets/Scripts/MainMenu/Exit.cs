@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class Exit : MonoBehaviour
 {
+    [SerializeField] GameObject quitPanel;
+
+    public void QuitPanel()
+    {
+        quitPanel.SetActive(true);
+    }
+
+    public void ExitQuitPanel()
+    {
+        quitPanel.SetActive(false);
+    }
+
     public void ExitGame()
     {
 #if UNITY_EDITOR

@@ -15,6 +15,7 @@ public class GameBegin : MonoBehaviour
     [Header("Zion Game Object")]
     [SerializeField] GameObject zion;
     [SerializeField] GameObject zionLight;
+    [SerializeField] KillSpider spider;
 
     [Tooltip("Variable to skip intro if player wants")]
     public bool skipIntro;
@@ -25,6 +26,7 @@ public class GameBegin : MonoBehaviour
         engineerAnim = GameObject.FindGameObjectWithTag(GameManager.engineerTag).GetComponent<Animator>();
         sphereAnim = GameObject.FindGameObjectWithTag(GameManager.sphereTag).GetComponent<Animator>();
         zionAnim = GameObject.FindGameObjectWithTag(GameManager.zionTag).GetComponent<Animator>();
+        spider = GameObject.FindObjectOfType<KillSpider>();
     }
 
     private void Update()
@@ -55,7 +57,13 @@ public class GameBegin : MonoBehaviour
             GameManager.sphereOn = true; 
             GameObject.FindObjectOfType<SwitchBridge>().OnClick();
             GameObject.FindObjectOfType<SwitchSphere>().OnClick();
-            GameObject.FindObjectOfType<SwitchDoor>().OnOpen();
+            SwitchDoor[] temp = GameObject.FindObjectsOfType<SwitchDoor>();
+            foreach(SwitchDoor obj in temp)
+            {
+                obj.OnOpen();
+            }
+            spider.Die();
+            GameObject.FindObjectOfType<DoorSwitch_Final>().OnClick();
             FindObjectOfType<AIInstructions>().beginTutorial = true;
         }
     }

@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FirstStage.unity
     guid: 85c55efd7b59bdd4fa6f9d19b484f6ec
+  - enabled: 1
+    path: Assets/Scenes/Planet.unity
+    guid: 89a84b5a88edd704a894065f3bd4e329
   m_configObjects: {}

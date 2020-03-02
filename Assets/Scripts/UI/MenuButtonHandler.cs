@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class MenuButtonHandler : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IDeselectHandler
+public class MenuButtonHandler : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
 {
     private AudioSource _as;
 
@@ -30,10 +30,5 @@ public class MenuButtonHandler : MonoBehaviour, IPointerClickHandler, IPointerEn
     public void OnPointerEnter(PointerEventData eventData)
     {
         _as.PlayOneShot(hoverClip);
-    }
-
-    public void OnDeselect(BaseEventData eventData)
-    {
-        GetComponent<Selectable>().OnPointerExit(null);
     }
 }

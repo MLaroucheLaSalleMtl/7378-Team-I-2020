@@ -61,7 +61,7 @@ public class MenuUI : MonoBehaviour
 
     public void Pause()
     {
-        paused.SetActive(!paused.activeSelf);
+        paused.SetActive(!paused.activeSelf); //NOT WORKING... check why it is not working
         if (paused.activeSelf) Time.timeScale = 0f;
         else Time.timeScale = 1f;
     }
@@ -73,7 +73,7 @@ public class MenuUI : MonoBehaviour
 
     public void Config()
     {
-        configPanel.SetActive(!configPanel.activeSelf);
+        configPanel.SetActive(!configPanel.activeSelf); //NOT WORKING... check why it is not working
         if (configPanel.activeSelf) Time.timeScale = 0f;
         else Time.timeScale = 1f;
     }

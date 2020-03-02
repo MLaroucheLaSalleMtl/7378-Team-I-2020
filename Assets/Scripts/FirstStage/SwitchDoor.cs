@@ -6,7 +6,7 @@ public class SwitchDoor : MonoBehaviour
 {
     [SerializeField] private Material mat;
     [SerializeField] private string boxTag = "boxSwitch";
-    [SerializeField] private GameObject door;
+    [SerializeField] private GameObject activateElement;
 
     void Start()
     {
@@ -32,12 +32,12 @@ public class SwitchDoor : MonoBehaviour
     public void OnOpen()
     {
         mat.SetColor("_EmissionColor", Color.green);
-        door.GetComponent<Animator>().SetBool("openDoor", true);
+        activateElement.GetComponent<Animator>().SetBool("openDoor", true);
     }
 
     public void OnClose()
     {
         mat.SetColor("_EmissionColor", Color.red);
-        door.GetComponent<Animator>().SetBool("openDoor", false);
+        activateElement.GetComponent<Animator>().SetBool("openDoor", false);
     }
 }

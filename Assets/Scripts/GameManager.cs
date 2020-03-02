@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject highlightSphere;
     public static string sphereTag = "PlayerSphere";
     public static string sphereImgTag = "PlayerSphereImg";
+    [SerializeField] CarHandler carCharacter;
+    [SerializeField] GameObject carHightlight;
+    public static string carTag = "Car";
     #endregion
 
     public static string zionTag = "EnemyZion";

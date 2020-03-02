@@ -39,7 +39,7 @@ public class SphereHandler : MonoBehaviour
     public string engineerTag = "PlayerEngineer";
     private float followMaxDistance = 3.0f;
     private float followMinDistance = 0.2f;
-    private float followSpeed = 1.8f;
+    [SerializeField] private float followSpeed = 1.8f;
     #endregion
 
     void Start()

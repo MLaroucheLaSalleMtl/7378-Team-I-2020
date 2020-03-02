@@ -5,17 +5,18 @@ using UnityEngine;
 public class DoorSwitch_Final : MonoBehaviour
 {
     [SerializeField] private Material mat;
-    [SerializeField] private string playerTag = GameManager.engineerTag;
-    [SerializeField] private Animator animLeft;
-    [SerializeField] private Animator animRight;
+    [SerializeField] private Animator animDoor;
+    [SerializeField] private GameObject carPlayer;
 
-    void Start()
+    private void Start()
     {
+        carPlayer = GameObject.FindGameObjectWithTag("Car");
+        mat = GetComponent<Renderer>().material;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == playerTag)
+        if (other.gameObject.tag == GameManager.sphereTag)
         {
             if (Input.GetButton("Action4"))
             {
@@ -27,9 +28,8 @@ public class DoorSwitch_Final : MonoBehaviour
     public void OnClick()
     {
         mat.SetColor("_EmissionColor", Color.green);
-        animLeft.SetBool("IsOpen", true);
-        animRight.SetBool("IsOpen", true);
-        FindObjectOfType<AIUI>().ShowText("You escaped from this place.");
-
+        animDoor.SetBool("IsOpen", true);
+        FindObjectOfType<AIUI>().ShowText("You can use the car to explore the planet. Go to the area where the radio frequency was detected");
+        carPlayer.GetComponent<Rigidbody>().isKinematic = false;
     }
 }

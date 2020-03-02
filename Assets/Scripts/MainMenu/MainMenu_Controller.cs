@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu_Controller : MonoBehaviour
 {
     int levelToLoad = 1;
+    [SerializeField] private GameObject optionMenu;
 
     public void Start_Game()
     {
@@ -19,12 +20,25 @@ public class MainMenu_Controller : MonoBehaviour
         print(levelToLoad);
     }
 
+    public void OptionMenu()
+    {
+        // optionMenu.SetActive(!optionMenu.activeSelf); Not working...Check later why
+        optionMenu.SetActive(true);
+    }
 
+    public void CloseOptionMenu()
+    {
+        optionMenu.SetActive(false);
+    }
 
-
-    // Update is called once per frame
     void Update()
     {
-        
+        if (optionMenu.activeSelf)
+        {
+            if (Input.GetButtonDown("Cancel"))
+            {
+                optionMenu.SetActive(false);
+            }
+        }
     }
 }
