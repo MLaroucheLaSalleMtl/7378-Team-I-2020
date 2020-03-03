@@ -2228,7 +2228,7 @@ GameObject:
   - component: {fileID: 7441988737404631243}
   m_Layer: 0
   m_Name: carRobotPrefab
-  m_TagString: Car
+  m_TagString: PlayerCar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2350,8 +2350,6 @@ MonoBehaviour:
   engineer: {fileID: 0}
   sphere: {fileID: 0}
   rb: {fileID: 0}
-  frontWheels: {fileID: 0}
-  backWheels: {fileID: 0}
   speed: 0
 --- !u!95 &7441988737404631243
 Animator:

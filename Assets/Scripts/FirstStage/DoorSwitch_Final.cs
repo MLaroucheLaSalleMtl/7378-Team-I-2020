@@ -10,7 +10,7 @@ public class DoorSwitch_Final : MonoBehaviour
 
     private void Start()
     {
-        carPlayer = GameObject.FindGameObjectWithTag("Car");
+        carPlayer = GameObject.FindGameObjectWithTag(GameManager.carTag);
         mat = GetComponent<Renderer>().material;
     }
 
@@ -29,7 +29,7 @@ public class DoorSwitch_Final : MonoBehaviour
     {
         mat.SetColor("_EmissionColor", Color.green);
         animDoor.SetBool("IsOpen", true);
-        FindObjectOfType<AIUI>().ShowText("You can use the car to explore the planet. Go to the area where the radio frequency was detected");
+        FindObjectOfType<AIUI>().ShowText("You can now use the car to explore the planet...");
         carPlayer.GetComponent<Rigidbody>().isKinematic = false;
     }
 }

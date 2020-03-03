@@ -19,7 +19,7 @@ public class EngineerHandler : MonoBehaviour
     internal Animator anim;
     private bool canMove = true;
     private float speed = 4.0f;
-    private float rotateSpeed = 0.5f;
+    private float rotateSpeed = 0.2f;
     internal bool engineerMove = true; //variable to be used by the GameManager.cs in order to control whether the Engineer Robot can move
     #endregion
 

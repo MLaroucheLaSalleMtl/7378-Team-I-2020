@@ -57,6 +57,7 @@ public class GameBegin : MonoBehaviour
             GameManager.sphereOn = true; 
             GameObject.FindObjectOfType<SwitchBridge>().OnClick();
             GameObject.FindObjectOfType<SwitchSphere>().OnClick();
+            GameObject.FindObjectOfType<SwitchWall>().OnClick();
             SwitchDoor[] temp = GameObject.FindObjectsOfType<SwitchDoor>();
             foreach(SwitchDoor obj in temp)
             {
