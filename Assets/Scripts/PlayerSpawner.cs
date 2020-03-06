@@ -4,32 +4,34 @@ using UnityEngine;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    private Transform respawnPlace;
-    private GameObject engineer;
-    private GameObject sphere;
+    [SerializeField] private Transform respawnPlace;
+    [SerializeField] private GameObject engineerPrefab;
+    [SerializeField] private GameObject spherePrefab;
+    public static bool begin = false;
 
     private void Awake()
     {
-        engineer = GameObject.FindGameObjectWithTag(GameManager.engineerTag);
-        sphere = GameObject.FindGameObjectWithTag(GameManager.sphereTag);
         respawnPlace = GameObject.Find("RespawnPlaceHolder").GetComponent<Transform>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == GameManager.engineerTag || other.gameObject.tag == GameManager.sphereTag)
+        if (other.gameObject.tag == GameManager.engineerTag)
         {
-            //if (other.gameObject.tag == GameManager.engineerTag)
-            //{  
-            //    Destroy(other);
-            //    Instantiate(engineer, respawnPlace);
-            //}
-            //else if (other.gameObject.tag == GameManager.sphereTag)
-            //{
-            //    Destroy(other);
-            //    Instantiate(sphere, respawnPlace);
-            //}
+            StartCoroutine(RespawnChar(other.gameObject));
+            Instantiate(engineerPrefab, respawnPlace);
+
+            if (begin) { FindObjectOfType<AIUI>().ShowText("<< Try to ask the ___SPHERE___ to jump over this gap.>>"); begin = false; }
         }
     }
 
+    IEnumerator RespawnChar(GameObject player)
+    {
+        player.SetActive(false);
+        player.transform.position = respawnPlace.position;
+        player.transform.rotation = Quaternion.identity;
+        yield return new WaitForSeconds(0.1f);
+        player.SetActive(true);
+        StopCoroutine(RespawnChar(player));
+    }
 }

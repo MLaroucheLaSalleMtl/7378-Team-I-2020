@@ -6,33 +6,35 @@ public class SwitchWall : MonoBehaviour
 {
 
     [Header("Result of this switch")]
+    [Tooltip("Put here the GameObject that will react when this switch is activated")]
     [SerializeField] private GameObject resultObj;
     [Header("Player who will act on this switch:")]
-    public bool sphereAct;
-    public bool engineerAct;
+    [Tooltip("Check here the player who will be responsible to act on this switch")]
+    public bool sphereAct = false;
+    public bool engineerAct = false;
+
     [Space]
     [Header("Output AI instruction?")]
-    public bool outputInstruction;
-    public string aiInstruction;
+    [Tooltip("Check and write here if there is any instruction the AI will give to the player or the characters")]
+    public bool outputInstruction = false;
+    public string aiInstruction = "";
 
-    private string playerTag;
     private Material mat;
     private bool activated;
 
     void Start()
     {
         mat = GetComponent<Renderer>().material;
-        if (sphereAct) { playerTag = GameManager.sphereTag; }
-        else { playerTag = GameManager.engineerTag; }
         outputInstruction = false;
         activated = false;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == playerTag)
+
+        if ((sphereAct && other.gameObject.tag == GameManager.sphereTag) || (engineerAct && other.gameObject.tag == GameManager.engineerTag))
         {
-            if (Input.GetButton("Action4"))
+            if (Input.GetButtonDown("Action4"))
             {
                 if (!activated)
                 {

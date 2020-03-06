@@ -59,6 +59,11 @@ public class GameManager : MonoBehaviour
                 FindObjectOfType<AIUI>().ShowText("Your link to the engineer is made of a radio frequency which is weak within this distance. Get closer to him.");
             }
         }
+
+        if (Input.GetButtonDown("Skip"))
+        {
+            AIUI.skip = true;
+        }
     }
 
     private void Begin()

@@ -7,7 +7,6 @@ public class PuzzleCubes : MonoBehaviour
     #region Object attributes
     private EngineerHandler engineer;
     private Rigidbody rb;
-    private BoxCollider bc;
     private Material mat;
     #endregion
 
@@ -24,7 +23,6 @@ public class PuzzleCubes : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        bc = GetComponent<BoxCollider>();
         mat = GetComponent<Renderer>().material;
         engineer = GameObject.FindObjectOfType<EngineerHandler>();
         engineerTag = GameManager.engineerTag;

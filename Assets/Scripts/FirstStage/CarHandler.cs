@@ -26,12 +26,12 @@ public class CarHandler : MonoBehaviour
         {
             if(Input.GetButtonDown("Action4"))
             {
-                Debug.Log("Car Activated");
                 engineer.transform.parent = gameObject.transform;
                 sphere.transform.parent = gameObject.transform;
                 engineer.SetActive(false);
                 sphere.SetActive(false);
                 rb.isKinematic = false;
+                rb.constraints = RigidbodyConstraints.FreezeRotation;
                 anim.SetBool("Close", true);
                 anim.SetTrigger("Movefwd");
             }

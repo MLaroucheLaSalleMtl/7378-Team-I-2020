@@ -8,6 +8,8 @@ public class SwitchDoor : MonoBehaviour
     [SerializeField] private string boxTag = "boxSwitch";
     [SerializeField] private GameObject activateElement;
 
+    [SerializeField] private ItemHighlight[] highlight;
+
     void Start()
     {
         mat = GetComponent<Renderer>().material;
@@ -31,6 +33,7 @@ public class SwitchDoor : MonoBehaviour
 
     public void OnOpen()
     {
+        if (highlight.Length > 0) foreach (ItemHighlight obj in highlight) obj.blink = false;
         mat.SetColor("_EmissionColor", Color.green);
         activateElement.GetComponent<Animator>().SetBool("openDoor", true);
     }

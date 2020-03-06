@@ -5242,6 +5242,7 @@ MonoBehaviour:
   sphere: {fileID: 0}
   sphereTag: PlayerSphere
   boxToCarry: {fileID: 0}
+  carryingBox: {fileID: 0}
 --- !u!143 &348335638
 CharacterController:
   m_ObjectHideFlags: 0

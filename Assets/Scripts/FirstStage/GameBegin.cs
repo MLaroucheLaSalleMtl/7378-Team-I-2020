@@ -20,6 +20,8 @@ public class GameBegin : MonoBehaviour
     [Tooltip("Variable to skip intro if player wants")]
     public bool skipIntro;
 
+    private CameraRigHandler camRig;
+
     private void Start()
     {
         skipIntro = false;
@@ -27,60 +29,66 @@ public class GameBegin : MonoBehaviour
         sphereAnim = GameObject.FindGameObjectWithTag(GameManager.sphereTag).GetComponent<Animator>();
         zionAnim = GameObject.FindGameObjectWithTag(GameManager.zionTag).GetComponent<Animator>();
         spider = GameObject.FindObjectOfType<KillSpider>();
+        camRig = GameObject.FindObjectOfType<CameraRigHandler>();
+        
+        PlayerSpawner.begin = true; //variable to control whether the spawner will show the initial instruction about the gaps
     }
 
     private void Update()
     {
         if (!skipIntro)
         {
-            engineerAnim.SetBool("shutOff", true);
             sphereAnim.SetBool("shutOff", true);
-            zionAnim.SetBool("walkAway", false);
-            StartCoroutine(Begin(10f));
+            if (zion) zionAnim.SetBool("walkAway", false);
+            StartCoroutine(Begin(6f));
             GameManager.sphereOn = false;
         }
         else if (skipIntro)
         {
-            engineerAnim.SetBool("shutOff", false);
+            engineerAnim.SetBool("shutOff", true);
+            zionAnim.SetBool("walkAway", false);
             GameManager.engineerOn = true;
-            Destroy(zion);
-            Destroy(zionLight);
-            Destroy(this);
+            GameManager.sphereOn = false;
         }
         if (Input.GetKeyDown(KeyCode.Backspace)) //TOBE removed - Just for testing purpose
         {
-            engineerAnim.SetBool("shutOff", false);
             GameManager.engineerOn = true;
             Destroy(zion);
             Destroy(zionLight);
             Destroy(this);
-            GameManager.sphereOn = true; 
+            GameManager.sphereOn = true;
             GameObject.FindObjectOfType<SwitchBridge>().OnClick();
             GameObject.FindObjectOfType<SwitchSphere>().OnClick();
-            GameObject.FindObjectOfType<SwitchWall>().OnClick();
+
+            SwitchWall[] tempWall = GameObject.FindObjectsOfType<SwitchWall>();
+            foreach (SwitchWall obj in tempWall)
+            {
+                obj.OnClick();
+            }
             SwitchDoor[] temp = GameObject.FindObjectsOfType<SwitchDoor>();
-            foreach(SwitchDoor obj in temp)
+            foreach (SwitchDoor obj in temp)
             {
                 obj.OnOpen();
             }
+
             spider.Die();
-            GameObject.FindObjectOfType<DoorSwitch_Final>().OnClick();
             FindObjectOfType<AIInstructions>().beginTutorial = true;
         }
     }
 
     IEnumerator Begin(float time)
     {
-        yield return new WaitForSeconds(time);
-        engineerAnim.SetBool("shutOff", false);
-        yield return new WaitForSeconds(4.0f);
-        zionAnim.SetBool("walkAway", true);
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(time * 0.4f);
+        yield return new WaitForSeconds(time * 0.4f);
+        if (zion) zionAnim.SetBool("walkAway", true);
+        yield return new WaitForSeconds(time * 0.1f);
         FindObjectOfType<AIInstructions>().beginTutorial = true;
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(time * 0.4f);
         Destroy(zionLight);
         Destroy(zion);
         GameManager.engineerOn = true;
+        yield return new WaitForSeconds(time * 0.3f);
+        if (camRig.index == 0) camRig.IndexChanger(+1);
         StopCoroutine("Begin");
         Destroy(this);
     }

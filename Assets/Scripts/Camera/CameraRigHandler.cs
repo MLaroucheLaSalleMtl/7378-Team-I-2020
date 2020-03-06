@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Script that control and store all the camera placeholders and behavior
 public class CameraRigHandler : MonoBehaviour
 {
     #region Singleton
@@ -18,21 +19,28 @@ public class CameraRigHandler : MonoBehaviour
         }
     }
     #endregion
+
     [Tooltip("index of the camera rig view inside the camPlaceHolder arrays")]
-    [Range(0,3)] public int index; //index of the camera rig view inside the camPlaceHolder arrays
+    [Range(0, 3)] public int index; //index of the camera rig view inside the camPlaceHolder arrays
+    private int tempIndex; //temporary index (placed here to avoid script to generate a temporary value type inside memory every time it executes the method
     [Tooltip("index of whole rig target position inside the stage")]
     public static int stageIndex; //index of whole rig target position inside the stage
-    public bool isTopView; //in case we decide to use the back view as well
+    public static bool isTopView; //in case we decide to use the back view as well
     public float moveSpeed = 2.0f; //camera move speed from one placeholder to another inside the rig
     public static bool doOnce;
 
     //schemes to control the camera used scheme 1 - SE, SW, NW, NE / 2 - S, W, N, E / 3 - S, N / 4 - E, W
-    [Range(1,4)] public static int camScheme; //variable to be changed/controlled with triggers on the stage
+    [Range(1, 4)] public static int camScheme; //variable to be changed/controlled with triggers on the stage
     [Header("1 - SE, SW, NW, NE / 2 - S, W, N, E / 3 - S, N, S, N / 4 - E, W, E, W")]
     [SerializeField] Transform[] camPlaceHolder1;
     [SerializeField] Transform[] camPlaceHolder2;
     [SerializeField] Transform[] camPlaceHolder3;
     [SerializeField] Transform[] camPlaceHolder4;
+    //[Space]   
+    //[Tooltip("Camera Players Place Holder")]
+    //[SerializeField] Transform engineerPlaceHolder;
+    //[SerializeField] Transform spherePlaceHolder;
+    //[SerializeField] Transform carPlaceHolder;
     [Space]
     [Tooltip("Place holders for the Camera Rig to move across the stage")]
     [SerializeField] Transform[] stage_PlaceHolders;
@@ -44,7 +52,7 @@ public class CameraRigHandler : MonoBehaviour
         index = 0;
         stageIndex = 0;
         isTopView = true;
-        doOnce = true;
+        //doOnce = true;
         camScheme = 1;
         CameraHandler.target = camPlaceHolder1[0];
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -52,6 +60,11 @@ public class CameraRigHandler : MonoBehaviour
 
     private void Update()
     {
+        //if (Input.GetKeyDown(KeyCode.Alpha3))
+        //{
+        //    isTopView = !isTopView;
+        //}
+
         if (isTopView)
         {
             switch (camScheme)
@@ -84,11 +97,11 @@ public class CameraRigHandler : MonoBehaviour
 
             }
         }
-
-        if (!isTopView) //insert code to change between cameras of the Sphere and Engineer when not in Top Down view
-        {
-
-        }
+        
+        //else if (!isTopView) //insert code to change between cameras of the Sphere and Engineer when not in Top Down view
+        //{
+        //    DownViewHandler();
+        //}
 
         if ((stageIndex >= 0) && (stageIndex < stage_PlaceHolders.Length))
         {
@@ -111,17 +124,38 @@ public class CameraRigHandler : MonoBehaviour
 
         if (Input.GetButtonDown("CameraLeft"))
         {
-            index++;
-            if (index > 3) index = 0;
-
-            CameraHandler.target = placeHolder[index];
+            IndexChanger(+1);
         }
-        if (Input.GetButtonDown("CameraRight"))
+        else if (Input.GetButtonDown("CameraRight"))
         {
-            index--;
-            if (index < 0) index = 3;
+            IndexChanger(-1);
+        }
 
+        if (index != tempIndex)
+        {
             CameraHandler.target = placeHolder[index];
         }
+    }
+
+    //void DownViewHandler()
+    //{
+    //    if (Input.GetButtonDown("CameraLeft"))
+    //    {
+    //        CameraHandler.target = engineerPlaceHolder;
+    //    }
+    //    if (Input.GetButtonDown("CameraRight"))
+    //    {
+    //        CameraHandler.target = spherePlaceHolder;
+    //    }
+    //}
+
+    public int IndexChanger(int change)
+    {
+        tempIndex = index;
+        index += change;
+        if (index > 3) index = 0;
+        else if (index < 0) index = 3;
+
+        return index;
     }
 }

@@ -5,7 +5,8 @@ using UnityEngine;
 public class SwitchSphere : MonoBehaviour
 {
     [SerializeField] private Material mat;
-    [SerializeField] private string playerTag = GameManager.engineerTag;
+    [SerializeField] ItemHighlight highlight;
+    [SerializeField] GameObject nextHighlight;
 
     void Start()
     {
@@ -14,7 +15,7 @@ public class SwitchSphere : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == playerTag)
+        if (other.gameObject.tag == GameManager.engineerTag)
         {
             if (Input.GetButton("Action4"))
             {
@@ -25,6 +26,9 @@ public class SwitchSphere : MonoBehaviour
 
     internal void OnClick()
     {
+        if (highlight) highlight.blink = false;
+        if (nextHighlight) nextHighlight.SetActive(true);
+        FindObjectOfType<CameraRigHandler>().IndexChanger(+4);
         mat.SetColor("_EmissionColor", Color.green);
         GameManager.sphereOn = true;
         FindObjectOfType<AIUI>().ShowText("<< _to_player: You can control the engineer or the sphere by swapping between them with the keyboard key [TAB] / joystick [left stick click] ... The sphere can roll or walk. To switch its mode use keyboard key [Q].>>");

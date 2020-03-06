@@ -13,12 +13,12 @@ public class AIInstructions : MonoBehaviour
     AIInstructions()
     {
         instruction.Enqueue("... ... ...");
-        instruction.Enqueue("Hello Monsieur. It is good to be working again...");
-        instruction.Enqueue("... ... ...");
         instruction.Enqueue("<< _TO_PLAYER_: you can SWITCH BETWEEN CAMERAS to explore the room using -> keyboard [1] and [2] / Joystick [L] and [R] shoulder>>");
+        instruction.Enqueue("<< _TO_PLAYER_: to INTERACT with switches you must use -> keyboard [E]  / Joystick [Y] >>");
+        instruction.Enqueue("... ... ...");
+        instruction.Enqueue("Hello Monsieur. It is good to be working again...");
         instruction.Enqueue("... in the LAB.OS10 system I see that the front door of your lab has been locked because the boxkey is not connected to the floor switch...");
         instruction.Enqueue("Another thing, the __SPHERE__'s radio frequency is showing she is within your range. However, she seens to be still OFF.");
-        instruction.Enqueue("<< _TO_PLAYER_: to INTERACT with switches you must use -> keyboard [E]  / Joystick [Y] >>");
         instruction.Enqueue("...and the safe bridge to the other side is down because its switch is off, as well.");
 
         history.Enqueue("My system shows that we are at the year 287 D.M.; what means we were switched off for about 13 years... ... ...");

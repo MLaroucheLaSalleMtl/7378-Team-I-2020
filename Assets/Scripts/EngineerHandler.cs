@@ -19,7 +19,7 @@ public class EngineerHandler : MonoBehaviour
     internal Animator anim;
     private bool canMove = true;
     private float speed = 4.0f;
-    private float rotateSpeed = 0.2f;
+    //private float rotateSpeed = 0.2f;
     internal bool engineerMove = true; //variable to be used by the GameManager.cs in order to control whether the Engineer Robot can move
     #endregion
 
@@ -39,6 +39,7 @@ public class EngineerHandler : MonoBehaviour
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         sphere = GameObject.FindGameObjectWithTag(sphereTag);
+
     }
 
     void Update()
@@ -51,8 +52,8 @@ public class EngineerHandler : MonoBehaviour
                 if (!anim.GetBool("CarryObject"))
                 {
                     if (Input.GetButtonUp("Action4")) { Action(); }
-                    if (Input.GetButtonUp("Action1")) 
-                    { 
+                    if (Input.GetButtonUp("Action1"))
+                    {
                         Jump();
                         FindObjectOfType<AIUI>().ShowText("You can not jump, Sir. You are very heavy. Try to ask the ___SPHERE___ to jump for you.");
                     }
@@ -93,7 +94,10 @@ public class EngineerHandler : MonoBehaviour
         {
             StartCoroutine(CantMove(3.0f));
             anim.SetBool("CarryObject", false);
-            if (boxToCarry) boxToCarry.GetComponent<PuzzleCubes>().OnRelease();
+            if (boxToCarry)
+            {
+                boxToCarry.GetComponent<PuzzleCubes>().OnRelease();
+            }
         }
         else
         {
@@ -126,7 +130,7 @@ public class EngineerHandler : MonoBehaviour
         if (controller.isGrounded)
         {
             anim.SetFloat("Horizontal", Input.GetAxis("Horizontal") * speed);
-            anim.SetFloat("Vertical", Input.GetAxis("Vertical") * rotateSpeed);
+            anim.SetFloat("Vertical", Input.GetAxis("Vertical"));
         }
     }
 

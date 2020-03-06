@@ -14,6 +14,8 @@ public class AIUI : MonoBehaviour
     [SerializeField] AnimationClip hideAnim;
 
     internal static bool canTalk;
+    internal static bool skip;
+    string _text;
 
     private void Awake()
     {
@@ -22,6 +24,7 @@ public class AIUI : MonoBehaviour
         anim.Play();
         aiText.GetComponent<Text>().text = "";
         canTalk = true;
+        skip = false;
     }
 
     public void HidePanel()
@@ -52,20 +55,32 @@ public class AIUI : MonoBehaviour
         }
     }
 
+    public void Skip()
+    {
+        skip = true;
+    }
+
     IEnumerator Conversation(string text)
     {
         canTalk = false;
         ShowPanel();
         aiText.GetComponent<Text>().text = "";
-        string _text = text;
 
-        foreach (char item in _text)
+        foreach (char item in text)
         {
-            aiText.GetComponent<Text>().text += item;
-            yield return new WaitForSeconds(0.1f);
+            if (!skip)
+            {
+                aiText.GetComponent<Text>().text += item;
+                yield return new WaitForSeconds(0.07f);
+            }
+            else
+            {
+                aiText.GetComponent<Text>().text = text;
+            }
         }
+        skip = false;
 
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(1f);
         HidePanel();
         aiText.GetComponent<Text>().text = "";
         canTalk = true;
@@ -81,16 +96,24 @@ public class AIUI : MonoBehaviour
 
         while (texts.Count > 0)
         {
-            
-            string _text = texts.Dequeue();
-            
+
+           _text = texts.Dequeue();
+
             foreach (char item in _text)
             {
-                aiText.GetComponent<Text>().text += item;
-                yield return new WaitForSeconds(0.085f);
+                if (!skip)
+                {
+                    aiText.GetComponent<Text>().text += item;
+                    yield return new WaitForSeconds(0.07f);
+                }
+                else
+                {
+                    aiText.GetComponent<Text>().text = _text;
+                }
             }
+            skip = false;
 
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.0f);
             aiText.GetComponent<Text>().text = "";
         }
 

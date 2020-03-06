@@ -8,6 +8,9 @@ public class SwitchBridge : MonoBehaviour
     [SerializeField] private string playerTag = GameManager.sphereTag;
     [SerializeField] private GameObject bridge;
 
+    [SerializeField] ItemHighlight highlight;
+    [SerializeField] GameObject[] nextHighlight;
+
     void Start()
     {
         mat = GetComponent<Renderer>().material;
@@ -25,7 +28,9 @@ public class SwitchBridge : MonoBehaviour
     }
 
     public void OnClick()
-    {   
+    {
+        if (highlight) highlight.blink = false;
+        if (nextHighlight.Length > 0) foreach (GameObject obj in nextHighlight) obj.SetActive(true);
         mat.SetColor("_EmissionColor", Color.green);
         bridge.GetComponent<Animator>().SetBool("liftBridge", true);
         FindObjectOfType<AIUI>().ShowText("<< _to_player: You can lift heavy objects with the __ENGINEER__ using -> keyboard [Q] / Joystick [X]. To drop them, press the same key again.>>");

@@ -129,6 +129,7 @@ public class SphereHandler : MonoBehaviour
         }
         if (anim.GetBool("Open"))
         {
+            controller.transform.rotation = Quaternion.identity;
             Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             Vector3 move = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * input;
             controller.Move(move * Time.deltaTime * speedOpen);
