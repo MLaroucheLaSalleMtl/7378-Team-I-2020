@@ -16,6 +16,7 @@ TagManager:
   - PlayerSphereLeg
   - PlayerCar
   - PlayerEngineerHand
+  - gap
   layers:
   - Default
   - TransparentFX

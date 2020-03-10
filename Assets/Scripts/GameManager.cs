@@ -18,10 +18,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject highlightEngineer;
     public static string engineerTag = "PlayerEngineer";
     public static string engineerImgTag = "PlayerEngineerImg";
+    public static string engineerName = "_ENGINEER_"; //engineer name to be used by others classes when sending instruction to the AI UI system 
     [SerializeField] SphereHandler sphereCharacter;
     [SerializeField] GameObject highlightSphere;
     public static string sphereTag = "PlayerSphere";
     public static string sphereImgTag = "PlayerSphereImg";
+    public static string sphereName = "_SPHERE_"; //sphere name to be used by others classes when sending instruction to the AI UI system
     [SerializeField] CarHandler carCharacter;
     [SerializeField] GameObject carHightlight;
     public static string carTag = "PlayerCar";

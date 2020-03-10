@@ -22,14 +22,15 @@ public class MainMenu_Controller : MonoBehaviour
 
     public void OptionMenu()
     {
-        // optionMenu.SetActive(!optionMenu.activeSelf); Not working...Check later why
-        optionMenu.SetActive(true);
+        bool state = optionMenu.activeSelf;
+        optionMenu.SetActive(!state);
+        //optionMenu.SetActive(true);
     }
 
-    public void CloseOptionMenu()
-    {
-        optionMenu.SetActive(false);
-    }
+    //public void CloseOptionMenu()
+    //{
+    //    optionMenu.SetActive(false);
+    //}
 
     void Update()
     {

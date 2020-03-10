@@ -14,13 +14,13 @@ public class EngineerHandler : MonoBehaviour
     #endregion
 
     #region Character Attributesd
+    //private CharacterController controller;
     private BoxCollider bcol;
-    private CharacterController controller;
     internal Animator anim;
-    private bool canMove = true;
-    private float speed = 4.0f;
-    //private float rotateSpeed = 0.2f;
+    public bool canMove = true;
     internal bool engineerMove = true; //variable to be used by the GameManager.cs in order to control whether the Engineer Robot can move
+    //private float speed = 4.0f;
+    //private float rotateSpeed = 0.2f;
     #endregion
 
 
@@ -36,18 +36,18 @@ public class EngineerHandler : MonoBehaviour
     void Start()
     {
         bcol = GetComponent<BoxCollider>();
-        controller = GetComponent<CharacterController>();
+        bcol.enabled = false;
+        //controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         sphere = GameObject.FindGameObjectWithTag(sphereTag);
-
     }
 
     void Update()
     {
         if (engineerMove)
         {
-            if (controller.isGrounded)
-            {
+            //if (controller.isGrounded)
+            //{
                 if (Input.GetButtonUp("Action3")) { TakeObject(); }
                 if (!anim.GetBool("CarryObject"))
                 {
@@ -55,11 +55,11 @@ public class EngineerHandler : MonoBehaviour
                     if (Input.GetButtonUp("Action1"))
                     {
                         Jump();
-                        FindObjectOfType<AIUI>().ShowText("You can not jump, Sir. You are very heavy. Try to ask the ___SPHERE___ to jump for you.");
+                        FindObjectOfType<AIUI>().ShowText($"You can not jump, Sir. You are very heavy. Try to ask the {GameManager.sphereName} to jump for you.");
                     }
                     if (Input.GetButtonUp("Action2")) { Punch(); }
                 }
-            }
+            //}
         }
     }
 
@@ -67,24 +67,15 @@ public class EngineerHandler : MonoBehaviour
     {
         if (engineerMove)
         {
-            if (controller.isGrounded && canMove)
-            {
-                if ((Input.GetAxis("Horizontal") != 0) || (Input.GetAxis("Vertical") > 0))
-                {
-                    anim.SetBool("Movement", true);
-                    Move();
-                }
-
-                else if ((Input.GetAxis("Horizontal") == 0) && (Input.GetAxis("Vertical") == 0))
-                {
-                    anim.SetBool("Movement", false);
-                    controller.Move(Vector3.zero);
-                }
-            }
+            //if (controller.isGrounded)
+            //{
+                Move();
+            //}
         }
         else
         {
-            anim.SetBool("Movement", false); //To be removed
+            anim.SetFloat("Horizontal", 0);
+            anim.SetFloat("Vertical", 0);
         }
     }
 
@@ -97,6 +88,7 @@ public class EngineerHandler : MonoBehaviour
             if (boxToCarry)
             {
                 boxToCarry.GetComponent<PuzzleCubes>().OnRelease();
+                bcol.enabled = false;
             }
         }
         else
@@ -106,6 +98,7 @@ public class EngineerHandler : MonoBehaviour
             if (boxToCarry)
             {
                 anim.SetBool("CarryObject", true);
+                bcol.enabled = true;
             }
         }
     }
@@ -127,10 +120,15 @@ public class EngineerHandler : MonoBehaviour
 
     public void Move()
     {
-        if (controller.isGrounded)
+        if (canMove)
         {
-            anim.SetFloat("Horizontal", Input.GetAxis("Horizontal") * speed);
+            anim.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
             anim.SetFloat("Vertical", Input.GetAxis("Vertical"));
+        }
+        else
+        {
+            anim.SetFloat("Vertical", 0);
+            anim.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
         }
     }
 

@@ -21,7 +21,7 @@ public class PlayerSpawner : MonoBehaviour
             StartCoroutine(RespawnChar(other.gameObject));
             Instantiate(engineerPrefab, respawnPlace);
 
-            if (begin) { FindObjectOfType<AIUI>().ShowText("<< Try to ask the ___SPHERE___ to jump over this gap.>>"); begin = false; }
+            if (begin) { FindObjectOfType<AIUI>().ShowText($"<< Try to ask the {GameManager.sphereName} to jump over this gap.>>"); begin = false; }
         }
     }
 

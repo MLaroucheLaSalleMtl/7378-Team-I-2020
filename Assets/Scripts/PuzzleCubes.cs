@@ -8,6 +8,7 @@ public class PuzzleCubes : MonoBehaviour
     private EngineerHandler engineer;
     private Rigidbody rb;
     private Material mat;
+    private bool isCarried;
     #endregion
 
     [Space]
@@ -22,15 +23,23 @@ public class PuzzleCubes : MonoBehaviour
 
     void Awake()
     {
+        isCarried = false;
         rb = GetComponent<Rigidbody>();
         mat = GetComponent<Renderer>().material;
-        engineer = GameObject.FindObjectOfType<EngineerHandler>();
+        engineer = FindObjectOfType<EngineerHandler>();
         engineerTag = GameManager.engineerTag;
         grabPos = GameObject.FindWithTag(engineerGrabPos).transform; //Assign Transform of child gameobject located on the hand of the Engineer Robot
     }
 
+    private void Update()
+    {
+        if (isCarried)
+        {
+            transform.position = Vector3.Lerp(transform.position, grabPos.position, 1.2f);
+        }
+    }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == engineerTag)
         {
@@ -64,17 +73,21 @@ public class PuzzleCubes : MonoBehaviour
 
     public void OnCarry()
     {
+        isCarried = true;
         rb.useGravity = false;
         rb.isKinematic = true;
-        transform.position = grabPos.transform.position;
+        //transform.position = grabPos.transform.position;
         transform.SetParent(grabPos.transform);
+        GetComponent<BoxCollider>().enabled = false;
     }
 
     public void OnRelease()
     {
+        isCarried = false;
         rb.useGravity = true;
         rb.isKinematic = false;
         transform.SetParent(null);
         engineer.boxToCarry = null;
+        GetComponent<BoxCollider>().enabled = true;
     }
 }

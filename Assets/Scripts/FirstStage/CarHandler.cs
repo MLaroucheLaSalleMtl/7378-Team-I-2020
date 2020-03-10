@@ -20,6 +20,14 @@ public class CarHandler : MonoBehaviour
         rb.isKinematic = true;
     }
 
+    private void Update()
+    {
+        if (anim.GetBool("isOpen"))
+        {
+            rb.isKinematic = false;
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == GameManager.engineerTag)
@@ -38,7 +46,7 @@ public class CarHandler : MonoBehaviour
         }
         else if (other.gameObject.tag == GameManager.sphereTag)
         {
-            FindObjectOfType<AIUI>().ShowText("Only the Engineer can drive the car");
+            FindObjectOfType<AIUI>().ShowText("Only the engineer can drive the car");
         }
     }
 }

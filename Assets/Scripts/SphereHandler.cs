@@ -36,7 +36,6 @@ public class SphereHandler : MonoBehaviour
     [SerializeField] internal GameObject engineer;
     [SerializeField] private Transform engineerPos;
     [Tooltip("Engineer Tag is the string to be parsed into the script. Need to be the same as the tag of the Engineer GameObject")]
-    public string engineerTag = "PlayerEngineer";
     private float followMaxDistance = 3.0f;
     private float followMinDistance = 0.2f;
     [SerializeField] private float followSpeed = 1.8f;
@@ -46,8 +45,8 @@ public class SphereHandler : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
-        engineer = GameObject.FindGameObjectWithTag(engineerTag);
-        engineerPos = GameObject.FindGameObjectWithTag(engineerTag).transform;
+        engineer = GameObject.FindGameObjectWithTag(GameManager.engineerTag);
+        engineerPos = GameObject.FindGameObjectWithTag(GameManager.engineerTag).transform;
         bcol.enabled = false;
     }
 
