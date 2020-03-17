@@ -5,7 +5,8 @@ using UnityEngine;
 public class SwitchSphere : MonoBehaviour
 {
     [SerializeField] private Material mat;
-    [SerializeField] ItemHighlight highlight;
+    [SerializeField] ItemHighlight highlightSphere;
+    [SerializeField] ItemHighlight highlightSwitch;
     [SerializeField] GameObject nextHighlight;
 
     void Start()
@@ -26,8 +27,10 @@ public class SwitchSphere : MonoBehaviour
 
     internal void OnClick()
     {
-        if (highlight) highlight.blink = false;
+        if (highlightSphere) highlightSphere.blink = false;
+        if (highlightSwitch) highlightSwitch.blink = false;
         if (nextHighlight) nextHighlight.SetActive(true);
+        CameraRigHandler.isTopView = true;
         FindObjectOfType<CameraRigHandler>().IndexChanger(+4);
         mat.SetColor("_EmissionColor", Color.green);
         GameManager.sphereOn = true;

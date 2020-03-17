@@ -8,7 +8,7 @@ public class PuzzleCubes : MonoBehaviour
     private EngineerHandler engineer;
     private Rigidbody rb;
     private Material mat;
-    private bool isCarried;
+    internal bool isCarried;
     #endregion
 
     [Space]
@@ -20,6 +20,10 @@ public class PuzzleCubes : MonoBehaviour
     public string engineerTag;
     [Space]
     public string switchTag = "switchForBox";
+
+
+
+
 
     void Awake()
     {
@@ -76,7 +80,7 @@ public class PuzzleCubes : MonoBehaviour
         isCarried = true;
         rb.useGravity = false;
         rb.isKinematic = true;
-        //transform.position = grabPos.transform.position;
+        transform.position = grabPos.transform.position;
         transform.SetParent(grabPos.transform);
         GetComponent<BoxCollider>().enabled = false;
     }
@@ -86,8 +90,16 @@ public class PuzzleCubes : MonoBehaviour
         isCarried = false;
         rb.useGravity = true;
         rb.isKinematic = false;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+        rb.constraints = RigidbodyConstraints.FreezePositionZ;
+        Invoke("ResetConstraints", 2f);
         transform.SetParent(null);
         engineer.boxToCarry = null;
         GetComponent<BoxCollider>().enabled = true;
+    }
+
+    private void ResetConstraints()
+    {
+        rb.constraints = RigidbodyConstraints.None;
     }
 }

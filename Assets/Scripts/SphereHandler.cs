@@ -62,6 +62,10 @@ public class SphereHandler : MonoBehaviour
                 if (Input.GetButtonUp("Action2")) { Attack(false); }
                 if (Input.GetButton("Action4")) { Action(); }
             }
+            else
+            {
+                verticalVelocity -= 10.0f * Time.deltaTime;
+            }
         }
     }
 
@@ -132,13 +136,14 @@ public class SphereHandler : MonoBehaviour
             Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             Vector3 move = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * input;
             controller.Move(move * Time.deltaTime * speedOpen);
-       
+            transform.rotation = Quaternion.LookRotation(transform.TransformDirection(input));
         }
         else if (!anim.GetBool("Open"))
         {
             Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             Vector3 move = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * input;
             controller.Move(move * Time.deltaTime * speedClosed);
+            transform.rotation = Quaternion.LookRotation(transform.TransformDirection(input));
         }
     }
 
@@ -168,12 +173,11 @@ public class SphereHandler : MonoBehaviour
 
     IEnumerator Jump(float time)
     {
-        controller.detectCollisions = false;
+        yield return new WaitForSeconds(0.15f);
+        controller.radius *= 2f;
         yield return new WaitForSeconds(time * 0.2f);
-        scol.radius = 0.002f;
+        controller.radius *= 0.5f;
         yield return new WaitForSeconds(time * 0.7f);
-        controller.detectCollisions = true;
-        scol.radius = 0.002f;
         StopCoroutine("Jump");
     }
 }

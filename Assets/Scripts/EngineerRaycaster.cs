@@ -29,25 +29,10 @@ public class EngineerRaycaster : MonoBehaviour
                 if (Physics.Raycast(transform.position, -transform.TransformDirection(Vector3.up), out hit))
                 {
                     if (hit.transform.tag == "gap") engineer.canMove = false;
+                    FindObjectOfType<AIUI>().ShowText($"You can not jump with this character.");
                 }
             }
         }
-        //if (frontCaster && engineer.anim.GetBool("CarryObject"))
-        //{
-        //    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 0.05f))
-        //    {
-        //        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-        //        if (hit.transform.tag != "boxSwitch") engineer.TakeObject();
-        //    }
-        //    else
-        //    {
-        //        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 0.05f, Color.white);
-        //        //if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward) * 1.2f, out hit))
-        //        //{
-        //        //    engineer.canMove = true;
-        //        //}
-        //    }
-        //}
     }
 
 }

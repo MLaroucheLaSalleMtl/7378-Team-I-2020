@@ -11,12 +11,15 @@ TagManager:
   - boxSwitch
   - switchForBox
   - CameraRig
-  - PlayerEngineerImg
-  - PlayerSphereImg
   - PlayerSphereLeg
   - PlayerCar
   - PlayerEngineerHand
   - gap
+  - MainCameraTPS
+  - PlayerEngineerUI
+  - PlayerSphereUI
+  - PlayerCarUI
+  - AiUI
   layers:
   - Default
   - TransparentFX

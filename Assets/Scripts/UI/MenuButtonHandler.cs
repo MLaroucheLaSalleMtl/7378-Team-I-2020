@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class MenuButtonHandler : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
 {
-    private AudioSource _as;
+    private AudioSource asource;
 
     [Header("Audio Clips")]
     [SerializeField] private AudioClip hoverClip;
@@ -14,12 +14,12 @@ public class MenuButtonHandler : MonoBehaviour, IPointerClickHandler, IPointerEn
 
     void Start()
     {
-        _as = GetComponent<AudioSource>(); 
+        asource = GetComponent<AudioSource>(); 
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        _as.PlayOneShot(clickClip);
+        asource.PlayOneShot(clickClip);
         if (GetComponent<Button>() != null)
         {
             GetComponent<Button>().onClick.Invoke();
@@ -29,6 +29,6 @@ public class MenuButtonHandler : MonoBehaviour, IPointerClickHandler, IPointerEn
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        _as.PlayOneShot(hoverClip);
+        asource.PlayOneShot(hoverClip);
     }
 }

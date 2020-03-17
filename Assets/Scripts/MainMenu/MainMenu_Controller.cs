@@ -7,6 +7,7 @@ public class MainMenu_Controller : MonoBehaviour
 {
     int levelToLoad = 1;
     [SerializeField] private GameObject optionMenu;
+    [SerializeField] private GameObject quitMenu;
 
     public void Start_Game()
     {
@@ -22,15 +23,15 @@ public class MainMenu_Controller : MonoBehaviour
 
     public void OptionMenu()
     {
-        bool state = optionMenu.activeSelf;
-        optionMenu.SetActive(!state);
-        //optionMenu.SetActive(true);
+        //bool state = optionMenu.activeSelf;
+        //optionMenu.SetActive(!state);
+        optionMenu.SetActive(true);
     }
 
-    //public void CloseOptionMenu()
-    //{
-    //    optionMenu.SetActive(false);
-    //}
+    public void CloseOptionMenu()
+    {
+        optionMenu.SetActive(false);
+    }
 
     void Update()
     {

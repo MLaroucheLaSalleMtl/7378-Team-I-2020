@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &153270296
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 153270297}
+  m_Layer: 0
+  m_Name: CameraPosHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &153270297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153270296}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.551, z: 0.456}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8841694117911338436}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &140772034484340363
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,7 +73,7 @@ GameObject:
   - component: {fileID: 4597811534294942147}
   m_Layer: 0
   m_Name: Leg3.003_end
-  m_TagString: Untagged
+  m_TagString: PlayerSphereLeg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -275,7 +305,7 @@ GameObject:
   - component: {fileID: 4597811532842358939}
   m_Layer: 0
   m_Name: Leg4.003_end
-  m_TagString: Untagged
+  m_TagString: PlayerSphereLeg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -412,7 +442,7 @@ GameObject:
   - component: {fileID: 4597811533360518098}
   m_Layer: 0
   m_Name: Leg10.003_end
-  m_TagString: Untagged
+  m_TagString: PlayerSphereLeg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -550,7 +580,7 @@ GameObject:
   - component: {fileID: 4597811532503178141}
   m_Layer: 0
   m_Name: Leg12.003_end
-  m_TagString: Untagged
+  m_TagString: PlayerSphereLeg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1171,7 +1201,7 @@ GameObject:
   - component: {fileID: 4597811533773982726}
   m_Layer: 0
   m_Name: Leg5.003_end
-  m_TagString: Untagged
+  m_TagString: PlayerSphereLeg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1216,7 +1246,7 @@ GameObject:
   - component: {fileID: 4597811533408927711}
   m_Layer: 0
   m_Name: Leg2.003_end
-  m_TagString: Untagged
+  m_TagString: PlayerSphereLeg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1261,7 +1291,7 @@ GameObject:
   - component: {fileID: 4597811534351270113}
   m_Layer: 0
   m_Name: Leg7.003_end
-  m_TagString: Untagged
+  m_TagString: PlayerSphereLeg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2227,6 +2257,7 @@ Transform:
   m_Children:
   - {fileID: 1150042063855781382}
   - {fileID: 5501566543299839488}
+  - {fileID: 153270297}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2265,7 +2296,6 @@ MonoBehaviour:
   bcol: {fileID: 4597811533580692100}
   engineer: {fileID: 0}
   engineerPos: {fileID: 0}
-  engineerTag: PlayerEngineer
   followSpeed: 1.8
 --- !u!143 &796112889
 CharacterController:
@@ -2482,7 +2512,7 @@ GameObject:
   - component: {fileID: 4597811534058865346}
   m_Layer: 0
   m_Name: Leg9.003_end
-  m_TagString: Untagged
+  m_TagString: PlayerSphereLeg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2873,7 +2903,7 @@ GameObject:
   - component: {fileID: 4597811534396894350}
   m_Layer: 0
   m_Name: Leg6.003_end
-  m_TagString: Untagged
+  m_TagString: PlayerSphereLeg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3263,7 +3293,7 @@ GameObject:
   - component: {fileID: 4597811534444455894}
   m_Layer: 0
   m_Name: Leg8.003_end
-  m_TagString: Untagged
+  m_TagString: PlayerSphereLeg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3586,7 +3616,7 @@ GameObject:
   - component: {fileID: 4597811533450020683}
   m_Layer: 0
   m_Name: Leg1.003_end
-  m_TagString: Untagged
+  m_TagString: PlayerSphereLeg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3631,7 +3661,7 @@ GameObject:
   - component: {fileID: 4597811533141509849}
   m_Layer: 0
   m_Name: Leg11.003_end
-  m_TagString: Untagged
+  m_TagString: PlayerSphereLeg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

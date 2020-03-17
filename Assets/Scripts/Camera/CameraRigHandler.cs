@@ -36,16 +36,17 @@ public class CameraRigHandler : MonoBehaviour
     [SerializeField] Transform[] camPlaceHolder2;
     [SerializeField] Transform[] camPlaceHolder3;
     [SerializeField] Transform[] camPlaceHolder4;
-    //[Space]   
-    //[Tooltip("Camera Players Place Holder")]
-    //[SerializeField] Transform engineerPlaceHolder;
-    //[SerializeField] Transform spherePlaceHolder;
-    //[SerializeField] Transform carPlaceHolder;
     [Space]
     [Tooltip("Place holders for the Camera Rig to move across the stage")]
     [SerializeField] Transform[] stage_PlaceHolders;
     [Space]
-    [SerializeField] Camera cam;
+    [SerializeField] Camera stageCam;
+    [SerializeField] Camera tpsCam;
+    [Space]
+    [Tooltip("Camera Players - Virtual Cameras")]
+    [SerializeField] GameObject vcamEngineer;
+    [SerializeField] GameObject vcamSphere;
+    [SerializeField] GameObject vcamCar;
 
     private void Start()
     {
@@ -55,15 +56,19 @@ public class CameraRigHandler : MonoBehaviour
         //doOnce = true;
         camScheme = 1;
         CameraHandler.target = camPlaceHolder1[0];
-        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        stageCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        stageCam = GameObject.FindGameObjectWithTag("MainCameraTPS").GetComponent<Camera>();
+
+        stageCam.enabled = true;
+        tpsCam.enabled = false;
     }
 
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Alpha3))
-        //{
-        //    isTopView = !isTopView;
-        //}
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            isTopView = !isTopView;
+        }
 
         if (isTopView)
         {
@@ -97,11 +102,11 @@ public class CameraRigHandler : MonoBehaviour
 
             }
         }
-        
-        //else if (!isTopView) //insert code to change between cameras of the Sphere and Engineer when not in Top Down view
-        //{
-        //    DownViewHandler();
-        //}
+
+        if (!isTopView)
+        {
+            DownViewHandler();
+        }
 
         if ((stageIndex >= 0) && (stageIndex < stage_PlaceHolders.Length))
         {
@@ -116,6 +121,9 @@ public class CameraRigHandler : MonoBehaviour
 
     void TopViewHandler(Transform[] placeHolder)
     {
+        stageCam.enabled = true;
+        tpsCam.enabled = false;
+
         if (doOnce)
         {
             CameraHandler.target = placeHolder[0];
@@ -137,17 +145,35 @@ public class CameraRigHandler : MonoBehaviour
         }
     }
 
-    //void DownViewHandler()
-    //{
-    //    if (Input.GetButtonDown("CameraLeft"))
-    //    {
-    //        CameraHandler.target = engineerPlaceHolder;
-    //    }
-    //    if (Input.GetButtonDown("CameraRight"))
-    //    {
-    //        CameraHandler.target = spherePlaceHolder;
-    //    }
-    //}
+    void DownViewHandler()
+    {
+        if (FindObjectOfType<EngineerHandler>().engineerMove)
+        {
+            vcamEngineer.SetActive(true);
+            vcamSphere.SetActive(false);
+            vcamCar.SetActive(false);
+        }
+
+        if (FindObjectOfType<SphereHandler>().sphereMove)
+        {
+            FindObjectOfType<AIUI>().ShowText($"As {GameManager.sphereName} is a remote controlled AI it has no downview Camera.");
+            //    vcamEngineer.SetActive(false);
+            //    vcamSphere.SetActive(true);
+            //    vcamCar.SetActive(false);
+        }
+
+        if (FindObjectOfType<CarHandler>().carMove)
+        {
+            vcamEngineer.SetActive(false);
+            vcamSphere.SetActive(false);
+            vcamCar.SetActive(true);
+        }
+
+
+        stageCam.enabled = false;
+        tpsCam.enabled = true;
+        doOnce = true;
+    }
 
     public int IndexChanger(int change)
     {

@@ -13,6 +13,7 @@ public class MenuUI : MonoBehaviour
     [Header("Hide")]
     [SerializeField] AnimationClip hideAnim;
     public bool isHidden;
+    public int counter = 360;
     
     [Header("Menu Reaction Items")]
     [SerializeField] GameObject paused;
@@ -26,6 +27,7 @@ public class MenuUI : MonoBehaviour
         isHidden = true;
         anim.clip = hideAnim;
         anim.Play();
+        counter = 360;
     }
 
     private void Update()
@@ -37,6 +39,14 @@ public class MenuUI : MonoBehaviour
         if (Input.GetButtonDown("Pause"))
         {
             Pause();
+        }
+        if (!isHidden)
+        {
+            counter--;
+            if (counter < 0)
+            {
+                HideBtn();
+            }
         }
     }
 
@@ -55,13 +65,14 @@ public class MenuUI : MonoBehaviour
                 anim.clip = hideAnim;
                 anim.Play();
                 isHidden = true;
+                counter = 360;
             }
         }
     }
 
     public void Pause()
     {
-        paused.SetActive(!paused.activeSelf); //NOT WORKING... check why it is not working
+        paused.SetActive(!paused.activeSelf);
         if (paused.activeSelf) Time.timeScale = 0f;
         else Time.timeScale = 1f;
     }
@@ -73,9 +84,17 @@ public class MenuUI : MonoBehaviour
 
     public void Config()
     {
-        configPanel.SetActive(!configPanel.activeSelf); //NOT WORKING... check why it is not working
-        if (configPanel.activeSelf) Time.timeScale = 0f;
-        else Time.timeScale = 1f;
+        Debug.Log(configPanel.activeSelf);
+        if (!configPanel.activeSelf)
+        {
+            Time.timeScale = 0f;
+            configPanel.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            configPanel.SetActive(false);
+        }
     }
 
     public void Restart() //included to restart stage from the beginning. Need to include later to restart from checkpoint
@@ -96,8 +115,9 @@ public class MenuUI : MonoBehaviour
     {
         saved.SetActive(true);
         //CALL SAVE METHOD FROM THE MAIN MENU
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.0f);
         saved.SetActive(false);
+        
         StopCoroutine("Saved()");
     }
 }

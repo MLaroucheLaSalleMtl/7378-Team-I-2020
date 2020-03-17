@@ -4,23 +4,39 @@ using UnityEngine;
 
 public class SwitchBridge : MonoBehaviour
 {
-    [SerializeField] private Material mat;
-    [SerializeField] private string playerTag = GameManager.sphereTag;
-    [SerializeField] private GameObject bridge;
+    [SerializeField] private ItemHighlight highlight;
+    [SerializeField] private GameObject nextHighlight;
+    [SerializeField] private GameObject floorHighlight;
+    [SerializeField] private PuzzleCubes cube;
 
-    [SerializeField] ItemHighlight highlight;
-    [SerializeField] GameObject[] nextHighlight;
+    [SerializeField] private GameObject resultObj;
+    private Material mat;
+
+    private bool doOnce;
 
     void Start()
     {
         mat = GetComponent<Renderer>().material;
+        doOnce = true;
+        mat.SetColor("_EmissionColor", Color.red);
+        resultObj.GetComponent<Animator>().SetBool("isOpen", false);
+    }
+
+    private void Update()
+    {
+        if (cube.isCarried && doOnce)
+        {
+            if (nextHighlight) nextHighlight.SetActive(false);
+            if (floorHighlight) floorHighlight.SetActive(true);
+            doOnce = false;
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == playerTag)
+        if (other.gameObject.tag == GameManager.sphereTag)
         {
-            if (Input.GetButton("Action4"))
+            if (Input.GetButtonDown("Action4"))
             {
                 OnClick();
             }
@@ -30,10 +46,9 @@ public class SwitchBridge : MonoBehaviour
     public void OnClick()
     {
         if (highlight) highlight.blink = false;
-        if (nextHighlight.Length > 0) foreach (GameObject obj in nextHighlight) obj.SetActive(true);
+        if (nextHighlight) nextHighlight.SetActive(true);
         mat.SetColor("_EmissionColor", Color.green);
-        bridge.GetComponent<Animator>().SetBool("liftBridge", true);
+        resultObj.GetComponent<Animator>().SetBool("isOpen", true);
         FindObjectOfType<AIUI>().ShowText($"<< _to_player: You can lift heavy objects with {GameManager.engineerName} using -> keyboard [Q] / Joystick [X]. To drop them, press the same key again.>>");
-
     }
 }

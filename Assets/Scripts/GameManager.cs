@@ -15,20 +15,23 @@ public class GameManager : MonoBehaviour
 
     #region Players
     [SerializeField] EngineerHandler engineerCharacter;
-    [SerializeField] GameObject highlightEngineer;
+    [SerializeField] GameObject uiEngineer;
     public static string engineerTag = "PlayerEngineer";
-    public static string engineerImgTag = "PlayerEngineerImg";
+    public static string engineerUItag = "PlayerEngineerUI";
     public static string engineerName = "_ENGINEER_"; //engineer name to be used by others classes when sending instruction to the AI UI system 
     [SerializeField] SphereHandler sphereCharacter;
-    [SerializeField] GameObject highlightSphere;
+    [SerializeField] GameObject uiSphere;
     public static string sphereTag = "PlayerSphere";
-    public static string sphereImgTag = "PlayerSphereImg";
+    public static string sphereUItag = "PlayerSphereUI";
     public static string sphereName = "_SPHERE_"; //sphere name to be used by others classes when sending instruction to the AI UI system
-    [SerializeField] CarHandler carCharacter;
-    [SerializeField] GameObject carHightlight;
+    [SerializeField] CarHandler carCharacter; //to be used when the car player is implemented so the game manager can activate it
+    [SerializeField] GameObject uiCar; //to be used when the car player is implemented so the game manager can activate it
     public static string carTag = "PlayerCar";
+    public static string carUItag = "PlayerCarUI";
     #endregion
 
+    [SerializeField] private GameObject uiAI;
+    public static string aiTag = "AiUI";
     public static string zionTag = "EnemyZion";
 
     //variables to control if the GameManager can change between players
@@ -39,10 +42,13 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         charChangeDistance = 15f;
-        engineerCharacter = GameObject.FindObjectOfType<EngineerHandler>();
-        sphereCharacter = GameObject.FindObjectOfType<SphereHandler>();
-        highlightEngineer = GameObject.FindGameObjectWithTag(engineerImgTag);
-        highlightSphere = GameObject.FindGameObjectWithTag(sphereImgTag);
+        engineerCharacter = FindObjectOfType<EngineerHandler>();
+        sphereCharacter = FindObjectOfType<SphereHandler>();
+        carCharacter = FindObjectOfType<CarHandler>();
+        uiAI = GameObject.FindGameObjectWithTag(aiTag);
+        uiEngineer = GameObject.FindGameObjectWithTag(engineerUItag);
+        uiSphere = GameObject.FindGameObjectWithTag(sphereUItag);
+        uiCar = GameObject.FindGameObjectWithTag(carUItag);
 
         Begin();
     }
@@ -50,15 +56,25 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonUp("CharSwitcher") && sphereOn && engineerOn)
+        if (FindObjectOfType<CarHandler>().carMove)
         {
-            if (Vector3.Magnitude(sphereCharacter.transform.position - engineerCharacter.transform.position) < charChangeDistance)
+            uiCar.SetActive(true);
+            uiEngineer.SetActive(false);
+            uiSphere.SetActive(false);
+            uiAI.SetActive(false);
+        }
+        else
+        {
+            if (Input.GetButtonUp("CharSwitcher") && sphereOn && engineerOn)
             {
-                CharacterHandler();
-            }
-            else
-            {
-                FindObjectOfType<AIUI>().ShowText("Your link to the engineer is made of a radio frequency which is weak within this distance. Get closer to him.");
+                if (Vector3.Magnitude(sphereCharacter.transform.position - engineerCharacter.transform.position) < charChangeDistance)
+                {
+                    CharacterHandler();
+                }
+                else
+                {
+                    FindObjectOfType<AIUI>().ShowText("Your link to the engineer is made of a radio frequency which is weak within this distance. Get closer to him.");
+                }
             }
         }
 
@@ -76,10 +92,13 @@ public class GameManager : MonoBehaviour
             if (sphereCharacter)
             {
                 sphereCharacter.sphereMove = false;
+                carCharacter.carMove = false;
             }
         }
-        highlightEngineer.SetActive(true);
-        highlightSphere.SetActive(false);
+
+        uiEngineer.SetActive(true);
+        uiSphere.SetActive(false);
+        uiCar.SetActive(false);
     }
 
     public void CharacterHandler()
@@ -91,13 +110,15 @@ public class GameManager : MonoBehaviour
             sphereCharacter.anim.SetBool("Open", false);
             sphereCharacter.bcol.enabled = false;
 
-            highlightEngineer.SetActive(true);
-            highlightSphere.SetActive(false);
+            uiEngineer.SetActive(true);
+            uiSphere.SetActive(false);
+            uiCar.SetActive(false);
         }
         else if (sphereCharacter.sphereMove)
         {
-            highlightEngineer.SetActive(false);
-            highlightSphere.SetActive(true);
+            uiEngineer.SetActive(false);
+            uiSphere.SetActive(true);
+            uiCar.SetActive(false);
         }
     }
 }

@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 7903237469259213141}
   - component: {fileID: 7903237469262637429}
   - component: {fileID: 7903237469261638581}
-  - component: {fileID: 7903237469259642227}
+  - component: {fileID: 7281069840545791308}
   - component: {fileID: 7903237469259642226}
   m_Layer: 0
-  m_Name: SwitchDoor
+  m_Name: SwitchFloor
   m_TagString: switchForBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &7903237469259642227
+--- !u!114 &7281069840545791308
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,12 +90,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7903237469259642229}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 460666200623aa946832e245442358d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a6c1bdbabebd49448257fa6bbd0f4bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 0}
   boxTag: boxSwitch
-  door: {fileID: 0}
+  activateElement: {fileID: 0}
+  highlight: {fileID: 0}
 --- !u!64 &7903237469259642226
 MeshCollider:
   m_ObjectHideFlags: 0

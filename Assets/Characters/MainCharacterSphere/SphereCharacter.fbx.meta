@@ -68,7 +68,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 0
     optimizeGameObjects: 0
-    motionNodeName: Armature.001/root_2.001/Bone.001/root_2/Body
+    motionNodeName: Armature.001/root_2.001/Bone.001/root_2/Body/Body_Down
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
@@ -503,15 +503,15 @@ ModelImporter:
       name: Roll
       takeName: Armature.001|Sphere_Roll
       internalID: 0
-      firstFrame: 0
-      lastFrame: 45
+      firstFrame: 45
+      lastFrame: 173
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
