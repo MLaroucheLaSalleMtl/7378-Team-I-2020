@@ -584,9 +584,6 @@ MonoBehaviour:
   - {fileID: 5191679833794335287}
   stage_PlaceHolders:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   stageCam: {fileID: 5635532681228682824}
   tpsCam: {fileID: 3342150185511183121}
   vcamEngineer: {fileID: 2595400288882854282}
@@ -984,7 +981,7 @@ GameObject:
   - component: {fileID: 10513428370743805}
   - component: {fileID: 5427427817358684458}
   - component: {fileID: 3709842307228854647}
-  - component: {fileID: 7230567225534687893}
+  - component: {fileID: 847765798}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -1045,7 +1042,7 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
---- !u!114 &7230567225534687893
+--- !u!114 &847765798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1054,19 +1051,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8570027394983427268}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
+  m_Script: {fileID: 11500000, guid: 36d1163fa822e8b418a0a603ec078d5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 1
-  m_FollowOffset: {x: 0.01, y: 0.03, z: -0.41}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
-  m_AngularDampingMode: 0
-  m_PitchDamping: 0
-  m_YawDamping: 0
-  m_RollDamping: 0
-  m_AngularDamping: 0
+  m_Damping: 0
 --- !u!1 &8958906057294764174
 GameObject:
   m_ObjectHideFlags: 0

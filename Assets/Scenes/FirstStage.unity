@@ -34611,6 +34611,11 @@ PrefabInstance:
       objectReference: {fileID: 598619304}
     - target: {fileID: 5635532681976814040, guid: 788f1e03f79bdbf4aac41c45926bc423,
         type: 3}
+      propertyPath: stage_PlaceHolders.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635532681976814040, guid: 788f1e03f79bdbf4aac41c45926bc423,
+        type: 3}
       propertyPath: stage_PlaceHolders.Array.data[0]
       value: 
       objectReference: {fileID: 1635961350}
@@ -34629,6 +34634,16 @@ PrefabInstance:
       propertyPath: stage_PlaceHolders.Array.data[3]
       value: 
       objectReference: {fileID: 1045543450}
+    - target: {fileID: 5635532681976814040, guid: 788f1e03f79bdbf4aac41c45926bc423,
+        type: 3}
+      propertyPath: hasEngineer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635532681976814040, guid: 788f1e03f79bdbf4aac41c45926bc423,
+        type: 3}
+      propertyPath: hasSphere
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5635532681976814042, guid: 788f1e03f79bdbf4aac41c45926bc423,
         type: 3}
       propertyPath: m_Name

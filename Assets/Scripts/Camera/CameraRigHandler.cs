@@ -48,6 +48,10 @@ public class CameraRigHandler : MonoBehaviour
     [SerializeField] GameObject vcamSphere;
     [SerializeField] GameObject vcamCar;
 
+    public bool hasEngineer;
+    public bool hasSphere;
+    public bool hasCar;
+
     private void Start()
     {
         index = 0;
@@ -147,28 +151,36 @@ public class CameraRigHandler : MonoBehaviour
 
     void DownViewHandler()
     {
-        if (FindObjectOfType<EngineerHandler>().engineerMove)
+        if (hasEngineer)
         {
-            vcamEngineer.SetActive(true);
-            vcamSphere.SetActive(false);
-            vcamCar.SetActive(false);
+            if (FindObjectOfType<EngineerHandler>().engineerMove)
+            {
+                vcamEngineer.SetActive(true);
+                vcamSphere.SetActive(false);
+                vcamCar.SetActive(false);
+            }
         }
 
-        if (FindObjectOfType<SphereHandler>().sphereMove)
+        if (hasSphere)
         {
-            FindObjectOfType<AIUI>().ShowText($"As {GameManager.sphereName} is a remote controlled AI it has no downview Camera.");
-            //    vcamEngineer.SetActive(false);
-            //    vcamSphere.SetActive(true);
-            //    vcamCar.SetActive(false);
+            if (FindObjectOfType<SphereHandler>().sphereMove)
+            {
+                FindObjectOfType<AIUI>().ShowText($"As {GameManager.sphereName} is a remote controlled AI it has no downview Camera.");
+                //    vcamEngineer.SetActive(false);
+                //    vcamSphere.SetActive(true);
+                //    vcamCar.SetActive(false);
+            }
         }
 
-        if (FindObjectOfType<CarHandler>().carMove)
+        if (hasCar)
         {
-            vcamEngineer.SetActive(false);
-            vcamSphere.SetActive(false);
-            vcamCar.SetActive(true);
+            if (FindObjectOfType<CarHandler>().carMove)
+            {
+                vcamEngineer.SetActive(false);
+                vcamSphere.SetActive(false);
+                vcamCar.SetActive(true);
+            }
         }
-
 
         stageCam.enabled = false;
         tpsCam.enabled = true;

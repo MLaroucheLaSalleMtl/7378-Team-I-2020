@@ -26,7 +26,7 @@ public class CarHandler : MonoBehaviour
     [SerializeField] [Range(1f, 45f)] private float maxSteeringAngle = 30f;
     [SerializeField] [Range(1f, 1000f)] private float maxTorque = 500f;
     [SerializeField] [Range(1f, 100000f)] private float brakeTorque = 9000f;
-    public float maxSpeed = 20f;
+    private float maxSpeed = 15f;
     internal bool carMove; //variable to control whether the Engineer or the Sphere sphereMove
     public bool carParked; //car State
     private int speedForText;
@@ -63,6 +63,17 @@ public class CarHandler : MonoBehaviour
         if (!carParked)
         {
             rb.isKinematic = false;
+
+            if (speedTxt)
+            {
+                speedForText = (int)(rb.velocity.magnitude * 3.6f);
+                speedTxt.text = speedForText.ToString() + " Kph";
+            }
+
+            if (angleTxt)
+            {
+                Direction();
+            }
         }
     }
 
@@ -73,17 +84,6 @@ public class CarHandler : MonoBehaviour
             Move();
 
             Brake();
-
-            if (speedTxt)
-            {
-                speedForText = (int)(rb.velocity.magnitude * 3.6f);
-                speedTxt.text = speedForText.ToString() + " Kph";
-            }
-            if (angleTxt)
-            {
-                angleForText = (int)(rb.angularVelocity.z);
-                angleTxt.text = angleForText.ToString();
-            }
         }
     }
 
@@ -125,8 +125,13 @@ public class CarHandler : MonoBehaviour
         {
             wheelFLCol.motorTorque = Input.GetAxis("Vertical") * maxTorque;
             wheelFRCol.motorTorque = Input.GetAxis("Vertical") * maxTorque;
-            wheelRLCol.motorTorque = Input.GetAxis("Vertical") * maxTorque;
-            wheelRRCol.motorTorque = Input.GetAxis("Vertical") * maxTorque;
+            //wheelRLCol.motorTorque = Input.GetAxis("Vertical") * maxTorque;
+            //wheelRRCol.motorTorque = Input.GetAxis("Vertical") * maxTorque;
+        }
+        else
+        {
+            wheelFLCol.motorTorque = Input.GetAxis("Vertical") * 0;
+            wheelFRCol.motorTorque = Input.GetAxis("Vertical") * 0;
         }
 
         WheelHandler(wheelFLCol, wheelFLTrans);
@@ -161,6 +166,69 @@ public class CarHandler : MonoBehaviour
             wheelFRCol.brakeTorque = 0;
             wheelRLCol.brakeTorque = 0;
             wheelRRCol.brakeTorque = 0;
+        }
+    }
+
+    private void Direction()
+    {
+        angleForText = (int)Vector3.Angle(transform.forward, Vector3.forward);
+
+        if (transform.forward.x <= 0)
+        {
+            angleForText = 360 - angleForText;
+        }
+
+        switch (angleForText)
+        {
+            case int N when ((N >= 340 && N <= 0) || (N >= 0 && N < 25)):
+                {
+                    angleTxt.text = "N";
+
+                }
+                break;
+            case int NE when (NE >= 25 && NE < 70):
+                {
+                    angleTxt.text = "NE";
+
+                }
+                break;
+            case int E when (E >= 70 && E < 115):
+                {
+                    angleTxt.text = "E";
+
+                }
+                break;
+            case int SE when (SE >= 115 && SE < 160):
+                {
+                    angleTxt.text = "SE";
+
+                }
+                break;
+            case int S when (S >= 160 && S < 205):
+                {
+                    angleTxt.text = "S";
+
+                }
+                break;
+            case int SW when (SW >= 205 && SW < 250):
+                {
+                    angleTxt.text = "SW";
+
+                }
+                break;
+            case int W when (W >= 250 && W < 295):
+                {
+                    angleTxt.text = "W";
+
+                }
+                break;
+            case int NW when (NW >= 295 && NW < 340):
+                {
+                    angleTxt.text = "NW";
+
+                }
+                break;
+
         }
     }
 }

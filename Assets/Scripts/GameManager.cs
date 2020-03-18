@@ -14,17 +14,17 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Players
-    [SerializeField] EngineerHandler engineerCharacter;
+    [SerializeField] internal EngineerHandler engineerCharacter;
     [SerializeField] GameObject uiEngineer;
     public static string engineerTag = "PlayerEngineer";
     public static string engineerUItag = "PlayerEngineerUI";
     public static string engineerName = "_ENGINEER_"; //engineer name to be used by others classes when sending instruction to the AI UI system 
-    [SerializeField] SphereHandler sphereCharacter;
+    [SerializeField] internal SphereHandler sphereCharacter;
     [SerializeField] GameObject uiSphere;
     public static string sphereTag = "PlayerSphere";
     public static string sphereUItag = "PlayerSphereUI";
     public static string sphereName = "_SPHERE_"; //sphere name to be used by others classes when sending instruction to the AI UI system
-    [SerializeField] CarHandler carCharacter; //to be used when the car player is implemented so the game manager can activate it
+    [SerializeField] internal CarHandler carCharacter; //to be used when the car player is implemented so the game manager can activate it
     [SerializeField] GameObject uiCar; //to be used when the car player is implemented so the game manager can activate it
     public static string carTag = "PlayerCar";
     public static string carUItag = "PlayerCarUI";
@@ -94,11 +94,31 @@ public class GameManager : MonoBehaviour
                 sphereCharacter.sphereMove = false;
                 carCharacter.carMove = false;
             }
+
+            uiEngineer.SetActive(true);
+            uiSphere.SetActive(false);
+            uiCar.SetActive(false);
+        }
+        else if (!engineerCharacter && sphereCharacter)
+        {
+            engineerCharacter.engineerMove = false;
+            sphereCharacter.sphereMove = true;
+            if (carCharacter) carCharacter.carMove = false;
+
+            uiEngineer.SetActive(false);
+            uiSphere.SetActive(true);
+            uiCar.SetActive(false);
+        }
+        else if (!engineerCharacter && !sphereCharacter)
+        {
+            if (carCharacter) carCharacter.carMove = true;
+
+            uiEngineer.SetActive(false);
+            uiSphere.SetActive(false);
+            uiCar.SetActive(true);
         }
 
-        uiEngineer.SetActive(true);
-        uiSphere.SetActive(false);
-        uiCar.SetActive(false);
+
     }
 
     public void CharacterHandler()
