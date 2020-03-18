@@ -166,6 +166,7 @@ public class CameraRigHandler : MonoBehaviour
             if (FindObjectOfType<SphereHandler>().sphereMove)
             {
                 FindObjectOfType<AIUI>().ShowText($"As {GameManager.sphereName} is a remote controlled AI it has no downview Camera.");
+                isTopView = true;
                 //    vcamEngineer.SetActive(false);
                 //    vcamSphere.SetActive(true);
                 //    vcamCar.SetActive(false);

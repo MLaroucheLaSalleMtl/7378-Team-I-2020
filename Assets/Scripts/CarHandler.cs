@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.ParticleSystemJobs;
 
 public class CarHandler : MonoBehaviour
 {
@@ -35,6 +36,11 @@ public class CarHandler : MonoBehaviour
     [SerializeField] private Text angleTxt;
     #endregion
 
+    #region Particle Attributes
+    public float ExhaustRate = 3f;
+    [SerializeField] private ParticleSystem[] smoke;
+    #endregion
+
     [SerializeField] private GameObject engineer;
     [SerializeField] private GameObject sphere;
 
@@ -46,6 +52,7 @@ public class CarHandler : MonoBehaviour
         engineer = GameObject.FindGameObjectWithTag(GameManager.engineerTag);
         sphere = GameObject.FindGameObjectWithTag(GameManager.sphereTag);
         if (carParked) rb.isKinematic = true;
+        Particle();
     }
 
     private void Update()
@@ -75,6 +82,8 @@ public class CarHandler : MonoBehaviour
                 Direction();
             }
         }
+
+        Particle();
     }
 
     private void FixedUpdate()
@@ -230,5 +239,25 @@ public class CarHandler : MonoBehaviour
                 break;
 
         }
+    }
+
+    private void Particle()
+    {
+        if (rb.velocity.magnitude < 1.5f)
+        {
+            foreach (ParticleSystem part in smoke)
+            {
+                part.Stop();
+            }
+        }
+        else
+        {
+            foreach (ParticleSystem part in smoke)
+            {
+                part.Play();
+                part.emissionRate = rb.velocity.magnitude * ExhaustRate;
+            }
+        }
+        
     }
 }
