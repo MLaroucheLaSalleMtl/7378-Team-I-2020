@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//by Sohyun Yi
+
 public class KillSpider : MonoBehaviour
 {
     [SerializeField] private Animator anim;

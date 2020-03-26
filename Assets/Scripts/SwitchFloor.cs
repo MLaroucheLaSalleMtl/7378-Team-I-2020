@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//by Sohyun Yi and Philipe
+
 public class SwitchFloor : MonoBehaviour
 {
     [SerializeField] private Material mat;

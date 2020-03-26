@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class MenuButtonHandler : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
+//by Philipe Gouveia & Sidakpreet Singh
+
+public class MenuButtonHandler : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IDeselectHandler, IPointerDownHandler
 {
     private AudioSource asource;
 
@@ -12,12 +14,12 @@ public class MenuButtonHandler : MonoBehaviour, IPointerClickHandler, IPointerEn
     [SerializeField] private AudioClip hoverClip;
     [SerializeField] private AudioClip clickClip;
 
-    void Start()
+    void Start() //by Philipe Gouveia
     {
         asource = GetComponent<AudioSource>(); 
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData) //by Philipe Gouveia
     {
         asource.PlayOneShot(clickClip);
         if (GetComponent<Button>() != null)
@@ -27,8 +29,24 @@ public class MenuButtonHandler : MonoBehaviour, IPointerClickHandler, IPointerEn
         }
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnPointerEnter(PointerEventData eventData) //by Sidakpreet Singh
     {
         asource.PlayOneShot(hoverClip);
+        GetComponent<Selectable>().Select();
     }
+
+    public void OnPointerDown(PointerEventData eventData) //by Sidakpreet Singh
+    {
+        if (GetComponent<Button>() != null)
+        {
+            GetComponent<Button>().onClick.Invoke();
+            Input.ResetInputAxes();
+        }
+    }
+
+    public void OnDeselect(BaseEventData eventData) //by Sidakpreet Singh
+    {
+        GetComponent<Selectable>().OnPointerExit(null);
+    }
+
 }

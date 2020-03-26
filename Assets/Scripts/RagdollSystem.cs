@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//by Philipe Gouveia
+
 public class RagdollSystem : MonoBehaviour
 {
     private Component[] hingeJoints;

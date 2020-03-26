@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//by Philipe Gouveia
+
 //Script that control and store all the camera placeholders and behavior
 public class CameraRigHandler : MonoBehaviour
 {

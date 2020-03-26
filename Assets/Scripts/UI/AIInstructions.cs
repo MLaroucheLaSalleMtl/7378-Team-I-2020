@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//by Philipe Gouveia
+
 public class AIInstructions : MonoBehaviour
 {
     public Queue<string> instruction = new Queue<string>();

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
 
+//by Sidakpreet Singh
 
 public class Loadingbar : MonoBehaviour
 {

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.ParticleSystemJobs;
 
+//by Sidakpreet Singh
+
 public class CarHandler : MonoBehaviour
 {
     #region Singleton Pattern
@@ -28,13 +30,13 @@ public class CarHandler : MonoBehaviour
     [SerializeField] [Range(1f, 1500f)] private float maxTorque = 1500f;
     //[SerializeField] [Range(1f, 100000f)] private float brakeTorque = 9000f;
     private float maxSpeed = 15f;
-    internal bool carMove; //variable to control whether the Engineer or the Sphere sphereMove
-    public bool carParked; //car State
+    internal bool carMove; //phil: variable to control whether the Engineer or the Sphere sphereMove
+    public bool carParked; //phil: car State
     private int speedForText;
     [SerializeField] private Text speedTxt;
     private int angleForText;
     [SerializeField] private Text angleTxt;
-    private float velocimeterSmooth = 0.5f; //inserted to avoid velocimeter to seens crazy
+    private float velocimeterSmooth = 0.5f; //phil: inserted to avoid velocimeter to seens crazy
     private float countdown;
     #endregion
 
@@ -94,7 +96,8 @@ public class CarHandler : MonoBehaviour
             Brake();
 
             countdown -= Time.deltaTime; 
-            if (countdown <= 0) //code inserted to avoid velocimeter to seens crazy
+
+            if (countdown <= 0) //phil: code inserted to avoid velocimeter to seens crazy
             {
                 Velocimeter();
                 countdown = velocimeterSmooth; 
@@ -196,7 +199,27 @@ public class CarHandler : MonoBehaviour
         }
     }
 
-    private void Direction()
+    private void Particle()
+    {
+        if (rb.velocity.magnitude < 1.5f)
+        {
+            foreach (ParticleSystem part in smoke)
+            {
+                part.Stop();
+            }
+        }
+        else
+        {
+            foreach (ParticleSystem part in smoke)
+            {
+                part.Play();
+                part.emissionRate = rb.velocity.magnitude * ExhaustRate;
+            }
+        }
+
+    }
+
+    private void Direction() //by Philipe Gouveia
     {
         angleForText = (int)Vector3.Angle(transform.forward, Vector3.forward);
 
@@ -259,27 +282,8 @@ public class CarHandler : MonoBehaviour
         }
     }
 
-    private void Particle()
-    {
-        if (rb.velocity.magnitude < 1.5f)
-        {
-            foreach (ParticleSystem part in smoke)
-            {
-                part.Stop();
-            }
-        }
-        else
-        {
-            foreach (ParticleSystem part in smoke)
-            {
-                part.Play();
-                part.emissionRate = rb.velocity.magnitude * ExhaustRate;
-            }
-        }
 
-    }
-
-    private void Velocimeter()
+    private void Velocimeter() //by Philipe Gouveia
     {
         if (speedTxt)
         {

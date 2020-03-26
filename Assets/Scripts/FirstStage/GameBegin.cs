@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//by Philipe Gouveia
+
 public class GameBegin : MonoBehaviour
 {
     //script done to handle the animations at the beginning of the game

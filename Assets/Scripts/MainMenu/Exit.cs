@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Sohyun Yi
 public class Exit : MonoBehaviour
 {
     [SerializeField] GameObject quitPanel;
@@ -24,5 +25,4 @@ public class Exit : MonoBehaviour
 			Application.Quit();
 #endif
     }
-
 }

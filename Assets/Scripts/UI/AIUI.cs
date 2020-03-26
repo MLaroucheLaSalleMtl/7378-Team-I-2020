@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//by Philipe Gouveia
+
 public class AIUI : MonoBehaviour
 {
     [SerializeField] private GameObject aiText;

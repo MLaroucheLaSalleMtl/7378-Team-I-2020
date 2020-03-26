@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//by Philipe Gouveia
+
 public class CameraChanger : MonoBehaviour
 {
     private void OnTriggerExit(Collider other)

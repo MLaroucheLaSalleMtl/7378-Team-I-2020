@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//by Philipe Gouveia
 
 //Trigger to put through the stage so the CameraRigHandler can change the camera scheme when the sphere pass throught this trigger
 public class CameraSchemeSelector : MonoBehaviour

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+//by Philipe Gouveia
+
 public class MenuUI : MonoBehaviour
 {
     #region UI

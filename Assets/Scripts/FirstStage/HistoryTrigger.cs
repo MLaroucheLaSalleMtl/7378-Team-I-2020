@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//by Philipe Gouveia
+
 [RequireComponent(typeof(BoxCollider))]
 public class HistoryTrigger : MonoBehaviour
 {

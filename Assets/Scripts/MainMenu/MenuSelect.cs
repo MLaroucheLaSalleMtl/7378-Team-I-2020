@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Sohyun Yi
 public class MenuSelect : MonoBehaviour
 {
     [SerializeField] private GameObject[] panels; 

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//by Philipe Gouveia and Sidakpreet Singh
+
 public class CheckPoint : MonoBehaviour
 {
     [SerializeField] private Transform engineerPlaceHolder;

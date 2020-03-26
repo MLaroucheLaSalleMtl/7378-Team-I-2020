@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//by Philipe Gouveia and Sohyun Yi
+
 public class PuzzleCubes : MonoBehaviour
 {
     #region Object attributes
@@ -20,9 +22,6 @@ public class PuzzleCubes : MonoBehaviour
     public string engineerTag;
     [Space]
     public string switchTag = "switchForBox";
-
-
-
 
 
     void Awake()

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//by Philipe Gouveia
+
 //Script to be used by the Camera GameObject in order to move smoothly through the placeholders of the Camera Rig
 public class CameraHandler : MonoBehaviour
 {

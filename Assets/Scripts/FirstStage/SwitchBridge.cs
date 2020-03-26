@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//by Philipe Gouveia
+
 public class SwitchBridge : MonoBehaviour
 {
     [SerializeField] private ItemHighlight highlight;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//Sohyun Yi
 public class SceneLoad : MonoBehaviour
 {
     private AsyncOperation async;

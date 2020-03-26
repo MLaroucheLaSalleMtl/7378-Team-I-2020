@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//by Sidakpreet Singh
+
 public class MInimap : MonoBehaviour
 {
     [SerializeField] private Transform FollowCar;
@@ -9,7 +11,7 @@ public class MInimap : MonoBehaviour
     Vector3 offset;
     private float height = 650;
 
-    //code added to handle next stage highlight on the minimap
+    //phil: code added to handle next stage highlight on the minimap
     [SerializeField] private GameObject pointOfInterestIcon;
     [SerializeField] private Transform poiTarget;
 

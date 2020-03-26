@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//by Sohyun Yi and Philipe Gouveia
+
 public class SwitchWall : MonoBehaviour
 {
     [Header("Result of this switch")]

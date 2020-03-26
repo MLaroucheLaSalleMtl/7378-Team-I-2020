@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
+//Sohyun Yi
 [RequireComponent(typeof(Slider))]
 public class Quality : MonoBehaviour
 {
@@ -13,20 +15,20 @@ public class Quality : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        slide = GetComponent<Slider>(); //Retrieve the component Slider
-        GFXNames = QualitySettings.names; //Retrieve the list of presets.
-        float v = QualitySettings.GetQualityLevel(); //Retrieve the current Quality setting.
-        slide.value = v; //Set the slider to right value
-        txtGFX.text = GFXNames[(int)v]; //Display the right text.
+        slide = GetComponent<Slider>(); 
+        GFXNames = QualitySettings.names; 
+        float v = QualitySettings.GetQualityLevel();
+        slide.value = v; 
+        txtGFX.text = GFXNames[(int)v]; 
     }
 
     public void SetGraphics(float val)
     {
-        slide.value = val; //Set the slider to right value
-        QualitySettings.SetQualityLevel((int)val, true); //Change the quality settings
-        txtGFX.text = GFXNames[(int)val]; //Display the right text.
+        slide.value = val;
+        QualitySettings.SetQualityLevel((int)val, true);
+        txtGFX.text = GFXNames[(int)val]; 
     }
-
+    
     // Update is called once per frame
     void Update()
     {
