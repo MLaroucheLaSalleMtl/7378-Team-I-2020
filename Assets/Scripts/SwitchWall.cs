@@ -53,11 +53,6 @@ public class SwitchWall : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other.gameObject.tag);
-    }
-
     public void OnClick()
     {
         mat.SetColor("_EmissionColor", Color.green);

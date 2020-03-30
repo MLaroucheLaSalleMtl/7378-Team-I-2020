@@ -130,7 +130,10 @@ public class CarHandler : MonoBehaviour
                     rb.isKinematic = false;
                     rb.constraints = RigidbodyConstraints.FreezeRotation;
                     anim.SetBool("Close", true);
-                    anim.SetTrigger("Movefwd");
+                    FindObjectOfType<TerrainLoader>().LoadTerrain();
+                    
+                    //anim.SetTrigger("Movefwd");
+
                 }
             }
             else if (other.gameObject.tag == GameManager.sphereTag)

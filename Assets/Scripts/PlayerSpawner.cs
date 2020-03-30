@@ -9,27 +9,41 @@ public class PlayerSpawner : MonoBehaviour
     [SerializeField] private Transform respawnPlace;
     [SerializeField] private GameObject engineerPrefab;
     [SerializeField] private GameObject spherePrefab;
-    public static bool begin = false;
-
-    private void Awake()
-    {
-        respawnPlace = GameObject.Find("RespawnPlaceHolder").GetComponent<Transform>();
-    }
+    public bool begin;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == GameManager.engineerTag)
+        if (begin)
         {
-            StartCoroutine(RespawnChar(other.gameObject));
-            Instantiate(engineerPrefab, respawnPlace);
+            if (other.gameObject.tag == GameManager.engineerTag)
+            {
+                StartCoroutine(RespawnChar(other.gameObject));
+                Instantiate(engineerPrefab, respawnPlace);
 
-            if (begin) { FindObjectOfType<AIUI>().ShowText($"<< Try to ask the {GameManager.sphereName} to jump over this gap.>>"); begin = false; }
+                FindObjectOfType<AIUI>().ShowText($"<< Try to ask the {GameManager.sphereName} to jump over this gap.>>");
+                begin = false;
+            }
+        }
+
+        if (!begin)
+        {
+            if (other.gameObject.tag == engineerPrefab.tag)
+            {
+                StartCoroutine(RespawnChar(other.gameObject));
+                Instantiate(engineerPrefab, respawnPlace);
+            }
+
+            else if (other.gameObject.tag == spherePrefab.tag)
+            {
+                StartCoroutine(RespawnChar(other.gameObject));
+                Instantiate(spherePrefab, respawnPlace);
+            }
         }
     }
 
     IEnumerator RespawnChar(GameObject player)
     {
-        player.SetActive(false);
+        //player.SetActive(false);
         player.transform.position = respawnPlace.position;
         player.transform.rotation = Quaternion.identity;
         yield return new WaitForSeconds(0.1f);

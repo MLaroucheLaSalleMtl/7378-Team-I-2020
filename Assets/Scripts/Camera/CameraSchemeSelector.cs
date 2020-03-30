@@ -7,15 +7,15 @@ using UnityEngine;
 //Trigger to put through the stage so the CameraRigHandler can change the camera scheme when the sphere pass throught this trigger
 public class CameraSchemeSelector : MonoBehaviour
 {
-    [Header("1 = SE, SW, NW, NE / 2 = S, W, N, E / 3 = S, N / 4 = E, W")]
-    [Range(1, 4)] public int schemeSelected;
+    [Header("0 = SE, SW, NW, NE / 1 = S, W, N, E / 2 = S, N / 3 = E, W")]
+    [Range(0, 4)] public int schemeSelected;
 
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == GameManager.sphereTag)
         {
             CameraRigHandler.doOnce = true;
-            CameraRigHandler.camScheme = schemeSelected;
+            FindObjectOfType<CameraRigHandler>().camScheme = schemeSelected;
         }
     }
 }

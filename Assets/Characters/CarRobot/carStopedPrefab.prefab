@@ -2347,11 +2347,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  rb: {fileID: 0}
+  wheelFLCol: {fileID: 0}
+  wheelFRCol: {fileID: 0}
+  wheelRLCol: {fileID: 0}
+  wheelRRCol: {fileID: 0}
+  wheelFLTrans: {fileID: 0}
+  wheelFRTrans: {fileID: 0}
+  wheelRLTrans: {fileID: 0}
+  wheelRRTrans: {fileID: 0}
+  steeringAngle: 0
+  maxSteeringAngle: 30
+  maxTorque: 1500
+  carParked: 1
+  speedTxt: {fileID: 0}
+  angleTxt: {fileID: 0}
+  ExhaustRate: 3
+  smoke: []
   engineer: {fileID: 0}
   sphere: {fileID: 0}
-  rb: {fileID: 0}
-  speed: 0
-  carParked: 1
 --- !u!95 &7441988737404631243
 Animator:
   serializedVersion: 3

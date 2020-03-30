@@ -151,7 +151,7 @@ public class SphereHandler : MonoBehaviour
 
     private void FollowMove()
     {
-        if (GameManager.sphereOn)
+        if (FindObjectOfType<GameManager>().sphereOn)
         {
             if (Vector3.Distance(transform.position, engineer.transform.position) >= followMaxDistance)
             {

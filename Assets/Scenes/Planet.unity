@@ -964,6 +964,9 @@ MonoBehaviour:
   carCharacter: {fileID: 0}
   uiCar: {fileID: 0}
   uiAI: {fileID: 0}
+  sphereOn: 0
+  engineerOn: 0
+  carOn: 0
   charChangeDistance: 15
 --- !u!4 &1648872189
 Transform:
@@ -2001,8 +2004,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c62303e705f07ae40b3ea255c8cc5d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterControlled: 0
   index: 0
   moveSpeed: 10
+  camScheme: 0
   camPlaceHolder1:
   - {fileID: 5635532681619916663}
   - {fileID: 5635532683193479720}
@@ -2278,6 +2283,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Terrain
       objectReference: {fileID: 0}
+    - target: {fileID: 8388739992965857255, guid: 5d880f8499f8695438ba32819df76b8b,
+        type: 3}
+      propertyPath: m_MaterialTemplate
+      value: 
+      objectReference: {fileID: 2100000, guid: 8fe5a42eed2758248a9645a1304cca60, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d880f8499f8695438ba32819df76b8b, type: 3}
 --- !u!1 &8570027396056081342

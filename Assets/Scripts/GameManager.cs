@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //by Philipe Gouveia and Sohyun Yi
 
@@ -37,9 +38,14 @@ public class GameManager : MonoBehaviour
     public static string zionTag = "EnemyZion";
 
     //variables to control if the GameManager can change between players
-    public static bool sphereOn;
-    public static bool engineerOn;
+    public bool sphereOn;
+    public bool engineerOn;
+    public bool carOn;
     public float charChangeDistance = 15f;
+
+    #region SceneManagement
+    private AsyncOperation async;
+    #endregion
 
     void Start()
     {
@@ -58,7 +64,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (FindObjectOfType<CarHandler>().carMove)
+        if (carOn && FindObjectOfType<CarHandler>().carMove)
         {
             uiCar.SetActive(true);
             uiEngineer.SetActive(false);
@@ -67,7 +73,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (Input.GetButtonUp("CharSwitcher") && sphereOn && engineerOn)
+            if ((sphereOn && engineerOn) && Input.GetButtonUp("CharSwitcher"))
             {
                 if (Vector3.Magnitude(sphereCharacter.transform.position - engineerCharacter.transform.position) < charChangeDistance)
                 {
@@ -119,8 +125,6 @@ public class GameManager : MonoBehaviour
             uiSphere.SetActive(false);
             uiCar.SetActive(true);
         }
-
-
     }
 
     public void CharacterHandler()
@@ -142,5 +146,16 @@ public class GameManager : MonoBehaviour
             uiSphere.SetActive(true);
             uiCar.SetActive(false);
         }
+    }
+
+    public void ActivateNewScene()
+    {
+        async.allowSceneActivation = true;
+    }
+
+    public void LoadNewLevel(int sceneIndex)
+    {
+        async = SceneManager.LoadSceneAsync(sceneIndex);
+        async.allowSceneActivation = false;
     }
 }

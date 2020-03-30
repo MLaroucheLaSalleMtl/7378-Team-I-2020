@@ -22,6 +22,7 @@ public class CameraRigHandler : MonoBehaviour
     }
     #endregion
 
+    public bool characterControlled;
     [Tooltip("index of the camera rig view inside the camPlaceHolder arrays")]
     [Range(0, 3)] public int index; //index of the camera rig view inside the camPlaceHolder arrays
     private int tempIndex; //temporary index (placed here to avoid script to generate a temporary value type inside memory every time it executes the method
@@ -32,7 +33,7 @@ public class CameraRigHandler : MonoBehaviour
     public static bool doOnce;
 
     //schemes to control the camera used scheme 1 - SE, SW, NW, NE / 2 - S, W, N, E / 3 - S, N / 4 - E, W
-    [Range(0, 4)] public static int camScheme; //variable to be changed/controlled with triggers on the stage
+    [Range(1, 4)] public int camScheme; //variable to be changed/controlled with triggers on the stage
     [Header("1 - SE, SW, NW, NE / 2 - S, W, N, E / 3 - S, N, S, N / 4 - E, W, E, W")]
     [SerializeField] Transform[] camPlaceHolder1;
     [SerializeField] Transform[] camPlaceHolder2;
@@ -40,7 +41,7 @@ public class CameraRigHandler : MonoBehaviour
     [SerializeField] Transform[] camPlaceHolder4;
     [Space]
     [Tooltip("Place holders for the Camera Rig to move across the stage")]
-    [SerializeField] Transform[] stage_PlaceHolders;
+    [SerializeField] internal Transform[] stage_PlaceHolders;
     [Space]
     [SerializeField] Camera stageCam;
     [SerializeField] Camera tpsCam;
@@ -60,10 +61,10 @@ public class CameraRigHandler : MonoBehaviour
         stageIndex = 0;
         isTopView = true;
         //doOnce = true;
-        camScheme = 1;
+        //camScheme = 1;
         CameraHandler.target = camPlaceHolder1[0];
         stageCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        stageCam = GameObject.FindGameObjectWithTag("MainCameraTPS").GetComponent<Camera>();
+        tpsCam = GameObject.FindGameObjectWithTag("MainCameraTPS").GetComponent<Camera>();
 
         stageCam.enabled = true;
         tpsCam.enabled = false;
@@ -78,6 +79,14 @@ public class CameraRigHandler : MonoBehaviour
 
         if (isTopView)
         {
+            if (characterControlled)
+            {
+                if (Input.GetButtonDown("CharSwitcher"))
+                {
+                    stageIndex = 1 - stageIndex;
+                }
+            }
+
             switch (camScheme)
             {
                 case 1:
@@ -105,8 +114,8 @@ public class CameraRigHandler : MonoBehaviour
                         TopViewHandler(camPlaceHolder1);
                     }
                     break;
-
             }
+
         }
 
         if (!isTopView)
@@ -167,8 +176,8 @@ public class CameraRigHandler : MonoBehaviour
         {
             if (FindObjectOfType<SphereHandler>().sphereMove)
             {
-                FindObjectOfType<AIUI>().ShowText($"As {GameManager.sphereName} is a remote controlled AI it has no downview Camera.");
                 isTopView = true;
+                FindObjectOfType<AIUI>().ShowText($"As {GameManager.sphereName} is a remote controlled AI it has no downview Camera.");
                 //    vcamEngineer.SetActive(false);
                 //    vcamSphere.SetActive(true);
                 //    vcamCar.SetActive(false);

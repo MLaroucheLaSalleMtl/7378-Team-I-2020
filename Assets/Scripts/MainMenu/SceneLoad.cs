@@ -16,7 +16,6 @@ public class SceneLoad : MonoBehaviour
             async = SceneManager.LoadSceneAsync(currentScene.buildIndex + 1);
             async.allowSceneActivation = true;
         }
-
     }
 
     public void BtnLoadScene(int i)

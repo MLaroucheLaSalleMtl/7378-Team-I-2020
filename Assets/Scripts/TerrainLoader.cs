@@ -9,9 +9,15 @@ public class TerrainLoader : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == GameManager.carTag)
+        if ((other.gameObject.tag == GameManager.carTag) || (other.gameObject.tag == GameManager.engineerTag)
+                || (other.gameObject.tag == GameManager.sphereTag))
         {
-            SceneManager.LoadScene("Planet");
+            LoadTerrain();
         }
+    }
+
+    internal void LoadTerrain()
+    {
+        SceneManager.LoadScene("Planet");
     }
 }

@@ -29,11 +29,9 @@ public class GameBegin : MonoBehaviour
         spider = GameObject.FindObjectOfType<KillSpider>();
         camRig = GameObject.FindObjectOfType<CameraRigHandler>();
 
-        PlayerSpawner.begin = true; //variable to control whether the spawner will show the initial instruction about the gaps
-
         if (zion) zionAnim.SetBool("walkAway", false);
-        GameManager.sphereOn = false;
-        GameManager.engineerOn = true;
+        FindObjectOfType<GameManager>().sphereOn = false;
+        FindObjectOfType<GameManager>().engineerOn = true;
 
         StartCoroutine(Begin(6f));
     }
@@ -42,7 +40,7 @@ public class GameBegin : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Backspace)) //TOBE removed - Just for testing purpose
         {
-            GameManager.engineerOn = true;
+            FindObjectOfType<GameManager>().engineerOn = true;
             Destroy(zion);
             Destroy(zionLight);
             Destroy(this);

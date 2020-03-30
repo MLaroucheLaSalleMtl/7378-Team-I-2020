@@ -35,7 +35,7 @@ public class SwitchSphere : MonoBehaviour
         CameraRigHandler.isTopView = true;
         FindObjectOfType<CameraRigHandler>().IndexChanger(+4);
         mat.SetColor("_EmissionColor", Color.green);
-        GameManager.sphereOn = true;
+        FindObjectOfType<GameManager>().sphereOn = true;
         FindObjectOfType<AIUI>().ShowText("<< _to_player: You can control the engineer or the sphere by swapping between them with the keyboard key [TAB] / joystick [left stick click] ...\n The sphere can roll or walk. To switch its mode use keyboard key [Q].>>");
     }
 }
