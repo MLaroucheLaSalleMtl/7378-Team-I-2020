@@ -28,7 +28,7 @@ public class CarHandler : MonoBehaviour
     [SerializeField] [Range(1f, 45f)] private float steeringAngle;
     [SerializeField] [Range(1f, 45f)] private float maxSteeringAngle = 30f;
     [SerializeField] [Range(1f, 1500f)] private float maxTorque = 1500f;
-    //[SerializeField] [Range(1f, 100000f)] private float brakeTorque = 9000f;
+    [SerializeField] [Range(1f, 100000f)] private float brakeTorque = 9000f;
     private float maxSpeed = 15f;
     internal bool carMove; //phil: variable to control whether the Engineer or the Sphere sphereMove
     public bool carParked; //phil: car State
@@ -102,13 +102,16 @@ public class CarHandler : MonoBehaviour
                 Velocimeter();
                 countdown = velocimeterSmooth; 
             }
+
+            if (!Input.GetButton("Vertical")) //phil: code inserted to avoid the car to keep moving when not required
+            {
+                wheelFLCol.brakeTorque = brakeTorque;
+                wheelFRCol.brakeTorque = brakeTorque;
+                wheelRLCol.brakeTorque = brakeTorque;
+                wheelRRCol.brakeTorque = brakeTorque;
+            }
         }
 
-
-    }
-
-    private void LateUpdate()
-    {
 
     }
 
@@ -153,8 +156,6 @@ public class CarHandler : MonoBehaviour
         {
             wheelFLCol.motorTorque = Input.GetAxis("Vertical") * maxTorque;
             wheelFRCol.motorTorque = Input.GetAxis("Vertical") * maxTorque;
-            //wheelRLCol.motorTorque = Input.GetAxis("Vertical") * maxTorque;
-            //wheelRRCol.motorTorque = Input.GetAxis("Vertical") * maxTorque;
         }
         else
         {
@@ -183,11 +184,6 @@ public class CarHandler : MonoBehaviour
     {
         if (Input.GetButton("Action1"))
         {
-            //wheelFLCol.brakeTorque = brakeTorque;
-            //wheelFRCol.brakeTorque = brakeTorque;
-            //wheelRLCol.brakeTorque = brakeTorque;
-            //wheelRRCol.brakeTorque = brakeTorque;
-
             wheelFLCol.brakeTorque = Mathf.Infinity;
             wheelFRCol.brakeTorque = Mathf.Infinity;
             wheelRLCol.brakeTorque = Mathf.Infinity;

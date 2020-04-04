@@ -21,32 +21,76 @@ public class MazeHandler : MonoBehaviour
     }
     #endregion
 
-    [SerializeField] Vector3[] rotations;
-    private int index;
-    public float smoothness = 0.5f;
-    public int countdown = 100;
-    private int temp;
+    //[SerializeField] Vector3[] rotations;
+    //Vector3 initialRot = new Vector3(0,0,0);
+    //private int index;
+    //public float smoothness = 0.5f;
+    ////public int countdown = 100;
+    ////private int temp;
+    //public float timer;0
+
+    [SerializeField] private GameObject[] deactivateObjects;
+    [SerializeField] private GameObject[] actiaveteObjects;
 
     private void Start()
     {
-        temp = countdown;
+        //timer = 5f;
+        //doRotation = true;
     }
 
     private void Update()
     {
-        if (temp <= 0)
-        {
-            NewRotation();
-            Debug.Log("New Rotation");
-        }
-        temp --;
+        //if (doRotation)
+        //{
+        //    StartCoroutine(NewRotation(5f));
+        //}
     }
 
-    void NewRotation()
+    private void OnTriggerEnter(Collider other) //End portal of Maze
     {
-        temp = countdown;
-        index = Random.Range(0, rotations.Length - 1);
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rotations[index]), Time.deltaTime);
+        TeleportToEngineer();
+    }
+
+
+    //phil: code commented to check if we have time implementing a random rotation. As it is below the rotation does suddenly not as animation
+    //IEnumerator NewRotation(float time) 
+    //{
+    //    doRotation = false;
+    //    index = Random.Range(0, rotations.Length - 1);
+    //    transform.rotation = Quaternion.Slerp(Quaternion.Euler(initialRot), Quaternion.Euler(rotations[index]), smoothness);
+    //    yield return new WaitForSeconds(time);
+    //    doRotation = true;
+    //    StopCoroutine("NewRotation");
+    //}
+
+
+    internal void TeleportToEngineer()
+    {
+        foreach (GameObject obj in deactivateObjects)
+        {
+            obj.SetActive(false);
+        }
+        foreach (GameObject obj in actiaveteObjects)
+        {
+            obj.SetActive(true);
+        }
+
+        FindObjectOfType<GameManager>().carOn = false;
+        FindObjectOfType<GameManager>().engineerOn = true;
+        FindObjectOfType<GameManager>().sphereOn = false;
+
+        CameraRigHandler.stageIndex = 0;
+        FindObjectOfType<CameraRigHandler>().stage_PlaceHolders[0] = Transform.FindObjectOfType<EngineerHandler>().transform;
+        FindObjectOfType<CameraRigHandler>().stage_PlaceHolders[1] = Transform.FindObjectOfType<EngineerHandler>().transform;
+        FindObjectOfType<CameraRigHandler>().camScheme = 1;
+        //FindObjectOfType<GameManager>().CharacterHandler(); Just for tester
+
+        FindObjectOfType<CameraRigHandler>().hasEngineer = true;
+        FindObjectOfType<CameraRigHandler>().hasSphere = false;
+
+        FindObjectOfType<LastStageManager>().isMaze = false;
+        FindObjectOfType<LastStageManager>().isStage = true;
+        FindObjectOfType<LastStageManager>().isTetris = false;
     }
 }
 

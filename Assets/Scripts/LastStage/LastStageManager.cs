@@ -32,7 +32,15 @@ public class LastStageManager : MonoBehaviour
         }
         if (isTetris)
         {
+            if (Input.GetButtonDown("CharSwitcher"))
+            {
+                FindObjectOfType<CameraRigHandler>().camScheme = 3 / FindObjectOfType<CameraRigHandler>().camScheme;
+            }
+        }
 
+        if (Input.GetKeyDown(KeyCode.Backspace)) //tester
+        {
+            FindObjectOfType<MazeHandler>().TeleportToEngineer();
         }
     }
 }

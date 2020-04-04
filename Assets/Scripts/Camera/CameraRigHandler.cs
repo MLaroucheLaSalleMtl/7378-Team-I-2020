@@ -192,6 +192,11 @@ public class CameraRigHandler : MonoBehaviour
                 vcamSphere.SetActive(false);
                 vcamCar.SetActive(true);
             }
+        } 
+        else if (!hasCar && !hasEngineer && !hasSphere)
+        {
+            isTopView = true;
+            FindObjectOfType<AIUI>().ShowText($"You cannot use the first person view at this part of the game");
         }
 
         stageCam.enabled = false;

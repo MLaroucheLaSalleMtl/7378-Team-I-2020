@@ -35,14 +35,14 @@ public class PortalToMaze : MonoBehaviour
         }
     }
 
-    private void ChangeToEngineer()
-    {
-        CameraRigHandler.stageIndex = 0;
-        FindObjectOfType<CameraRigHandler>().stage_PlaceHolders[1] = FindObjectOfType<CameraRigHandler>().stage_PlaceHolders[0];
-        FindObjectOfType<GameManager>().CharacterHandler();
-    }
+    //private void ChangeToEngineer()
+    //{
+    //    CameraRigHandler.stageIndex = 0;
+    //    FindObjectOfType<CameraRigHandler>().stage_PlaceHolders[1] = FindObjectOfType<CameraRigHandler>().stage_PlaceHolders[0];
+    //    FindObjectOfType<GameManager>().CharacterHandler();
+    //}
 
-    private void TeleportToMaze()
+    internal void TeleportToMaze()
     {
         foreach(GameObject obj in deactivateObjects)
         {

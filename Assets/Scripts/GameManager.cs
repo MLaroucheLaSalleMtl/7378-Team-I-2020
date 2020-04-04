@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//by Philipe Gouveia and Sohyun Yi
+//by Philipe Gouveia
 
 public class GameManager : MonoBehaviour
 {

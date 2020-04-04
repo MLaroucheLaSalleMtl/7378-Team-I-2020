@@ -80,6 +80,21 @@
     <Compile Include="Assets\Scripts\FirstStage\SwitchSphere.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\ItemHighlight.cs" />
+    <Compile Include="Assets\Scripts\LastStage\BlackHoles.cs" />
+    <Compile Include="Assets\Scripts\LastStage\DoorTrigger.cs" />
+    <Compile Include="Assets\Scripts\LastStage\FollowSphereMaze.cs" />
+    <Compile Include="Assets\Scripts\LastStage\LastStageManager.cs" />
+    <Compile Include="Assets\Scripts\LastStage\LoadLastStage.cs" />
+    <Compile Include="Assets\Scripts\LastStage\MazeHandler.cs" />
+    <Compile Include="Assets\Scripts\LastStage\MazePlayerHandler.cs" />
+    <Compile Include="Assets\Scripts\LastStage\PortalAfterTetris.cs" />
+    <Compile Include="Assets\Scripts\LastStage\PortalToMaze.cs" />
+    <Compile Include="Assets\Scripts\LastStage\TetrisGrid.cs" />
+    <Compile Include="Assets\Scripts\LastStage\TetrisHandler.cs" />
+    <Compile Include="Assets\Scripts\LastStage\TetrisPCHandler.cs" />
+    <Compile Include="Assets\Scripts\LastStage\TetrisPCRayCaster.cs" />
+    <Compile Include="Assets\Scripts\LastStage\TetrisPCSpawner.cs" />
+    <Compile Include="Assets\Scripts\LastStage\TetrisSwitchReset.cs" />
     <Compile Include="Assets\Scripts\Loadingbar.cs" />
     <Compile Include="Assets\Scripts\MInimap.cs" />
     <Compile Include="Assets\Scripts\MainMenu\Exit.cs" />
@@ -87,7 +102,10 @@
     <Compile Include="Assets\Scripts\MainMenu\MenuSelect.cs" />
     <Compile Include="Assets\Scripts\MainMenu\Quality.cs" />
     <Compile Include="Assets\Scripts\MainMenu\SceneLoad.cs" />
+    <Compile Include="Assets\Scripts\MainMenu\Select_pannels.cs" />
+    <Compile Include="Assets\Scripts\MainMenu\Setvolume.cs" />
     <Compile Include="Assets\Scripts\PlayerSpawner.cs" />
+    <Compile Include="Assets\Scripts\Portal.cs" />
     <Compile Include="Assets\Scripts\PuzzleCubes.cs" />
     <Compile Include="Assets\Scripts\RagdollSystem.cs" />
     <Compile Include="Assets\Scripts\SphereHandler.cs" />
@@ -111,53 +129,57 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\Ciconia Studio\Shaders\Double Sided Shaders\Double Sided Standard Diffuse Bump.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\Shaders\DynamicTerrain\Surface_RenderTerrain_Tess.shader" />
     <None Include="Assets\UI\Tech Menu\Shaders\Blur.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\ErbGameArt\Procedural fire\Shaders\FireSphere.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\UI\Tech Menu\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\ErbGameArt\Procedural fire\Demo scene\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Into The Unknown/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Project-Collab/Into The Unknown/Into The Unknown/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Cinemachine">
-      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Into The Unknown/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Project-Collab/Into The Unknown/Into The Unknown/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ProGrids">
-      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Into The Unknown/Library/ScriptAssemblies/Unity.ProGrids.dll</HintPath>
+      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Project-Collab/Into The Unknown/Into The Unknown/Library/ScriptAssemblies/Unity.ProGrids.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Into The Unknown/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Project-Collab/Into The Unknown/Into The Unknown/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ProGrids.Editor">
-      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Into The Unknown/Library/ScriptAssemblies/Unity.ProGrids.Editor.dll</HintPath>
+      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Project-Collab/Into The Unknown/Into The Unknown/Library/ScriptAssemblies/Unity.ProGrids.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Into The Unknown/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Project-Collab/Into The Unknown/Into The Unknown/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Into The Unknown/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Project-Collab/Into The Unknown/Into The Unknown/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Into The Unknown/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Project-Collab/Into The Unknown/Into The Unknown/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Into The Unknown/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Project-Collab/Into The Unknown/Into The Unknown/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Into The Unknown/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Project-Collab/Into The Unknown/Into The Unknown/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.cinemachine.editor">
-      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Into The Unknown/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Project-Collab/Into The Unknown/Into The Unknown/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Into The Unknown/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Project-Collab/Into The Unknown/Into The Unknown/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Into The Unknown/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>D:/Documents/Lasalle/2020.1-winter/GameEngine2/IntoTheUnknown/Project-Collab/Into The Unknown/Into The Unknown/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
