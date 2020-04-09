@@ -38,9 +38,9 @@ public class LastStageManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Backspace)) //tester
-        {
-            FindObjectOfType<MazeHandler>().TeleportToEngineer();
-        }
+        //if (Input.GetKeyDown(KeyCode.Backspace)) //tester
+        //{
+        //    FindObjectOfType<MazeHandler>().TeleportToEngineer();
+        //}
     }
 }

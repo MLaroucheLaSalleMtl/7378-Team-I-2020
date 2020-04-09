@@ -2,27 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//by Philipe Gouveia
+
 public class DoorTrigger : MonoBehaviour
 {
     private Animator anim;
-    public bool stageEntrance;
+    public bool test;
+    private bool hasKeys;
     public string aiText;
+    private bool doOnce;
 
     private void Start()
     {
+        if (test) hasKeys = true;
+        //else (hasKeys = GameManager.) to replace by the GameManager control of keys from others stages
+        doOnce = false;
         anim = GetComponent<Animator>();
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (!stageEntrance)
+        if (hasKeys)
         {
             if (other.gameObject.tag == GameManager.engineerTag)
             { anim.SetBool("isOpen", true); }
         }
-        if (stageEntrance)
+        if (!hasKeys)
         {
-            FindObjectOfType<AIUI>().ShowText(aiText);
+            if (!doOnce)
+            {
+                FindObjectOfType<AIUI>().ShowText(aiText);
+            }
+            doOnce = true;
         }
     }
 
@@ -30,6 +41,8 @@ public class DoorTrigger : MonoBehaviour
     {
         if (other.gameObject.tag == GameManager.engineerTag)
         { anim.SetBool("isOpen", false); }
+
+        doOnce = false;
     }
 
 }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//by Philipe Gouveia
+
 public class LoadLastStage : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)

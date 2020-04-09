@@ -50,16 +50,16 @@ public class EngineerHandler : MonoBehaviour
         {
             //if (controller.isGrounded)
             //{
-                if (Input.GetButtonUp("Action3")) { TakeObject(); }
+                if (Input.GetButtonDown("Action3")) { TakeObject(); }
                 if (!anim.GetBool("CarryObject"))
                 {
-                    if (Input.GetButtonUp("Action4")) { Action(); }
-                    if (Input.GetButtonUp("Action1"))
+                    if (Input.GetButtonDown("Action4")) { Action(); }
+                    if (Input.GetButtonDown("Action1"))
                     {
                         Jump();
                         FindObjectOfType<AIUI>().ShowText($"You can not jump, Sir. You are very heavy. Try to ask the {GameManager.sphereName} to jump for you.");
                     }
-                    if (Input.GetButtonUp("Action2")) { Punch(); }
+                    if (Input.GetButtonDown("Action2")) { Punch(); }
                 }
             //}
         }

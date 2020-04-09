@@ -15,6 +15,8 @@ public class PortalToMaze : MonoBehaviour
     [SerializeField] private Transform cameraRigTarget;
     [SerializeField] private Transform mazePlayer;
 
+    [SerializeField] private TextMesh hologram;
+
     private void Start()
     {
         portal.SetActive(false);
@@ -25,22 +27,17 @@ public class PortalToMaze : MonoBehaviour
         if (other.gameObject.tag == GameManager.sphereTag)
         {
             if (Input.GetButtonDown("Action4"))
-            {
+            { 
                 control.isActive = true;
                 portal.SetActive(true);
 
+                hologram.color = Color.green;
+                hologram.text = "-->";
+
                 Invoke("TeleportToMaze", 3f);
-                //ChangeToEngineer();
             }
         }
     }
-
-    //private void ChangeToEngineer()
-    //{
-    //    CameraRigHandler.stageIndex = 0;
-    //    FindObjectOfType<CameraRigHandler>().stage_PlaceHolders[1] = FindObjectOfType<CameraRigHandler>().stage_PlaceHolders[0];
-    //    FindObjectOfType<GameManager>().CharacterHandler();
-    //}
 
     internal void TeleportToMaze()
     {

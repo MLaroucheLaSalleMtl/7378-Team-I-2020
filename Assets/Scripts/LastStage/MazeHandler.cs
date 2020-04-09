@@ -52,7 +52,7 @@ public class MazeHandler : MonoBehaviour
     }
 
 
-    //phil: code commented to check if we have time implementing a random rotation. As it is below the rotation does suddenly not as animation
+    //CODE commented to check if we have time implementing a random rotation. As it is below the rotation does suddenly not as animation
     //IEnumerator NewRotation(float time) 
     //{
     //    doRotation = false;
@@ -83,7 +83,7 @@ public class MazeHandler : MonoBehaviour
         FindObjectOfType<CameraRigHandler>().stage_PlaceHolders[0] = Transform.FindObjectOfType<EngineerHandler>().transform;
         FindObjectOfType<CameraRigHandler>().stage_PlaceHolders[1] = Transform.FindObjectOfType<EngineerHandler>().transform;
         FindObjectOfType<CameraRigHandler>().camScheme = 1;
-        //FindObjectOfType<GameManager>().CharacterHandler(); Just for tester
+        FindObjectOfType<GameManager>().CharacterHandler();
 
         FindObjectOfType<CameraRigHandler>().hasEngineer = true;
         FindObjectOfType<CameraRigHandler>().hasSphere = false;

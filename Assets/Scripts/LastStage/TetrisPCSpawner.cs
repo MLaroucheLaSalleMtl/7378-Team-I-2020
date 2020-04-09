@@ -33,9 +33,6 @@ public class TetrisPCSpawner : MonoBehaviour
         }
     }
 
-
-
-
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.tag == boxTag)
