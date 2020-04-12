@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     public bool sphereOn;
     public bool engineerOn;
     public bool carOn;
+    public bool mechOn;
     public float charChangeDistance = 15f;
 
     #region SceneManagement
@@ -99,8 +100,8 @@ public class GameManager : MonoBehaviour
             engineerCharacter.engineerMove = true;
             if (sphereCharacter)
             {
-                sphereCharacter.sphereMove = false;
-                carCharacter.carMove = false;
+                if (sphereCharacter) sphereCharacter.sphereMove = false;
+                if (carCharacter) carCharacter.carMove = false;
             }
 
             uiEngineer.SetActive(true);
@@ -109,8 +110,8 @@ public class GameManager : MonoBehaviour
         }
         else if (!engineerCharacter && sphereCharacter)
         {
-            engineerCharacter.engineerMove = false;
-            sphereCharacter.sphereMove = true;
+            if (engineerCharacter) engineerCharacter.engineerMove = false;
+            if (sphereCharacter) sphereCharacter.sphereMove = true;
             if (carCharacter) carCharacter.carMove = false;
 
             uiEngineer.SetActive(false);
@@ -156,6 +157,12 @@ public class GameManager : MonoBehaviour
     public void LoadNewLevel(int sceneIndex)
     {
         async = SceneManager.LoadSceneAsync(sceneIndex);
+        async.allowSceneActivation = false;
+    }
+
+    public void LoadNewLevel(string name)
+    {
+        async = SceneManager.LoadSceneAsync(name);
         async.allowSceneActivation = false;
     }
 }

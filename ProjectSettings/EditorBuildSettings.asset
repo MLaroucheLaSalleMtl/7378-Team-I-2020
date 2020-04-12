@@ -17,7 +17,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Planet.unity
     guid: 8e05dd5254491374aa0f42372798a8ed
+  - enabled: 1
+    path: Assets/Scenes/LastStage.unity
+    guid: 4ff3d17cfb8d9674ebddc7291defb918
+  - enabled: 1
+    path: Assets/Scenes/FinalBoss.unity
+    guid: cad2dd4ea050a1748983760f7ab82702
+  - enabled: 1
+    path: Assets/Scenes/EndScene.unity
+    guid: 2713ffde6b60ec941a4ca6e04672280e
   - enabled: 0
-    path: Assets/Scenes/Planet.unity
+    path: 
     guid: 89a84b5a88edd704a894065f3bd4e329
   m_configObjects: {}

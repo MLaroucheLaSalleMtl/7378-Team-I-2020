@@ -35,10 +35,10 @@ public class CameraRigHandler : MonoBehaviour
     //schemes to control the camera used scheme 1 - SE, SW, NW, NE / 2 - S, W, N, E / 3 - S, N / 4 - E, W
     [Range(1, 4)] public int camScheme; //variable to be changed/controlled with triggers on the stage
     [Header("1 - SE, SW, NW, NE / 2 - S, W, N, E / 3 - S, N, S, N / 4 - E, W, E, W")]
-    [SerializeField] Transform[] camPlaceHolder1;
-    [SerializeField] Transform[] camPlaceHolder2;
-    [SerializeField] Transform[] camPlaceHolder3;
-    [SerializeField] Transform[] camPlaceHolder4;
+    [SerializeField] internal Transform[] camPlaceHolder1;
+    [SerializeField] internal Transform[] camPlaceHolder2;
+    [SerializeField] internal Transform[] camPlaceHolder3;
+    [SerializeField] internal Transform[] camPlaceHolder4;
     [Space]
     [Tooltip("Place holders for the Camera Rig to move across the stage")]
     [SerializeField] internal Transform[] stage_PlaceHolders;

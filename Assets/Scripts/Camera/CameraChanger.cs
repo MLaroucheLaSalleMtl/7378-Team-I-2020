@@ -13,6 +13,7 @@ public class CameraChanger : MonoBehaviour
     [Range(0,3)]
     public int index;
 
+
     private void OnTriggerExit(Collider other)
     {
         if (stagePosHandler)
