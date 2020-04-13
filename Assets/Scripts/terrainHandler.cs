@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//by Sohyun Yi
+
 public class terrainHandler : MonoBehaviour
 {
     public GameObject terrain = new GameObject();

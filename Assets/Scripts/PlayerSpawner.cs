@@ -9,6 +9,7 @@ public class PlayerSpawner : MonoBehaviour
     [SerializeField] private Transform respawnPlace;
     [SerializeField] private GameObject engineerPrefab;
     [SerializeField] private GameObject spherePrefab;
+    [SerializeField] private GameObject boxPrefab;
     public bool begin;
 
     private void OnTriggerEnter(Collider other)
@@ -39,6 +40,11 @@ public class PlayerSpawner : MonoBehaviour
                 Instantiate(spherePrefab, respawnPlace);
             }
         }
+
+        if (other.gameObject.tag == "boxSwitch")
+        {
+            other.gameObject.transform.position = respawnPlace.position;
+        }
     }
 
     IEnumerator RespawnChar(GameObject player)
@@ -48,6 +54,7 @@ public class PlayerSpawner : MonoBehaviour
         player.transform.rotation = Quaternion.identity;
         yield return new WaitForSeconds(0.1f);
         player.SetActive(true);
+        yield return null;
         StopCoroutine(RespawnChar(player));
     }
 }

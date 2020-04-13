@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject uiCar; //to be used when the car player is implemented so the game manager can activate it
     public static string carTag = "PlayerCar";
     public static string carUItag = "PlayerCarUI";
+    [SerializeField] GameObject uiMech;
+    public static string mechUItag = "PlayerMechUI";
     #endregion
 
     [SerializeField] private GameObject uiAI;
@@ -48,6 +50,13 @@ public class GameManager : MonoBehaviour
     private AsyncOperation async;
     #endregion
 
+    #region SFX
+    [Space]
+    [Header("Sound Effects")]
+    private AudioSource sfx;
+    [SerializeField] private AudioClip characterChangeSFX;
+    #endregion
+
     void Start()
     {
         charChangeDistance = 15f;
@@ -58,6 +67,9 @@ public class GameManager : MonoBehaviour
         uiEngineer = GameObject.FindGameObjectWithTag(engineerUItag);
         uiSphere = GameObject.FindGameObjectWithTag(sphereUItag);
         uiCar = GameObject.FindGameObjectWithTag(carUItag);
+        uiMech = GameObject.FindGameObjectWithTag(mechUItag);
+
+        sfx = GetComponent<AudioSource>();
 
         Begin();
     }
@@ -79,6 +91,7 @@ public class GameManager : MonoBehaviour
                 if (Vector3.Magnitude(sphereCharacter.transform.position - engineerCharacter.transform.position) < charChangeDistance)
                 {
                     CharacterHandler();
+                    sfx.PlayOneShot(characterChangeSFX);
                 }
                 else
                 {
@@ -107,6 +120,7 @@ public class GameManager : MonoBehaviour
             uiEngineer.SetActive(true);
             uiSphere.SetActive(false);
             uiCar.SetActive(false);
+            uiMech.SetActive(false);
         }
         else if (!engineerCharacter && sphereCharacter)
         {

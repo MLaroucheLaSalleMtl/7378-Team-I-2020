@@ -43,6 +43,15 @@ public class SphereHandler : MonoBehaviour
     [SerializeField] private float followSpeed = 1.8f;
     #endregion
 
+    #region SFX 
+    //by Philipe Gouveia
+    [Space]
+    [Header("SFX")]
+    private AudioSource sfx;
+    [SerializeField] private AudioClip stepSFX;
+    [SerializeField] private AudioClip openSFX;
+    #endregion
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -50,6 +59,7 @@ public class SphereHandler : MonoBehaviour
         engineer = GameObject.FindGameObjectWithTag(GameManager.engineerTag);
         engineerPos = GameObject.FindGameObjectWithTag(GameManager.engineerTag).transform;
         bcol.enabled = false;
+        sfx = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -112,6 +122,7 @@ public class SphereHandler : MonoBehaviour
     {
         controller.transform.rotation = Quaternion.identity;
         anim.SetBool("Open", !anim.GetBool("Open"));
+        sfx.PlayOneShot(openSFX);
         if (anim.GetBool("Open"))
         {
             bcol.enabled = true;
@@ -181,5 +192,9 @@ public class SphereHandler : MonoBehaviour
         controller.radius *= 0.5f;
         yield return new WaitForSeconds(time * 0.7f);
         StopCoroutine("Jump");
+    }
+
+    public void Step()
+    {
     }
 }

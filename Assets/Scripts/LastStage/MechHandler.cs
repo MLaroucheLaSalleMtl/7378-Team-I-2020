@@ -34,13 +34,12 @@ public class MechHandler : MonoBehaviour
 
     #region Controlllers
     private Animator anim;
-    private AudioSource audio;
     #endregion
 
     #region Canon
     [Space]
     [Header("Canon")]
-    //canon shoot
+    //canon shootSfx
     [SerializeField] private LineRenderer[] laserBeans;
     private int lastIndex = 0;
     [SerializeField] private GameObject laserAim;
@@ -74,12 +73,16 @@ public class MechHandler : MonoBehaviour
     #endregion
 
 
-    #region AudioClips
+    #region SFX
     [Space]
-    [Header("AudioClips")]
-    [SerializeField] AudioClip step;
-    [SerializeField] AudioClip[] shoot;
-    [SerializeField] AudioClip explosion;
+    [Header("SFX")]
+    private AudioSource sfx;
+    [SerializeField] AudioClip activatedSfx;
+    [SerializeField] AudioClip dieSFX;
+    [SerializeField] AudioClip stepSfx;
+    [SerializeField] AudioClip[] shootSfx;
+    [SerializeField] AudioClip explosionSfx;
+    [SerializeField] AudioClip explosionShieldSfx;
     #endregion
 
     void Start()
@@ -88,7 +91,7 @@ public class MechHandler : MonoBehaviour
         switchOn = false;
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-        audio = GetComponent<AudioSource>();
+        sfx = GetComponent<AudioSource>();
         reset = true;
         canons.rotation = Quaternion.Euler(0, 0, -90);
 
@@ -106,7 +109,8 @@ public class MechHandler : MonoBehaviour
         if (anim.GetBool("SwitchOn"))
         {
             if (Input.GetButton("Action1")) ForceField();
-            if (Input.GetButtonUp("Action1")) forceField.SetActive(false);
+            if (Input.GetButtonUp("Action1")) ForceShieldOff();
+
             if (!forceField.activeSelf)
             {
                 if (Input.GetButtonDown("Action4"))
@@ -118,7 +122,7 @@ public class MechHandler : MonoBehaviour
             {
                 if (Input.GetButtonDown("Action4"))
                 {
-                    FindObjectOfType<AIUI>().ShowText("You can not shoot while the shield is active.");
+                    FindObjectOfType<AIUI>().ShowText("You can not shootSfx while the shield is active.");
                 }
             }
 
@@ -167,7 +171,7 @@ public class MechHandler : MonoBehaviour
             //Debug.Log(canonRotInput);
             //canons.rotation = Quaternion.Lerp(canons.rotation, Quaternion.Euler(0, canonRotInput.x * canonSpeed, -90), 1);
 
-        //OR
+            //OR
 
             //canonRotInput = Camera.main.ScreenToViewportPoint(Input.mousePosition);
             //rotateCanon = canons.rotation.x + (canonSpeed * (0.5f - canonRotInput.x));
@@ -179,7 +183,7 @@ public class MechHandler : MonoBehaviour
 
     public void Step()
     {
-        audio.PlayOneShot(step, 0.5f);
+        sfx.PlayOneShot(stepSfx, 0.5f);
     }
 
     public void ForceField()
@@ -187,6 +191,7 @@ public class MechHandler : MonoBehaviour
         if (shieldBar >= 1)
         {
             forceField.SetActive(true);
+            anim.SetBool("Shield", true);
             if (shieldBar <= 1)
             {
                 shieldTxt.color = Color.red;
@@ -198,17 +203,23 @@ public class MechHandler : MonoBehaviour
         }
         else if (shieldBar < 1)
         {
-            forceField.SetActive(false);
+            ForceShieldOff();
             FindObjectOfType<AIUI>().ShowText("Wait for the shield to reload.");
         }
+    }
+
+    public void ForceShieldOff()
+    {
+        forceField.SetActive(false);
+        anim.SetBool("Shield", false);
     }
 
     public void Shoot()
     {
         if (shoots >= 1)
         {
-            anim.SetTrigger("Shoot");
-            audio.PlayOneShot(shoot[Random.Range(0, 2)], 0.5f);
+            anim.SetTrigger("shootSfx");
+            sfx.PlayOneShot(shootSfx[Random.Range(0, 2)], 0.5f);
             ShootCanon();
             shoots--;
             shootsTxt.text = "";
@@ -261,10 +272,10 @@ public class MechHandler : MonoBehaviour
 
     public void GetHit()
     {
-        audio.PlayOneShot(explosion, 0.3f);
 
         if (forceField.activeSelf)
         {
+            sfx.PlayOneShot(explosionShieldSfx);
             shieldBar--;
             shieldTxt.text = "";
             for (int i = 1; i <= shieldBar; i++)
@@ -282,6 +293,7 @@ public class MechHandler : MonoBehaviour
         }
         else
         {
+            sfx.PlayOneShot(explosionSfx);
             healthBar--;
             integrityTxt.text = "";
 
@@ -328,6 +340,7 @@ public class MechHandler : MonoBehaviour
 
     private void Die()
     {
+        sfx.PlayOneShot(dieSFX);
         PortalToMaze.skipPortal = true;
         FindObjectOfType<GameManager>().LoadNewLevel("FinalBoss");
         FindObjectOfType<GameManager>().ActivateNewScene();
@@ -335,6 +348,7 @@ public class MechHandler : MonoBehaviour
 
     public void SwitchON()
     {
+        sfx.PlayOneShot(activatedSfx);
         switchOn = true;
         CameraRigHandler.stageIndex = 1;
     }

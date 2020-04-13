@@ -11,6 +11,13 @@ public class SwitchSphere : MonoBehaviour
     [SerializeField] ItemHighlight highlightSwitch;
     [SerializeField] GameObject nextHighlight;
 
+    #region SFX 
+    [Space]
+    [Header("SFX")]
+    private AudioSource sfx;
+    [SerializeField] private AudioClip engineSFX;
+    #endregion
+
     void Start()
     {
         mat = GetComponent<Renderer>().material;

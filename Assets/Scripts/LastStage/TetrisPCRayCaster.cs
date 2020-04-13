@@ -14,9 +14,9 @@ public class TetrisPCRayCaster : MonoBehaviour
     {
         Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * 1f, Color.white);
 
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right) * 1f, out hit, 1.5f))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right) * 2f, out hit, 2.0f))
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * 1f, Color.yellow);
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right) * 2f, Color.yellow);
             hitTag = hit.transform.GetComponent<TetrisGrid>().name;
             isAvailable = hit.transform.GetComponent<TetrisGrid>().isAvailable;
         }
@@ -24,10 +24,16 @@ public class TetrisPCRayCaster : MonoBehaviour
 
     internal void AvailableGrid(bool value)
     {
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right) * 1f, out hit, 1.5f))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right) * 2f, out hit, 2f))
         {
             hit.transform.GetComponent<TetrisGrid>().isAvailable = value;
         }
+    }
+
+    public void ResetCaster()
+    {
+        hitTag = "";
+        isAvailable = true;
     }
 }
 

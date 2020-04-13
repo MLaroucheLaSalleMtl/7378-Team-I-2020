@@ -6,11 +6,24 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
+    #region Attributes
     [SerializeField] private GameObject portal;
     [SerializeField] private GameObject explosion;
     [SerializeField] private GameObject playerToDestroy;
     public int timeInterval;
     public bool isActive;
+    #endregion
+
+    #region SFX 
+    [Header("SFX")]
+    private AudioSource sfx;
+    [SerializeField] private AudioClip activatedSFX;
+    #endregion
+
+    private void Start()
+    {
+        sfx = GetComponent<AudioSource>();
+    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -18,6 +31,7 @@ public class Portal : MonoBehaviour
         {
             if (other.gameObject.tag == playerToDestroy.tag)
             {
+                sfx.PlayOneShot(activatedSFX);
                 Invoke("DestroyPlayer", timeInterval);
                 Invoke("Teleport", 2f);
             }

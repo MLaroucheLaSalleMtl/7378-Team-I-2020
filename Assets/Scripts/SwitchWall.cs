@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//by Sohyun Yi and Philipe Gouveia
+//by Philipe Gouveia and Sohyun Yi
 
 public class SwitchWall : MonoBehaviour
 {
@@ -14,7 +14,6 @@ public class SwitchWall : MonoBehaviour
     public bool sphereAct = false;
     public bool engineerAct = false;
 
-    
     [Space]
     [Header("Has Switch Off option")]
     public bool hasSwitchOff = false;
@@ -25,11 +24,21 @@ public class SwitchWall : MonoBehaviour
     public bool outputInstruction = false;
     public string aiInstruction = "";
 
+    #region Attributes
     private Material mat;
     private bool activated = false;
+    #endregion
+
+    #region SFX 
+    //by Philipe Gouveia
+    [Header("SFX")]
+    private AudioSource sfx;
+    [SerializeField] private AudioClip clickSFX;
+    #endregion
 
     void Start()
     {
+        sfx = GetComponent<AudioSource>();
         mat = GetComponent<Renderer>().material;
     }
 
@@ -55,6 +64,7 @@ public class SwitchWall : MonoBehaviour
 
     public void OnClick()
     {
+        sfx.PlayOneShot(clickSFX);
         mat.SetColor("_EmissionColor", Color.green);
         resultObj.GetComponent<Animator>().SetBool("isOpen", true);
         if (outputInstruction) { FindObjectOfType<AIUI>().ShowText(aiInstruction); }
@@ -62,9 +72,8 @@ public class SwitchWall : MonoBehaviour
 
     public void SwitchOff()
     {
-        {
-            mat.SetColor("_EmissionColor", Color.red);
-            resultObj.GetComponent<Animator>().SetBool("isOpen", false);
-        }
+        sfx.PlayOneShot(clickSFX);
+        mat.SetColor("_EmissionColor", Color.red);
+        resultObj.GetComponent<Animator>().SetBool("isOpen", false);
     }
 }

@@ -48,5 +48,4 @@ public class MenuButtonHandler : MonoBehaviour, IPointerClickHandler, IPointerEn
     {
         GetComponent<Selectable>().OnPointerExit(null);
     }
-
 }

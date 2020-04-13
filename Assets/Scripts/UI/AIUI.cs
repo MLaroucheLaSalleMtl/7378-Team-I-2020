@@ -19,6 +19,13 @@ public class AIUI : MonoBehaviour
     internal static bool skip;
     string _text;
 
+    #region SFX 
+    [Space]
+    [Header("SFX")]
+    private AudioSource sfx;
+    [SerializeField] private AudioClip engineSFX;
+    #endregion
+
     private void Awake()
     {
         anim = GetComponent<Animation>();

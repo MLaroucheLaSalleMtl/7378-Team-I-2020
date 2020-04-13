@@ -2266,6 +2266,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5938330296556540830, guid: 1b4ed3a4fb45b8c488d0e9ad8401e68a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047308574729099597, guid: 1b4ed3a4fb45b8c488d0e9ad8401e68a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8646511483640910939, guid: 1b4ed3a4fb45b8c488d0e9ad8401e68a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8646511484121817712, guid: 1b4ed3a4fb45b8c488d0e9ad8401e68a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3301,6 +3316,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CameraRigChanger
+      objectReference: {fileID: 0}
+    - target: {fileID: 6284104091376644326, guid: 5c5eb538afd543c45baa60bc9cd18c2f,
+        type: 3}
+      propertyPath: stagePosHandler
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6284104091376644327, guid: 5c5eb538afd543c45baa60bc9cd18c2f,
         type: 3}
@@ -13673,6 +13693,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CameraRigChanger
       objectReference: {fileID: 0}
+    - target: {fileID: 6284104091376644326, guid: 5c5eb538afd543c45baa60bc9cd18c2f,
+        type: 3}
+      propertyPath: stagePosHandler
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6284104091376644327, guid: 5c5eb538afd543c45baa60bc9cd18c2f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18435,8 +18460,10 @@ MonoBehaviour:
   carCharacter: {fileID: 0}
   uiCar: {fileID: 0}
   uiAI: {fileID: 0}
-  sphereOn: 0
-  engineerOn: 0
+  sphereOn: 1
+  engineerOn: 1
+  carOn: 0
+  mechOn: 0
   charChangeDistance: 0
 --- !u!4 &1786314821
 Transform:
@@ -34519,6 +34546,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CameraRigChanger
+      objectReference: {fileID: 0}
+    - target: {fileID: 6284104091376644326, guid: 5c5eb538afd543c45baa60bc9cd18c2f,
+        type: 3}
+      propertyPath: index
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6284104091376644326, guid: 5c5eb538afd543c45baa60bc9cd18c2f,
+        type: 3}
+      propertyPath: stagePosHandler
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6284104091376644327, guid: 5c5eb538afd543c45baa60bc9cd18c2f,
         type: 3}

@@ -48,6 +48,14 @@ public class CarHandler : MonoBehaviour
     [SerializeField] private GameObject engineer;
     [SerializeField] private GameObject sphere;
 
+    #region SFX 
+    //by Philipe Gouveia
+    [Space]
+    [Header("SFX")]
+    private AudioSource sfx;
+    [SerializeField] private AudioClip engineSFX;
+    #endregion
+
     void Start()
     {
         carMove = false;

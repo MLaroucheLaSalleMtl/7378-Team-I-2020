@@ -2,14 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//by Sohyun Yi and Philipe
+//by Philipe Gouveia and Sohyun Yi
 
 public class SwitchFloor : MonoBehaviour
 {
+    #region Attributes
     [SerializeField] private Material mat;
     public string boxTag = "boxSwitch";
     [SerializeField] private GameObject activateElement;
     [SerializeField] private ItemHighlight highlight;
+    #endregion
+
+    #region SFX 
+    //by Philipe Gouveia
+    [Space]
+    [Header("SFX")]
+    private AudioSource sfx;
+    [SerializeField] private AudioClip soundSFX;
+    #endregion
 
     void Start()
     {

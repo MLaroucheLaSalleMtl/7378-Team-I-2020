@@ -4,6 +4,7 @@ using UnityEngine;
 
 //by Philipe Gouveia
 
+    [RequireComponent(typeof(AudioSource))]
 public class PortalToMaze : MonoBehaviour
 {
     [SerializeField] private GameObject portal;
@@ -26,6 +27,14 @@ public class PortalToMaze : MonoBehaviour
     public bool toMaze;
     public bool toBossFight;
 
+    #region SFX 
+    [Space]
+    [Header("SFX")]
+    private AudioSource sfx;
+    [SerializeField] private AudioClip portalSFX;
+    [SerializeField] private AudioClip mechClickSFX;
+    #endregion
+
     private void Awake()
     {
         skipPortal = false; //to be changed after testing
@@ -34,6 +43,7 @@ public class PortalToMaze : MonoBehaviour
     private void Start()
     {
         if (portal) portal.SetActive(false);
+        sfx = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -115,6 +125,7 @@ public class PortalToMaze : MonoBehaviour
 
         if (toBossFight)
         {
+            sfx.PlayOneShot(mechClickSFX);
             CameraRigHandler camRig = CameraRigHandler.instance;
             for (int i = 0; i < camRig.camPlaceHolder1.Length; i++)
             {

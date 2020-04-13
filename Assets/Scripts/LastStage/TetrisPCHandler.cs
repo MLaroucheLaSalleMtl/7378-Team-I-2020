@@ -17,17 +17,25 @@ public class TetrisPCHandler : MonoBehaviour
 
     [SerializeField] private TetrisPCRayCaster[] casters;
 
+    #region SFX 
+    [Header("SFX")]
+    private AudioSource sfx;
+    [SerializeField] private AudioClip moveSFX;
+    [SerializeField] private AudioClip placeSFX;
+    #endregion
+
     private void Awake()
     {
         spawnerList.pieces.Add(this.gameObject);
         isActive = false;
         inPlace = false;
+        initialStatepos = transform.position;
+        initialStaterot = transform.rotation;
     }
 
     private void Start()
     {
-        initialStatepos = transform.position;
-        initialStaterot = transform.rotation;
+        sfx = GetComponent<AudioSource>();
         gameObject.SetActive(false);
     }
 
@@ -75,6 +83,11 @@ public class TetrisPCHandler : MonoBehaviour
         isActive = false;
         inPlace = false;
 
+        foreach (TetrisPCRayCaster cast in casters)
+        {
+            cast.ResetCaster();
+        }
+
         gameObject.SetActive(false);
     }
 
@@ -100,7 +113,10 @@ public class TetrisPCHandler : MonoBehaviour
                     }
                 }
                 if (!forbiddenMove)
+                {
                     this.transform.position += new Vector3(-3, 0, 0);
+                    sfx.PlayOneShot(moveSFX);
+                }
                 else
                     forbiddenMove = false;
             }
@@ -114,7 +130,10 @@ public class TetrisPCHandler : MonoBehaviour
                     }
                 }
                 if (!forbiddenMove)
+                { 
                     this.transform.position += new Vector3(3, 0, 0);
+                    sfx.PlayOneShot(moveSFX);
+                }
                 else
                     forbiddenMove = false;
             }
@@ -132,7 +151,10 @@ public class TetrisPCHandler : MonoBehaviour
                     }
                 }
                 if (!forbiddenMove)
+                {
                     this.transform.position += new Vector3(0, 0, 3);
+                    sfx.PlayOneShot(moveSFX);
+                }
                 else
                     forbiddenMove = false;
             }
@@ -146,7 +168,10 @@ public class TetrisPCHandler : MonoBehaviour
                     }
                 }
                 if (!forbiddenMove)
+                {
                     this.transform.position += new Vector3(0, 0, -3);
+                    sfx.PlayOneShot(moveSFX);
+                }
                 else
                     forbiddenMove = false;
             }
@@ -171,6 +196,7 @@ public class TetrisPCHandler : MonoBehaviour
 
                 isActive = false;
                 transform.position += new Vector3(0, -.7f, 0);
+                sfx.PlayOneShot(placeSFX);
             }
             else
                 forbiddenMove = false;
@@ -186,6 +212,7 @@ public class TetrisPCHandler : MonoBehaviour
             if (!forbiddenMove)
             {
                 transform.RotateAround(rotateCenter.position, new Vector3(0, 1, 0), 90);
+                sfx.PlayOneShot(moveSFX);
 
                 if (transform.rotation.y >= 360)
                 {

@@ -13,12 +13,24 @@ public class TetrisSwitchReset : MonoBehaviour
     private Vector3 boxInitpos;
     private Quaternion boxInitrot;
 
+    [SerializeField] private TetrisGrid[] place;
+    [SerializeField] private GameObject bridge;
+    [SerializeField] private GameObject newGrid;
+    private Transform bridgeTransform;
+
+    #region SFX 
+    [Header("SFX")]
+    private AudioSource sfx;
+    [SerializeField] private AudioClip clickSFX;
+    #endregion
+
     void Start()
     {
         holoCounter = 0;
         boxInitpos = box.transform.position;
         boxInitrot = box.transform.rotation;
         mat = GetComponent<Renderer>().material;
+        sfx = GetComponent<AudioSource>();
     }
 
     private void OnTriggerStay(Collider other)
@@ -31,7 +43,7 @@ public class TetrisSwitchReset : MonoBehaviour
                 mat.SetColor("_EmissionColor", Color.blue);
                 hologram.GetComponent<TextMesh>().color = Color.blue;
                 hologram.GetComponent<TextMesh>().text = "";
-
+                sfx.PlayOneShot(clickSFX);
                 StartCoroutine(ResetPuzzle(4f));
             }
         }
@@ -41,14 +53,23 @@ public class TetrisSwitchReset : MonoBehaviour
     {
         box.transform.position = boxInitpos;
         box.transform.rotation = boxInitrot;
-        foreach (TetrisPCHandler piece in FindObjectsOfType<TetrisPCHandler>())
-        {
-            piece.ResetPiece();
-        }
         foreach (TetrisPCSpawner spawner in FindObjectsOfType<TetrisPCSpawner>())
         {
             spawner.ResetSwitch();
         }
+       
+        foreach (TetrisGrid grid in place)
+        {
+            grid.isAvailable = true;
+        }
+        foreach (TetrisPCHandler piece in FindObjectsOfType<TetrisPCHandler>())
+        {
+            piece.ResetPiece();
+        }
+
+        //bridgeTransform = bridge.transform;
+        //Destroy(bridge);
+        //Instantiate(newGrid, bridgeTransform);
     }
 
     IEnumerator ResetPuzzle(float time)

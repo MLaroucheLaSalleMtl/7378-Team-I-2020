@@ -35,5 +35,4 @@ public class SceneLoad : MonoBehaviour
             async.allowSceneActivation = true;
         }
     }
-    
 }

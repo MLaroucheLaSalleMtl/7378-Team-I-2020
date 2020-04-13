@@ -355,6 +355,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1cffd36403d86540a6aae424d78be87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test: 0
+  aiText: 
+  openSFX: {fileID: 8300000, guid: 5c7112828f512441f88a38364a8552b0, type: 3}
+  closeSFX: {fileID: 8300000, guid: 5c7112828f512441f88a38364a8552b0, type: 3}
 --- !u!1 &1790945437686594
 GameObject:
   m_ObjectHideFlags: 0

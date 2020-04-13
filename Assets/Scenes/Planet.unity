@@ -543,6 +543,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5489797457981065180, guid: 1b4ed3a4fb45b8c488d0e9ad8401e68a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047308574729099597, guid: 1b4ed3a4fb45b8c488d0e9ad8401e68a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8646511484121817712, guid: 1b4ed3a4fb45b8c488d0e9ad8401e68a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -742,6 +752,7 @@ MonoBehaviour:
   sphereOn: 0
   engineerOn: 0
   carOn: 0
+  mechOn: 0
   charChangeDistance: 15
 --- !u!4 &1648872189
 Transform:
@@ -1067,6 +1078,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2000
       objectReference: {fileID: 0}
+    - target: {fileID: 7043425528274598356, guid: ccc92acf4600754418b982037b28ecbd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -25.199951
+      objectReference: {fileID: 0}
     - target: {fileID: 7043425528628067502, guid: ccc92acf4600754418b982037b28ecbd,
         type: 3}
       propertyPath: FollowCar
@@ -1087,6 +1103,16 @@ PrefabInstance:
       propertyPath: pointOfInterestIcon
       value: 
       objectReference: {fileID: 402755567}
+    - target: {fileID: 7043425528696373419, guid: ccc92acf4600754418b982037b28ecbd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -51.900024
+      objectReference: {fileID: 0}
+    - target: {fileID: 7043425528696373419, guid: ccc92acf4600754418b982037b28ecbd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -25.199951
+      objectReference: {fileID: 0}
     - target: {fileID: 7043425528829105940, guid: ccc92acf4600754418b982037b28ecbd,
         type: 3}
       propertyPath: m_LocalPosition.z

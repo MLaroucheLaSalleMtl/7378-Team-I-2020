@@ -16,6 +16,13 @@ public class SwitchBridge : MonoBehaviour
 
     private bool doOnce;
 
+    #region SFX 
+    [Space]
+    [Header("SFX")]
+    private AudioSource sfx;
+    [SerializeField] private AudioClip engineSFX;
+    #endregion
+
     void Start()
     {
         mat = GetComponent<Renderer>().material;
