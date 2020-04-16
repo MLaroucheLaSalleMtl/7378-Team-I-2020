@@ -30,6 +30,7 @@ public class MechHandler : MonoBehaviour
     public float canonSpeed;
     [SerializeField] private GameObject forceField;
     [SerializeField] private Transform body;
+    internal int enemies;
     #endregion
 
     #region Controlllers
@@ -63,7 +64,7 @@ public class MechHandler : MonoBehaviour
     [Range(0, 3)] public float shoots = 3.0f;
     private float defaultShoots = 3.0f;
     [SerializeField] private Text shieldTxt;
-    [Range(0, 4)] public float shieldBar = 3.1f;
+    [Range(0, 4)] public float shieldBar = 9.1f;
     private float defaultShield = 3.1f;
     [SerializeField] private Text shootsTxt;
     [Range(0, 9)] public int healthBar = 9;
@@ -94,7 +95,7 @@ public class MechHandler : MonoBehaviour
         sfx = GetComponent<AudioSource>();
         reset = true;
         canons.rotation = Quaternion.Euler(0, 0, -90);
-
+        enemies = enemy.Length;
         Invoke("SwitchON", 5f);
     }
 
@@ -128,11 +129,6 @@ public class MechHandler : MonoBehaviour
 
             Move();
             //RotateCanon(); NOT WORKING AS DESIRED
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha0)) //**********tester
-        {
-            GetHit();
         }
     }
 
@@ -252,7 +248,12 @@ public class MechHandler : MonoBehaviour
 
             if (hit.transform.tag == "Enemy")
             {
-                Debug.Log("Hit"); //phil: Code to reduce enemy healthBar - Waiting on Sidakpreet to finish enemy
+                hit.transform.gameObject.GetComponent<LastBossHandler>().GetHit();
+                 
+                if (enemies <= 0)
+                {
+                    Invoke("EndStage", 3f);
+                }
             }
         }
     }
@@ -272,7 +273,6 @@ public class MechHandler : MonoBehaviour
 
     public void GetHit()
     {
-
         if (forceField.activeSelf)
         {
             sfx.PlayOneShot(explosionShieldSfx);
@@ -351,7 +351,21 @@ public class MechHandler : MonoBehaviour
         sfx.PlayOneShot(activatedSfx);
         switchOn = true;
         CameraRigHandler.stageIndex = 1;
+        foreach (GameObject obj in enemy)
+        {
+            obj.GetComponent<LastBossHandler>().Begin();
+        }
     }
+
+    void EndStage()
+    {
+
+        Debug.Log("Load EndScene");
+        FindObjectOfType<GameManager>().LoadNewLevel("EndScene");
+        FindObjectOfType<GameManager>().ActivateNewScene();
+
+    }
+
 
     /*-------Methods from Unity Asset------*/
     //some changes were necessary to apply the script for the array of laserbeans

@@ -29,7 +29,7 @@ public class CarHandler : MonoBehaviour
     [SerializeField] [Range(1f, 45f)] private float maxSteeringAngle = 30f;
     [SerializeField] [Range(1f, 1500f)] private float maxTorque = 1500f;
     [SerializeField] [Range(1f, 100000f)] private float brakeTorque = 9000f;
-    private float maxSpeed = 15f;
+    private float maxSpeed = 50f;
     internal bool carMove; //phil: variable to control whether the Engineer or the Sphere sphereMove
     public bool carParked; //phil: car State
     private int speedForText;
@@ -53,11 +53,13 @@ public class CarHandler : MonoBehaviour
     [Space]
     [Header("SFX")]
     private AudioSource sfx;
-    [SerializeField] private AudioClip engineSFX;
+    [SerializeField] private AudioClip driftSFX;
+    [SerializeField] private AudioSource engineSFX;
     #endregion
 
     void Start()
     {
+        sfx = GetComponent<AudioSource>();
         carMove = false;
         if (carParked) anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
@@ -83,7 +85,6 @@ public class CarHandler : MonoBehaviour
         if (!carParked)
         {
             rb.isKinematic = false;
-
 
             if (angleTxt)
             {
@@ -156,9 +157,12 @@ public class CarHandler : MonoBehaviour
 
     private void Move()
     {
+        
         steeringAngle = Input.GetAxis("Horizontal") * maxSteeringAngle;
         wheelFLCol.steerAngle = steeringAngle;
         wheelFRCol.steerAngle = steeringAngle;
+
+        EngineSound();
 
         if (rb.velocity.magnitude < maxSpeed)
         {
@@ -204,6 +208,7 @@ public class CarHandler : MonoBehaviour
             wheelRLCol.brakeTorque = 0;
             wheelRRCol.brakeTorque = 0;
         }
+        DriftChecker(); //phil
     }
 
     private void Particle()
@@ -296,6 +301,24 @@ public class CarHandler : MonoBehaviour
         {
             speedForText = (int)(rb.velocity.magnitude * 3.6f);
             speedTxt.text = speedForText.ToString() + " Kph";
+        }
+    }
+
+    private void EngineSound() //by Philipe Gouveia
+    {
+        engineSFX.pitch = (int)(rb.velocity.magnitude * 3.6f) / maxSpeed + 1;
+    }
+
+    private void DriftChecker() //by Philipe Gouveia
+    {
+        if (Input.GetButton("Action1"))
+        {
+            sfx.PlayOneShot(driftSFX, 0.03f);
+            sfx.pitch = (int)(rb.velocity.magnitude * 3.6f) / maxSpeed + 1;
+        }
+        else
+        {
+            sfx.Stop();
         }
     }
 }

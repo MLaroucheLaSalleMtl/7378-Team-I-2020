@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 //by Sidakpreet Singh & Sohyun Yi & Philipe Gouveia
  
@@ -10,7 +11,23 @@ public class MainMenu_Controller : MonoBehaviour
     //Sohyun Yi & Sidakpreet & Philipe
     internal static int levelToLoad = 1;
     private string levelselect;
-    [SerializeField] private GameObject[] popUpMenus;
+    [SerializeField] private GameObject[] popUpMenus; //phil
+    [SerializeField] private Button[] buttons; //phil
+    private Color defaultColor;
+
+    private void Start() //phil
+    {
+        Input.ResetInputAxes();
+        defaultColor = buttons[0].colors.normalColor;
+    }
+
+    void Update() //Phil
+    {
+            if (Input.GetButtonDown("Cancel"))
+            {
+            CloseMenus();
+            }
+    }
 
     public void Start_Game() //Sidakpreet
     {
@@ -23,7 +40,27 @@ public class MainMenu_Controller : MonoBehaviour
         SceneManager.LoadScene(i);
     }
 
-    
+    public void CloseMenus() //Phil
+    {
+        Input.ResetInputAxes();
+        foreach (Button btn in buttons)
+        {
+            btn.enabled = true;
+        }
+
+        foreach (GameObject obj in popUpMenus)
+        {
+            obj.SetActive(false);
+        }
+    }
+
+    #region Main Menu Buttons
+    public void LevelSelectMenu() //Phil
+    {
+        CloseMenus();
+        popUpMenus[1].SetActive(!popUpMenus[1].activeSelf);
+    }
+
     public void OptionMenu() //Sohyun Yi
     {
         //bool state = optionMenu.activeSelf;
@@ -36,12 +73,6 @@ public class MainMenu_Controller : MonoBehaviour
     //{
     //    optionMenu.SetActive(false);
     //}
-
-    public void LevelSelectMenu() //Phil
-    {
-        CloseMenus();
-        popUpMenus[1].SetActive(!popUpMenus[1].activeSelf);
-    }
 
     public void CreditsMenu() //Phil
     {
@@ -69,20 +100,5 @@ public class MainMenu_Controller : MonoBehaviour
 			Application.Quit();
 #endif
     }
-
-    void Update() //Phil
-    {
-            if (Input.GetButtonDown("Cancel"))
-            {
-            CloseMenus();
-            }
-    }
-
-    public void CloseMenus() //Phil
-    {
-        foreach (GameObject obj in popUpMenus)
-        {
-            obj.SetActive(false);
-        }
-    }
+    #endregion
 }

@@ -20,11 +20,12 @@ public class SwitchBridge : MonoBehaviour
     [Space]
     [Header("SFX")]
     private AudioSource sfx;
-    [SerializeField] private AudioClip engineSFX;
+    [SerializeField] private AudioClip clickSFX;
     #endregion
 
     void Start()
     {
+        sfx = GetComponent<AudioSource>();
         mat = GetComponent<Renderer>().material;
         doOnce = true;
         mat.SetColor("_EmissionColor", Color.red);
@@ -54,6 +55,7 @@ public class SwitchBridge : MonoBehaviour
 
     public void OnClick()
     {
+        sfx.PlayOneShot(clickSFX);
         if (highlight) highlight.blink = false;
         if (nextHighlight) nextHighlight.SetActive(true);
         mat.SetColor("_EmissionColor", Color.green);

@@ -5303,12 +5303,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canMove: 1
+  speed: 5
+  rateOfTurn: 5
   sphere: {fileID: 0}
   sphereTag: PlayerSphere
   boxToCarry: {fileID: 0}
   stepSFX:
   - {fileID: 8300000, guid: 669d5732abd195d4a9fa584355e78b4e, type: 3}
   - {fileID: 8300000, guid: 8d0531344c5662749890a38b2acf5cdc, type: 3}
+  pickItemSFX: {fileID: 8300000, guid: 27d96563a5b9ad94493a8d7af49337e0, type: 3}
+  releaseItemSFX: {fileID: 8300000, guid: 78ff3a6dcd037bb4da059f3be3effbe1, type: 3}
+  jumpSFX: {fileID: 8300000, guid: 97157c16434d8e944af65a8f67dc0fae, type: 3}
+  turnSFX: {fileID: 8300000, guid: 9d39c71eba99ab747bcabaedc404a2a4, type: 3}
+  pushSFX: {fileID: 8300000, guid: c083c8a153ea18d41a2fdd9a0b670265, type: 3}
 --- !u!54 &8734154842863383923
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5365,7 +5372,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5409,7 +5416,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

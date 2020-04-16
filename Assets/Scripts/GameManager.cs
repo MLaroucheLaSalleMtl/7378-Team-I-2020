@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     public float charChangeDistance = 15f;
 
     #region SceneManagement
+    internal static int currentStage = 1;
     private AsyncOperation async;
     #endregion
 
@@ -91,7 +92,7 @@ public class GameManager : MonoBehaviour
                 if (Vector3.Magnitude(sphereCharacter.transform.position - engineerCharacter.transform.position) < charChangeDistance)
                 {
                     CharacterHandler();
-                    sfx.PlayOneShot(characterChangeSFX);
+                    sfx.PlayOneShot(characterChangeSFX, 1f);
                 }
                 else
                 {
@@ -154,12 +155,14 @@ public class GameManager : MonoBehaviour
             uiEngineer.SetActive(true);
             uiSphere.SetActive(false);
             uiCar.SetActive(false);
+            uiMech.SetActive(false);
         }
         else if (sphereCharacter.sphereMove)
         {
             uiEngineer.SetActive(false);
             uiSphere.SetActive(true);
             uiCar.SetActive(false);
+            uiMech.SetActive(false);
         }
     }
 
@@ -170,13 +173,13 @@ public class GameManager : MonoBehaviour
 
     public void LoadNewLevel(int sceneIndex)
     {
-        async = SceneManager.LoadSceneAsync(sceneIndex);
+        async = SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Single);
         async.allowSceneActivation = false;
     }
 
     public void LoadNewLevel(string name)
     {
-        async = SceneManager.LoadSceneAsync(name);
+        async = SceneManager.LoadSceneAsync(name, LoadSceneMode.Single);
         async.allowSceneActivation = false;
     }
 }

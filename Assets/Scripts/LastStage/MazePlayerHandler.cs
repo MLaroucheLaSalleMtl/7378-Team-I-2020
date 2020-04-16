@@ -25,9 +25,17 @@ public class MazePlayerHandler : MonoBehaviour
     
     private Rigidbody rb;
 
+    #region SFX 
+    [Space]
+    [Header("SFX")]
+    private AudioSource sfx;
+    [SerializeField] private AudioClip collisionSFX;
+    #endregion
+
     void Start()
     {
-        rb = GetComponent<Rigidbody>(); 
+        rb = GetComponent<Rigidbody>();
+        sfx = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -37,5 +45,11 @@ public class MazePlayerHandler : MonoBehaviour
         input = new Vector3(horizontal, 0, vertical);
         movement = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0) * input;
         rb.AddForce(movement * speed * Time.deltaTime, ForceMode.VelocityChange);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag != "mazeFloor")
+        sfx.PlayOneShot(collisionSFX);
     }
 }

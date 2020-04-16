@@ -21,15 +21,6 @@ TagManager:
   - PlayerCarUI
   - AiUI
   - TetrisBlock
-  - gridLeft
-  - gridTop
-  - gridRight
-  - gridBottom
-  - gridTL
-  - gridTR
-  - gridBL
-  - gridBR
-  - gridCenter
   - PlayerMechUI
   - Enemy
   layers:

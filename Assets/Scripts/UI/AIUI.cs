@@ -23,11 +23,12 @@ public class AIUI : MonoBehaviour
     [Space]
     [Header("SFX")]
     private AudioSource sfx;
-    [SerializeField] private AudioClip engineSFX;
+    [SerializeField] private AudioClip textSFX;
     #endregion
 
     private void Awake()
     {
+        sfx = GetComponent<AudioSource>();
         anim = GetComponent<Animation>();
         anim.clip = hideAnim;
         anim.Play();
@@ -38,12 +39,14 @@ public class AIUI : MonoBehaviour
 
     public void HidePanel()
     {
+        sfx.PlayOneShot(textSFX);
         anim.clip = hideAnim;
         anim.Play();
     }
 
     public void ShowPanel()
     {
+        sfx.PlayOneShot(textSFX);
         anim.clip = showAnim;
         anim.Play();
     }

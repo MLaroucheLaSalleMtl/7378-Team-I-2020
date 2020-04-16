@@ -6,13 +6,23 @@ using UnityEngine.UI;
 
 //by Sidakpreet Singh
 
+
 public class Settings : MonoBehaviour
 {
+
+
+
+    [SerializeField] private Slider audioMixerSlider; //phil
     [SerializeField] private AudioMixer audioMixer;   // to give the referenece to the audio we are using in this case using the audio mixer
+    [SerializeField] private Text volValue;
     [SerializeField] private string nameParameter;
+    [SerializeField] private Slider sfxSlider;
+    [SerializeField] private Text sfxValue;
+    [SerializeField] private string nameParameterSfx; //phil
+    
 
 
-    Resolution[] resolutions = Screen.resolutions;
+    Resolution[] resolutions;
 
     public Dropdown resolutiondropdown;  // in order to add all our resolutions
 
@@ -20,14 +30,18 @@ public class Settings : MonoBehaviour
     void Start()  
     {
         //for the volume
-        Slider slide = GetComponent<Slider>();
-        float v = PlayerPrefs.GetFloat(nameParameter, 0);
-        slide.value = v;
+        //Slider slide = GetComponent<Slider>(); //phil: commented in order to apply for the sfx as well
+        float v = PlayerPrefs.GetFloat(nameParameter, 0); 
+        audioMixerSlider.value = v;
+        volValue.text = System.Convert.ToInt32(v + 80).ToString(); //phil
 
+        float t = PlayerPrefs.GetFloat(nameParameterSfx, 0); //phil
+        sfxSlider.value = t; //phil
+        sfxValue.text = System.Convert.ToInt32(t + 80).ToString(); //phil
 
 
         // in order to get all the resolutions we have on our screen available 
-    
+        resolutions = Screen.resolutions;
         resolutiondropdown.ClearOptions();
 
         //adding our resultions using the string 
@@ -67,19 +81,24 @@ public class Settings : MonoBehaviour
     }
 
     //volume
-    public void SetVolume(float volume)
+    public void SetVolumeMusic(float volume)
     {
-        Slider slide = GetComponent<Slider>();
-        audioMixer.SetFloat(nameParameter, volume);
+        Slider slide = audioMixerSlider;
         slide.value = volume;
+        volValue.text = System.Convert.ToInt32(volume + 80).ToString();
+        audioMixer.SetFloat(nameParameter, volume);
         PlayerPrefs.SetFloat(nameParameter, volume);
         PlayerPrefs.Save();
     }
 
-    //quality
-    public void SetQuality(int qualityindex)  //0=low , 1= medium , 2= high
+    public void SetVolumeSFX(float volume)
     {
-        QualitySettings.SetQualityLevel(qualityindex);
+        Slider slide = sfxSlider;
+        slide.value = volume;
+        sfxValue.text = System.Convert.ToInt32(volume + 80).ToString();
+        audioMixer.SetFloat(nameParameterSfx, volume);
+        PlayerPrefs.SetFloat(nameParameterSfx, volume);
+        PlayerPrefs.Save();
     }
 
     //screen

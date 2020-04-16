@@ -44,12 +44,14 @@ public class SphereHandler : MonoBehaviour
     #endregion
 
     #region SFX 
-    //by Philipe Gouveia
     [Space]
     [Header("SFX")]
     private AudioSource sfx;
     [SerializeField] private AudioClip stepSFX;
     [SerializeField] private AudioClip openSFX;
+    [SerializeField] private AudioClip jumpSFX;
+    [SerializeField] private AudioClip rotateSFX;
+    [SerializeField] private AudioClip rollingSFX;
     #endregion
 
     void Start()
@@ -177,12 +179,6 @@ public class SphereHandler : MonoBehaviour
         }
     }
 
-    public void Jump()
-    {
-        controller.transform.rotation = Quaternion.identity;
-        anim.SetTrigger("Jump");
-        StartCoroutine(Jump(3.0f));
-    }
 
     IEnumerator Jump(float time)
     {
@@ -191,10 +187,32 @@ public class SphereHandler : MonoBehaviour
         yield return new WaitForSeconds(time * 0.2f);
         controller.radius *= 0.5f;
         yield return new WaitForSeconds(time * 0.7f);
-        StopCoroutine("Jump");
+        StopCoroutine(Jump(time));
+        yield return null;
+    }
+
+    #region Animation Events
+    public void Jump()
+    {
+        controller.transform.rotation = Quaternion.identity;
+        anim.SetTrigger("Jump");
+        sfx.PlayOneShot(jumpSFX);
+        StartCoroutine(Jump(3.0f));
     }
 
     public void Step()
     {
+        sfx.PlayOneShot(stepSFX);
     }
+
+    public void Rotate()
+    {
+        sfx.PlayOneShot(rotateSFX);
+    }
+
+    public void Rolling()
+    {
+        sfx.PlayOneShot(rollingSFX);
+    }
+    #endregion
 }

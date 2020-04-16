@@ -2298,8 +2298,11 @@ MonoBehaviour:
   engineer: {fileID: 0}
   engineerPos: {fileID: 0}
   followSpeed: 1.8
-  stepSFX: {fileID: 8300000, guid: c263d0fc35a1b4d31bff3de76d7b11f9, type: 3}
+  stepSFX: {fileID: 8300000, guid: fdd2bb537121ac04090e0d17ffcc3a10, type: 3}
   openSFX: {fileID: 8300000, guid: 8bc0249e5fd614ea7b26484aa9c91a7a, type: 3}
+  jumpSFX: {fileID: 8300000, guid: 03f5e86c9f8af40468e062c1662b3436, type: 3}
+  rotateSFX: {fileID: 8300000, guid: ad83b53cd73454bc8b3d398f5e2586f1, type: 3}
+  rollingSFX: {fileID: 8300000, guid: c3eda35741630e348a90b43fc379e268, type: 3}
 --- !u!143 &796112889
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2331,7 +2334,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2375,7 +2378,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

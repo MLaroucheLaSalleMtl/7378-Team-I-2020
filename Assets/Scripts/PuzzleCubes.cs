@@ -23,6 +23,8 @@ public class PuzzleCubes : MonoBehaviour
     [Space]
     public string switchTag = "switchForBox";
 
+    public float constraintResetTimer = 3f;
+
 
     void Awake()
     {
@@ -91,8 +93,8 @@ public class PuzzleCubes : MonoBehaviour
         rb.isKinematic = false;
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX;
-        Invoke("ResetConstraints", 4f);
-        transform.SetParent(null);
+        Invoke("ResetConstraints", constraintResetTimer);
+        transform.SetParent(null); 
         engineer.boxToCarry = null;
         GetComponent<BoxCollider>().enabled = true;
     }

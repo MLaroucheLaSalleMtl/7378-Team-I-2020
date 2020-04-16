@@ -43,6 +43,11 @@ public class EngineerHandler : MonoBehaviour
     [Header("SFX")]
     private AudioSource sfx;
     [SerializeField] private AudioClip[] stepSFX;
+    [SerializeField] private AudioClip pickItemSFX;
+    [SerializeField] private AudioClip releaseItemSFX;
+    [SerializeField] private AudioClip jumpSFX;
+    [SerializeField] private AudioClip turnSFX;
+    [SerializeField] private AudioClip pushSFX;
     #endregion
 
     void Start()
@@ -154,14 +159,6 @@ public class EngineerHandler : MonoBehaviour
         }
     }
 
-    public void PickItem()
-    {
-        if (boxToCarry)
-        {
-            boxToCarry.GetComponent<PuzzleCubes>().OnCarry();
-            bcol.enabled = true;
-        }
-    }
 
     IEnumerator CantMove(float time)
     {
@@ -172,13 +169,45 @@ public class EngineerHandler : MonoBehaviour
         yield return null;
     }
 
+    #region Animation Events
+    public void PickItem()
+    {
+        if (boxToCarry)
+        {
+            boxToCarry.GetComponent<PuzzleCubes>().OnCarry();
+            bcol.enabled = true;
+        }
+    }
+
+    public void Pick()
+    {
+        sfx.PlayOneShot(pickItemSFX);
+    }
+
+    public void ReleaseItem()
+    {
+        bcol.enabled = false;
+        sfx.PlayOneShot(releaseItemSFX);
+    }
+
+    public void JumpSFX()
+    {
+        sfx.PlayOneShot(jumpSFX);
+    }
+
     public void Step()
     {
         sfx.PlayOneShot(stepSFX[Random.Range(0, stepSFX.Length)]);
     }
 
-    public void ReleaseItem()
+    public void Turn()
     {
-            bcol.enabled = false;
+        sfx.PlayOneShot(turnSFX);
     }
+
+    public void Finger()
+    {
+        sfx.PlayOneShot(pushSFX);
+    }
+    #endregion
 }

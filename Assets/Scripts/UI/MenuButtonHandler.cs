@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 //by Philipe Gouveia & Sidakpreet Singh
 
-public class MenuButtonHandler : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IDeselectHandler, IPointerDownHandler
+public class MenuButtonHandler : MonoBehaviour, IPointerEnterHandler, IDeselectHandler, IPointerDownHandler
 {
     private AudioSource asource;
 
@@ -19,16 +19,6 @@ public class MenuButtonHandler : MonoBehaviour, IPointerClickHandler, IPointerEn
         asource = GetComponent<AudioSource>(); 
     }
 
-    public void OnPointerClick(PointerEventData eventData) //by Philipe Gouveia
-    {
-        asource.PlayOneShot(clickClip);
-        if (GetComponent<Button>() != null)
-        {
-            GetComponent<Button>().onClick.Invoke();
-            Input.ResetInputAxes();
-        }
-    }
-
     public void OnPointerEnter(PointerEventData eventData) //by Sidakpreet Singh
     {
         asource.PlayOneShot(hoverClip);
@@ -39,13 +29,15 @@ public class MenuButtonHandler : MonoBehaviour, IPointerClickHandler, IPointerEn
     {
         if (GetComponent<Button>() != null)
         {
-            GetComponent<Button>().onClick.Invoke();
-            Input.ResetInputAxes();
+            asource.PlayOneShot(clickClip);
+            //GetComponent<Button>().onClick.Invoke();
+            //Input.ResetInputAxes();
         }
     }
 
     public void OnDeselect(BaseEventData eventData) //by Sidakpreet Singh
     {
-        GetComponent<Selectable>().OnPointerExit(null);
+        //GetComponent<Selectable>().OnPointerExit(null);
+        //Input.ResetInputAxes();
     }
 }
