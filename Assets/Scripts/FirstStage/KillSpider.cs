@@ -26,7 +26,7 @@ public class KillSpider : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == GameManager.engineerTag)
+        if ((collision.gameObject.tag == GameManager.engineerTag) || (collision.gameObject.tag == GameManager.sphereTag))
         {
             Die();
         }

@@ -76,7 +76,8 @@ public class TetrisHandler : MonoBehaviour
 
     private void EndPuzzle()
     {
-        gap.SetActive(false);
+        sfx.PlayOneShot(endSFX);
+        //gap.SetActive(false);
         bridge.transform.position += new Vector3(0, 1, 0);
         foreach(GameObject obj in grid)
         {
@@ -92,7 +93,6 @@ public class TetrisHandler : MonoBehaviour
         controls[2].gameObject.SetActive(false);
         box.SetActive(false);
         switchReset.SetActive(false);
-        sfx.PlayOneShot(endSFX);
         Destroy(this);
     }
 

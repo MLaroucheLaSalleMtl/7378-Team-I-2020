@@ -314,7 +314,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 3be9bdab2ffca554aadb5d4240f61a9c, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 3508718574255868241, guid: 7596a8e5c803442468fbeb2649dea14e,
         type: 3}
       propertyPath: m_Parameters.alignment

@@ -104,12 +104,12 @@ public class CarHandler : MonoBehaviour
 
             Brake();
 
-            countdown -= Time.deltaTime; 
+            countdown -= Time.deltaTime;
 
             if (countdown <= 0) //phil: code inserted to avoid velocimeter to seens crazy
             {
                 Velocimeter();
-                countdown = velocimeterSmooth; 
+                countdown = velocimeterSmooth;
             }
 
             if (!Input.GetButton("Vertical")) //phil: code inserted to avoid the car to keep moving when not required
@@ -143,7 +143,7 @@ public class CarHandler : MonoBehaviour
                     rb.constraints = RigidbodyConstraints.FreezeRotation;
                     anim.SetBool("Close", true);
                     FindObjectOfType<TerrainLoader>().LoadTerrain();
-                    
+
                     //anim.SetTrigger("Movefwd");
 
                 }
@@ -157,7 +157,7 @@ public class CarHandler : MonoBehaviour
 
     private void Move()
     {
-        
+
         steeringAngle = Input.GetAxis("Horizontal") * maxSteeringAngle;
         wheelFLCol.steerAngle = steeringAngle;
         wheelFRCol.steerAngle = steeringAngle;
@@ -311,10 +311,11 @@ public class CarHandler : MonoBehaviour
 
     private void DriftChecker() //by Philipe Gouveia
     {
-        if (Input.GetButton("Action1"))
+        if ((Input.GetButton("Action1")) && ((int)(rb.velocity.magnitude * 3.6f) > 1))
         {
-            sfx.PlayOneShot(driftSFX, 0.03f);
-            sfx.pitch = (int)(rb.velocity.magnitude * 3.6f) / maxSpeed + 1;
+
+                sfx.PlayOneShot(driftSFX, 0.03f);
+                sfx.pitch = (int)(rb.velocity.magnitude * 3.6f) / maxSpeed + 1;
         }
         else
         {
