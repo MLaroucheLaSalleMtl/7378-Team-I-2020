@@ -78,6 +78,8 @@ public class MazeHandler : MonoBehaviour
         FindObjectOfType<GameManager>().carOn = false;
         FindObjectOfType<GameManager>().engineerOn = true;
         FindObjectOfType<GameManager>().sphereOn = false;
+        FindObjectOfType<EngineerHandler>().canMove = true;
+        FindObjectOfType<EngineerHandler>().anim.SetFloat("WalkSpeed", EngineerHandler.speed);
 
         CameraRigHandler.stageIndex = 0;
         FindObjectOfType<CameraRigHandler>().stage_PlaceHolders[0] = Transform.FindObjectOfType<EngineerHandler>().transform;

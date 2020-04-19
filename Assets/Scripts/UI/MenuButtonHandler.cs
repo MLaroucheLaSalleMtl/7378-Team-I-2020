@@ -21,7 +21,7 @@ public class MenuButtonHandler : MonoBehaviour, IPointerEnterHandler, IDeselectH
 
     public void OnPointerEnter(PointerEventData eventData) //by Sidakpreet Singh
     {
-        asource.PlayOneShot(hoverClip);
+        asource.PlayOneShot(hoverClip, 0.5f);
         GetComponent<Selectable>().Select();
     }
 

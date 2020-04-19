@@ -19,10 +19,10 @@ public class LastStageManager : MonoBehaviour
 
     void Update()
     {
-        if (isStage)
-        {
+        //if (isStage)
+        //{
 
-        }
+        //}
         if (isMaze)
         {
             if (Input.GetButtonDown("CharSwitcher"))

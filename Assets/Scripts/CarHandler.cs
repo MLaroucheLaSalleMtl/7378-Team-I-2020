@@ -112,8 +112,8 @@ public class CarHandler : MonoBehaviour
                 countdown = velocimeterSmooth;
             }
 
-            if (!Input.GetButton("Vertical")) //phil: code inserted to avoid the car to keep moving when not required
-            {
+            if (Input.GetAxis("Accelerate") > -0.1 && Input.GetAxis("Accelerate") < 0.1) //phil: code inserted to avoid the car to keep moving when not required
+            { //phil: Input.Manager "Accelerate" created to create more reliability and to support joystick
                 wheelFLCol.brakeTorque = brakeTorque;
                 wheelFRCol.brakeTorque = brakeTorque;
                 wheelRLCol.brakeTorque = brakeTorque;
@@ -166,8 +166,11 @@ public class CarHandler : MonoBehaviour
 
         if (rb.velocity.magnitude < maxSpeed)
         {
-            wheelFLCol.motorTorque = Input.GetAxis("Vertical") * maxTorque;
-            wheelFRCol.motorTorque = Input.GetAxis("Vertical") * maxTorque;
+            //wheelFLCol.motorTorque = Input.GetAxis("Vertical") * maxTorque;
+            //wheelFRCol.motorTorque = Input.GetAxis("Vertical") * maxTorque;
+
+            wheelFLCol.motorTorque = Input.GetAxis("Accelerate") * maxTorque; //phil: Input.Manager "accelerate" created to support joystick triggers
+            wheelFRCol.motorTorque = Input.GetAxis("Accelerate") * maxTorque; //phil: Input.Manager "accelerate" created to support joystick triggers
         }
         else
         {

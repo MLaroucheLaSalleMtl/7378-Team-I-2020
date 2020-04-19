@@ -441,7 +441,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingbar: {fileID: 707735004}
   txt: {fileID: 1258234989}
-  sceneToLoad: -1
 --- !u!82 &812306543
 AudioSource:
   m_ObjectHideFlags: 0
@@ -451,7 +450,7 @@ AudioSource:
   m_GameObject: {fileID: 812306538}
   m_Enabled: 0
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: b9c466ad450391043951e30fee55da14,
+  OutputAudioMixerGroup: {fileID: 5810647978108090976, guid: b9c466ad450391043951e30fee55da14,
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 769bb7c0fea23094b8c8ae4851f203e5, type: 3}
   m_PlayOnAwake: 1
@@ -774,7 +773,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100%
+  m_Text: 0 %
 --- !u!222 &1258234990
 CanvasRenderer:
   m_ObjectHideFlags: 0

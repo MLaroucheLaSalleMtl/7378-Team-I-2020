@@ -13,30 +13,31 @@ public class Loadingbar : MonoBehaviour
 
     [SerializeField] private Image loadingbar;
     [SerializeField] private Text txt;
-
-
-    [SerializeField] private int sceneToLoad = -1;  
+    //internal static int sceneToLoad;
+    internal static string sceneToLoadName = null;
+    private Scene loadScene;
 
     void Start()
     {
+        loadScene = SceneManager.GetSceneByName(sceneToLoadName);
+        
         Time.timeScale = 1.0f;
         Input.ResetInputAxes();
-        Scene currentscene = SceneManager.GetActiveScene();
+
+        //Scene currentscene = SceneManager.GetActiveScene();
+
         System.GC.Collect();
 
-
-        if (sceneToLoad < 0)  
+        if (loadScene == null)  
         {
-            async = SceneManager.LoadSceneAsync(currentscene.buildIndex + 1);
+            async = SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
         }
         else
         {
-            async = SceneManager.LoadSceneAsync(sceneToLoad);
+            async = SceneManager.LoadSceneAsync(sceneToLoadName, LoadSceneMode.Single);
         }
         async.allowSceneActivation = false;
-
     }
-    
 
     // Update is called once per frame
     void Update()
@@ -47,7 +48,7 @@ public class Loadingbar : MonoBehaviour
         }
         if (txt)  
         {
-            txt.text = ((async.progress + 0.1f) * 100).ToString("f2") + "%";
+            txt.text = ((async.progress + 0.1f) * 100).ToString() + "%";
         }
         if (async.progress > 0.89f)  
         {

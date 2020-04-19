@@ -72,7 +72,7 @@ public class CameraRigHandler : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetButtonDown("CameraClose"))
         {
             isTopView = !isTopView;
         }

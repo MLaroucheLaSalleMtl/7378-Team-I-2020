@@ -166,6 +166,7 @@ public class SphereHandler : MonoBehaviour
     {
         if (FindObjectOfType<GameManager>().sphereOn)
         {
+            followSpeed = EngineerHandler.speed;
             if (Vector3.Distance(transform.position, engineer.transform.position) >= followMaxDistance)
             {
                 Vector3 follow = new Vector3((engineer.transform.position.x - transform.position.x), 0, (engineer.transform.position.z - transform.position.z));

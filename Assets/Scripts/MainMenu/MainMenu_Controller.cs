@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 //by Sidakpreet Singh & Sohyun Yi & Philipe Gouveia
- 
+
 public class MainMenu_Controller : MonoBehaviour
 {
     //Sohyun Yi & Sidakpreet & Philipe
-    internal static int levelToLoad = 1;
+    internal static int levelToLoad = 2;
     private string levelselect;
     [SerializeField] private GameObject[] popUpMenus; //phil
     [SerializeField] private Button[] buttons; //phil
@@ -23,16 +23,12 @@ public class MainMenu_Controller : MonoBehaviour
 
     void Update() //Phil
     {
-            if (Input.GetButtonDown("Cancel"))
-            {
+        if (Input.GetButtonDown("Cancel"))
+        {
             CloseMenus();
-            }
+        }
     }
 
-    public void Start_Game() //Sidakpreet
-    {
-        SceneManager.LoadScene(levelToLoad);
-    }
 
     public void SelectLevelToLoad(string i) //Sidakpreet
     { //phil: changed to string to have it more reliable on the menu
@@ -52,9 +48,22 @@ public class MainMenu_Controller : MonoBehaviour
         {
             obj.SetActive(false);
         }
+        buttons[0].Select();
     }
 
     #region Main Menu Buttons
+    public void Start_Game() //Sidakpreet
+    {
+        Loadingbar.sceneToLoadName = "FirstStage";
+        SceneManager.LoadScene("LoadingScreen");
+    }
+
+
+    public void ResumeGame() //Phil
+    {
+        FindObjectOfType<GameManager>().LoadGame();
+    }
+
     public void LevelSelectMenu() //Phil
     {
         CloseMenus();
@@ -68,11 +77,6 @@ public class MainMenu_Controller : MonoBehaviour
         CloseMenus();
         popUpMenus[0].SetActive(!popUpMenus[0].activeSelf);
     }
-
-    //public void CloseOptionMenu() //Sohyun Yi
-    //{
-    //    optionMenu.SetActive(false);
-    //}
 
     public void CreditsMenu() //Phil
     {

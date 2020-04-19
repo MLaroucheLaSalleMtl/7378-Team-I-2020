@@ -36,40 +36,41 @@ public class GameBegin : MonoBehaviour
         StartCoroutine(Begin(6f));
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Backspace)) //TOBE removed - Just for testing purpose
-        {
-            FindObjectOfType<GameManager>().engineerOn = true;
-            Destroy(zion);
-            Destroy(zionLight);
-            Destroy(this);
-            GameObject.FindObjectOfType<SwitchBridge>().OnClick();
-            GameObject.FindObjectOfType<SwitchSphere>().OnClick();
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Backspace)) //TO BE removed - Just for testing purpose
+    //    {
+    //        FindObjectOfType<GameManager>().engineerOn = true;
+    //        Destroy(zion);
+    //        Destroy(zionLight);
+    //        Destroy(this);
+    //        GameObject.FindObjectOfType<SwitchBridge>().OnClick();
+    //        GameObject.FindObjectOfType<SwitchSphere>().OnClick();
 
-            SwitchWall[] tempWall = GameObject.FindObjectsOfType<SwitchWall>();
-            foreach (SwitchWall obj in tempWall)
-            {
-                obj.OnClick();
-            }
+    //        SwitchWall[] tempWall = GameObject.FindObjectsOfType<SwitchWall>();
+    //        foreach (SwitchWall obj in tempWall)
+    //        {
+    //            obj.OnClick();
+    //        }
 
-            SwitchFloor[] temp = GameObject.FindObjectsOfType<SwitchFloor>();
-            foreach (SwitchFloor obj in temp)
-            {
-                obj.OnOpen();
-            }
+    //        SwitchFloor[] temp = GameObject.FindObjectsOfType<SwitchFloor>();
+    //        foreach (SwitchFloor obj in temp)
+    //        {
+    //            obj.OnOpen();
+    //        }
 
-            spider.Die();
+    //        spider.Die();
 
-            FindObjectOfType<AIInstructions>().beginTutorial = true;
-        }
-    }
+    //        FindObjectOfType<AIInstructions>().beginTutorial = true;
+    //    }
+    //}
 
     IEnumerator Begin(float time)
     {
         yield return new WaitForSeconds(time * 0.7f);
         if (zion) zionAnim.SetBool("walkAway", true);
         yield return new WaitForSeconds(time * 0.1f);
+        if (zion) zionAnim.SetBool("endScene", true);
         FindObjectOfType<AIInstructions>().beginTutorial = true;
         yield return new WaitForSeconds(time * 0.4f);
         Destroy(zionLight);

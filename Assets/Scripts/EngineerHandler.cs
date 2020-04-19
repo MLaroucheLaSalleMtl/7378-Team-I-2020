@@ -21,13 +21,16 @@ public class EngineerHandler : MonoBehaviour
     public bool canMove = true;
     internal bool engineerMove = true; //variable to be used by the GameManager.cs in order to control whether the Engineer Robot can move
     private Rigidbody rb;
-    public float speed = 5f;
-    public float rateOfTurn = 5f;
+    internal static float speed = 2.2f;
+    public float rateOfTurn = 5000f;
     private Vector3 pos;
     private Quaternion rot;
+    private bool movefwd = true;
+
     #endregion
 
     #region Others
+    [Space]
     [Header("Sphere Game Object")]
     [SerializeField] internal GameObject sphere;
     [Tooltip("Sphere Tag is the string to be parsed into the script. Need to be the same as the tag of the Sphere GameObject")]
@@ -58,6 +61,7 @@ public class EngineerHandler : MonoBehaviour
         anim = GetComponent<Animator>();
         sphere = GameObject.FindGameObjectWithTag(sphereTag);
         sfx = GetComponent<AudioSource>();
+        anim.SetFloat("WalkSpeed", speed);
     }
 
     void Update()
@@ -86,8 +90,9 @@ public class EngineerHandler : MonoBehaviour
         }
         else
         {
-            anim.SetFloat("Horizontal", 0);
-            anim.SetFloat("Vertical", 0);
+            anim.SetBool("Movement", false);
+            anim.SetBool("TurnLeft", false);
+            anim.SetBool("TurnRight", false);
         }
     }
 
@@ -110,7 +115,7 @@ public class EngineerHandler : MonoBehaviour
                 anim.SetTrigger("TakeObject");
                 anim.SetBool("CarryObject", true);
             }
-            else 
+            else
             {
                 FindObjectOfType<AIUI>().ShowText("There is nothing to pick up");
             }
@@ -136,26 +141,83 @@ public class EngineerHandler : MonoBehaviour
     {
         if (canMove)
         {
-            anim.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
-            anim.SetFloat("Vertical", Input.GetAxis("Vertical"));
+            ForwardMovement();
 
-            //if (Input.GetButton("Vertical")) anim.SetBool("Move", true);
-            //else if (Input.GetButtonUp("Vertical")) anim.SetBool("Move", false);
+            LateralMovement();
 
-            //if (Input.GetAxis("Horizontal") >= 0.2f) anim.SetBool("TurnRight", true);
-            //else if (Input.GetAxis("Horizontal") <= -0.2f) anim.SetBool("TurnLeft", true);
-            //else { anim.SetBool("TurnLeft", false); anim.SetBool("TurnRight", false); }
-
-            //pos = transform.position + (transform.forward * (Input.GetAxis("Vertical") * speed * Time.deltaTime));
-            //rb.MovePosition(pos);
-
-            //rot = transform.rotation * Quaternion.Euler(Vector3.up * (rateOfTurn * Input.GetAxis("Horizontal") * Time.deltaTime));
-            //rb.MoveRotation(rot);
+            if (Input.GetButtonUp("Vertical"))
+            {
+                anim.SetBool("Movement", false);
+            }
+            if (Input.GetButtonUp("Horizontal"))
+            {
+                movefwd = true;
+                anim.SetBool("TurnLeft", false);
+                anim.SetBool("TurnRight", false);
+            }
         }
         else
         {
-            anim.SetFloat("Vertical", 0);
-            anim.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
+            anim.SetBool("Movement", false);
+
+            LateralMovement();
+        }
+    }
+
+    public void ForwardMovement()
+    {
+        //if (Input.GetButton("Vertical") && Input.GetAxis("Vertical") >= 0)
+        if (Input.GetAxis("Vertical") > 0.1)
+        {
+            if (movefwd)
+            {
+                anim.SetBool("Movement", true);
+
+                pos = transform.position + (transform.forward * (Input.GetAxis("Vertical") * speed * Time.deltaTime));
+                rb.MovePosition(pos);
+
+                rot = transform.rotation * Quaternion.Euler(Vector3.up * (rateOfTurn * Input.GetAxis("Horizontal") * Time.deltaTime));
+                rb.MoveRotation(rot);
+            }
+        }
+        else
+        {
+            anim.SetBool("Movement", false);
+        }
+    }
+
+    public void LateralMovement()
+    {
+        //if (!anim.GetBool("Movement") && Input.GetButton("Horizontal"))
+        if (!anim.GetBool("Movement"))
+        {
+            movefwd = false;
+
+            if (Input.GetAxis("Horizontal") > 0.1f)
+            {
+                anim.SetBool("TurnRight", true);
+                anim.SetBool("TurnLeft", false);
+            }
+            else if (Input.GetAxis("Horizontal") < -0.1f)
+            {
+                anim.SetBool("TurnLeft", true);
+                anim.SetBool("TurnRight", false);
+            }
+            else if (Input.GetButton("Vertical"))
+            {
+                anim.SetBool("TurnLeft", false);
+                anim.SetBool("TurnRight", false);
+                movefwd = true;
+            }
+
+            else
+            {
+                anim.SetBool("TurnLeft", false);
+                anim.SetBool("TurnRight", false);
+                movefwd = true;
+            }
+
+            //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(Vector3.up * 45), 1);
         }
     }
 
@@ -197,7 +259,7 @@ public class EngineerHandler : MonoBehaviour
 
     public void Step()
     {
-        sfx.PlayOneShot(stepSFX[Random.Range(0, stepSFX.Length)]);
+        sfx.PlayOneShot(stepSFX[Random.Range(0, stepSFX.Length)], 0.09f);
     }
 
     public void Turn()

@@ -12,11 +12,11 @@ public class MInimap : MonoBehaviour
     private float height = 650;
 
     //phil: code added to handle next stage highlight on the minimap
-    [SerializeField] private GameObject pointOfInterestIcon;
-    [SerializeField] private Transform poiTarget;
+    [SerializeField] private GameObject[] pointOfInterestIcon;
+    [SerializeField] private Transform[] poiStages;
 
     void Start()
-   {
+    {
         transform.position = FollowCar.position;
         offset = new Vector3(1, height, 1);
         //transform.SetParent(null);
@@ -24,11 +24,14 @@ public class MInimap : MonoBehaviour
 
     private void Update()
     {
-        carIcon.transform.position = FollowCar.position + new Vector3(1,600,1);
+        carIcon.transform.position = FollowCar.position + new Vector3(1, 600, 1);
         carIcon.transform.parent = FollowCar.transform;
 
-        pointOfInterestIcon.transform.position = poiTarget.position + new Vector3(1, 600, 1);
-        pointOfInterestIcon.transform.parent = poiTarget.transform;
+        for (int i = 0; i < poiStages.Length; i++)
+        {
+            pointOfInterestIcon[i].transform.position = poiStages[i].position + new Vector3(1, 600, 1);
+            //pointOfInterestIcon[i].transform.parent = poiStages[i].transform;
+        }
     }
 
     void LateUpdate()
@@ -36,7 +39,7 @@ public class MInimap : MonoBehaviour
         if (FollowCar != null)
         {
             transform.position = FollowCar.position + offset;
-                //Quaternion.LookRotation(-FollowCar.up, FollowCar.forward);
+            //Quaternion.LookRotation(-FollowCar.up, FollowCar.forward);
         }
     }
 }

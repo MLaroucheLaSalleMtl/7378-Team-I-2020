@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     public float charChangeDistance = 15f;
 
     #region SceneManagement
-    internal static int currentStage = 1;
+    internal static string currentStage = "MainMenu";
     private AsyncOperation async;
     #endregion
 
@@ -181,5 +181,17 @@ public class GameManager : MonoBehaviour
     {
         async = SceneManager.LoadSceneAsync(name, LoadSceneMode.Single);
         async.allowSceneActivation = false;
+    }
+
+    public static void SaveGame()
+    {
+        currentStage = SceneManager.GetActiveScene().name;
+    }
+
+    public void LoadGame()
+    {
+        Loadingbar.sceneToLoadName = currentStage;
+        LoadNewLevel("LoadingScreen");
+        ActivateNewScene();
     }
 }

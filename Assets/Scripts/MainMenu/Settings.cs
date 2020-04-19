@@ -12,12 +12,12 @@ public class Settings : MonoBehaviour
 
 
 
-    [SerializeField] private Slider audioMixerSlider; //phil
-    [SerializeField] private AudioMixer audioMixer;   // to give the referenece to the audio we are using in this case using the audio mixer
+    [SerializeField] private AudioMixer audioMixer; // to give the referenece to the audio we are using in this case using the audio mixer
+    [SerializeField] private Slider musicSlider; //phil: renamed in order to implement music and sfx sliders
     [SerializeField] private Text volValue;
     [SerializeField] private string nameParameter;
-    [SerializeField] private Slider sfxSlider;
-    [SerializeField] private Text sfxValue;
+    [SerializeField] private Slider sfxSlider; //phil
+    [SerializeField] private Text sfxValue; //phil
     [SerializeField] private string nameParameterSfx; //phil
     
 
@@ -32,7 +32,7 @@ public class Settings : MonoBehaviour
         //for the volume
         //Slider slide = GetComponent<Slider>(); //phil: commented in order to apply for the sfx as well
         float v = PlayerPrefs.GetFloat(nameParameter, 0); 
-        audioMixerSlider.value = v;
+        musicSlider.value = v;
         volValue.text = System.Convert.ToInt32(v + 80).ToString(); //phil
 
         float t = PlayerPrefs.GetFloat(nameParameterSfx, 0); //phil
@@ -83,7 +83,7 @@ public class Settings : MonoBehaviour
     //volume
     public void SetVolumeMusic(float volume)
     {
-        Slider slide = audioMixerSlider;
+        Slider slide = musicSlider;
         slide.value = volume;
         volValue.text = System.Convert.ToInt32(volume + 80).ToString();
         audioMixer.SetFloat(nameParameter, volume);
