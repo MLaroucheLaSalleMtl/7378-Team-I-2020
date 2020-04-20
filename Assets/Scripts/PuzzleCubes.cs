@@ -91,8 +91,9 @@ public class PuzzleCubes : MonoBehaviour
         isCarried = false;
         rb.useGravity = true;
         rb.isKinematic = false;
-        rb.constraints = RigidbodyConstraints.FreezeRotation;
-        rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX;
+        //rb.constraints = RigidbodyConstraints.FreezeRotation;
+        //| RigidbodyConstraints.FreezePositionX
+        rb.constraints = RigidbodyConstraints.FreezePositionZ;
         Invoke("ResetConstraints", constraintResetTimer);
         transform.SetParent(null); 
         engineer.boxToCarry = null;

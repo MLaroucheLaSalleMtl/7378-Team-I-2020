@@ -1003,7 +1003,7 @@ GameObject:
   - component: {fileID: 4659695584711624532}
   - component: {fileID: 8151102421140983513}
   m_Layer: 5
-  m_Name: DirectionTxt
+  m_Name: ShieldTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1049,7 +1049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19406372, g: 0.8396226, b: 0.31846672, a: 1}
+  m_Color: {r: 0.19215687, g: 0.19951281, b: 0.8392157, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2517,7 +2517,7 @@ GameObject:
   - component: {fileID: 7439899694805421071}
   - component: {fileID: 3334036370066148290}
   m_Layer: 5
-  m_Name: DirectionTxt
+  m_Name: ShootsTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2563,7 +2563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.18396226, g: 0.25712603, b: 0.735849, a: 1}
+  m_Color: {r: 0.19215687, g: 0.2, b: 0.8392157, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3038,8 +3038,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 15, y: 49}
-  m_SizeDelta: {x: 565.6, y: 30}
+  m_AnchoredPosition: {x: 15, y: 48.1}
+  m_SizeDelta: {x: 565.6, y: 46.2}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &6126896592468538388
 CanvasRenderer:
@@ -3069,10 +3069,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 44610ebdc52d7b1488df63d8f17f7bd5, type: 3}
-    m_FontSize: 14
+    m_FontSize: 12
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
+    m_BestFit: 1
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -3080,8 +3080,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "BATTLE MECH CONTROL:\nSHIELD - Hold <Action 3> for Shield | Push <Action
-    4> to shoot\n "
+  m_Text: 'BATTLE MECH CONTROL:
+
+    SHIELD - hold <Action 1> (space/A) | SHOOT -
+    push <Action 4> (E/Y)'
 --- !u!1 &3459655031458736431
 GameObject:
   m_ObjectHideFlags: 0
@@ -3273,7 +3275,7 @@ GameObject:
   - component: {fileID: 2819857687198195972}
   - component: {fileID: 5265997645248137649}
   m_Layer: 5
-  m_Name: DirectionTxt
+  m_Name: HealthBarTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3319,7 +3321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0.9811321, b: 0.379196, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -4426,7 +4428,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0

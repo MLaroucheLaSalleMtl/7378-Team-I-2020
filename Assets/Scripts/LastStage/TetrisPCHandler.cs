@@ -207,6 +207,7 @@ public class TetrisPCHandler : MonoBehaviour
             if (casters[0].hitTag != "C")
             {
                 forbiddenMove = true;
+                FindObjectOfType<AIUI>().ShowText("# IMPORTANT #\nTo flip the pieces, their central piece needs to be on the darker area of the grid.                                          ");
             }
 
             if (!forbiddenMove)

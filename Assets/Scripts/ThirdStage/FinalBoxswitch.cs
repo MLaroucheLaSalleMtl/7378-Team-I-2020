@@ -24,7 +24,7 @@ public class FinalBoxswitch : MonoBehaviour
         {
             FinalDoorAnim.SetTrigger("Open");
             FindObjectOfType<AIUI>().ShowText("You completed this stage. You have gained one key to access the last resource space ship.");
-            GameManager.hasKey2 = true;
+            GameManager.hasKey1 = true;
             FindObjectOfType<GameManager>().LoadNewLevel("Planet");
         }
     }

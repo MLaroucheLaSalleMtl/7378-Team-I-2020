@@ -21,12 +21,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject uiEngineer;
     public static string engineerTag = "PlayerEngineer";
     public static string engineerUItag = "PlayerEngineerUI";
-    public static string engineerName = "_ENGINEER_"; //engineer name to be used by others classes when sending instruction to the AI UI system 
+    public static string engineerName = "Bard"; //engineer name to be used by others classes when sending instruction to the AI UI system 
     [SerializeField] internal SphereHandler sphereCharacter;
     [SerializeField] GameObject uiSphere;
     public static string sphereTag = "PlayerSphere";
     public static string sphereUItag = "PlayerSphereUI";
-    public static string sphereName = "_SPHERE_"; //sphere name to be used by others classes when sending instruction to the AI UI system
+    public static string sphereName = "Teeny"; //sphere name to be used by others classes when sending instruction to the AI UI system
     [SerializeField] internal CarHandler carCharacter; //to be used when the car player is implemented so the game manager can activate it
     [SerializeField] GameObject uiCar; //to be used when the car player is implemented so the game manager can activate it
     public static string carTag = "PlayerCar";

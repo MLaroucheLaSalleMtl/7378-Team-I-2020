@@ -37,7 +37,9 @@ public class TetrisHandler : MonoBehaviour
         talk.Enqueue("To do so, you must select the type of piece you want to use by placing the box on the corresponding switch");
         talk.Enqueue("You can switch cameras with the Character Switcher key");
         talk.Enqueue("Remember that you can always reset your build progress by holding the reset switch on the left side of the room");
-        talk.Enqueue("# PIECES MOVEMENTS # \n - move - movement keys \n - flip =  Action 1  \n - place or replace = Action 4 \n - confirm the place = Action 3 \n                                  ");
+        talk.Enqueue("# PIECES MOVEMENTS # \n - move - movement keys \n - flip =  Jump btn (space/A) \n - place/replace = Act on btn (E/Y)\n - confirm = PICK UP btn (Q/X)                                                      ");
+        talk.Enqueue("# IMPORTANT #\nTo flip the pieces, their central piece needs to be on the darker area of the grid.                                          ");
+   
     }
 
 
@@ -68,7 +70,7 @@ public class TetrisHandler : MonoBehaviour
     {
         if (FindObjectOfType<LastStageManager>().isTetris && counter >= timeSpan)
         {
-            FindObjectOfType<AIUI>().ShowText("# PIECES MOVEMENTS # \n - move - movement keys \n - flip =  Action 1  \n - place or replace = Action 4 \n - confirm the place = Action 3 \n                                  ");
+            FindObjectOfType<AIUI>().ShowText("- move - movement keys \n - flip =  JUMP btn (space/A) \n - place/replace = ACT ON btn (E/Y)\n - confirm = PICK UP btn (Q/X)                                                   ");
             counter = 0;
         }
         else if (FindObjectOfType<LastStageManager>().isTetris)

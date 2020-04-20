@@ -10,9 +10,10 @@ public class EnterStageTester : MonoBehaviour
     public string stageName;
     private Queue<string> phare = new Queue<string>();
     public bool isFirstStage;
+    public bool noStage;
 
-    //[SerializeField] SpiderAI[] SpiderAgent;
-    private bombExplosion b;
+    [SerializeField] GameObject SpiderAgent;
+    public bombExplosion b;
 
     [SerializeField] private GameObject spawnPlaceHolder; //phil
     #region SFX
@@ -22,20 +23,19 @@ public class EnterStageTester : MonoBehaviour
 
     private void Start()
     {
-        b = FindObjectOfType<bombExplosion>();
-
         asour = GetComponent<AudioSource>();
         doOnce = true;
         if (isFirstStage)
         {
+            b = FindObjectOfType<bombExplosion>();
             //phare.Enqueue($"Now you entered the {stageName} zone to move to next stage. But, you cannot go inside the spaceship.                        ");
-            phare.Enqueue($"Now you entered the {stageName} zone. But, you cannot go further to other spaceships.                        ");
+            phare.Enqueue($"Now are at the {stageName} zone. But, you cannot go further.                        ");
             phare.Enqueue("There are spiders protecting them. If you go deeper inside, the spiders will follow and beleaguer you.                      ");
-            phare.Enqueue("To use your bomb towards spiders, press the ACTION 3 button.                                     ");
+            phare.Enqueue("To use your bomb towards spiders, press the PICK UP button (Q / X).                                     ");
         }
         else
         {
-            phare.Enqueue($"Now you entered the {stageName} zone. press ACTION 4 to enter the stage                         ");
+            phare.Enqueue($"Now you entered the {stageName} zone. press ACT ON button (E / Y) to enter the stage                         ");
         }
     }
 
@@ -47,7 +47,11 @@ public class EnterStageTester : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == GameManager.carTag)
+        {
+            SpiderAgent.SetActive(true);
+            if (!isFirstStage) b = FindObjectOfType<bombExplosion>();
             FindObjectOfType<AIUI>().ShowText(phare);
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -56,21 +60,31 @@ public class EnterStageTester : MonoBehaviour
         {
             if (b.SpiderIsDead)
             {
-                FindObjectOfType<AIUI>().ShowText("You have slained the spiders. Press ACTION 3 button to enter the spaceship.                             ");
-
-                if (Input.GetButtonDown("Action4"))
-                {
-                    asour.PlayOneShot(enterStageSound);
-                    Invoke("GoInsideShip", 2f);
-                    PlanetHandler.spawnerPos = spawnPlaceHolder.transform;
-                }
+                FindObjectOfType<AIUI>().ShowText("You have slained the spiders. Press ACT ON (E / Y) button to enter the spaceship.                             ");
             }
-            else
+            if (Input.GetButtonDown("Action4"))
             {
-                FindObjectOfType<AIUI>().ShowText("You have to kill all spider. To use your bomb towards spiders, press the ACTION 3 button.                                     ");
+                if (!noStage)
+                {
+                    if (b.SpiderIsDead)
+                    {
+                        asour.PlayOneShot(enterStageSound);
+                        Invoke("GoInsideShip", 2f);
+                        PlanetHandler.spawnerPos = spawnPlaceHolder.transform;
+                    }
+                    else
+                    {
+                        FindObjectOfType<AIUI>().ShowText("You have to kill all spider. To use your bomb towards spiders, press the PICK UP button (Q / X).                                     ");
+                    }
+                }
+                else if (noStage)
+                {
+                    FindObjectOfType<AIUI>().ShowText("This station is locked and empty. There is nothing to do here                                     ");
+                }
             }
         }
     }
+
 
     void GoInsideShip()
     {

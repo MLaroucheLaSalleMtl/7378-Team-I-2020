@@ -11,7 +11,7 @@ public class SpiderKiller : MonoBehaviour
     {
         if ((other.gameObject.tag == GameManager.engineerTag) || (other.gameObject.tag == GameManager.sphereTag))
         {
-            Invoke("Killer", 5f);
+            Invoke("Killer", 2f);
         }
     }
 

@@ -70,7 +70,7 @@ https://trello.com/b/18JjtMkI/7378-teami-2020
 
 *4.1 - Graphical Designs*
 
--Game Studio Design:
+-Game Studio Logo Design:
 by Phil Go, https://github.com/philipe-go
 
 -Game icon Design:
@@ -159,6 +159,7 @@ by Sound Engineer Champollion, instagram: @champs.music
 
 -Background Stages Music Pack:
 by Robson Cozendey, https://www.cozendey.com
+
 Planet by marcelofg55, https://opengameart.org/content/sci-fi-textures
 
 -SFX package I:

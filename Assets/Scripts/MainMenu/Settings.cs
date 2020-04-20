@@ -5,21 +5,28 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 
 //by Sidakpreet Singh
-
-
 public class Settings : MonoBehaviour
 {
 
 
 
     [SerializeField] private AudioMixer audioMixer; // to give the referenece to the audio we are using in this case using the audio mixer
-    [SerializeField] private Slider musicSlider; //phil: renamed in order to implement music and sfx sliders
+    [SerializeField] private Slider musicSlider;
     [SerializeField] private Text volValue;
     [SerializeField] private string nameParameter;
     [SerializeField] private Slider sfxSlider; //phil
     [SerializeField] private Text sfxValue; //phil
     [SerializeField] private string nameParameterSfx; //phil
-    
+
+    //by Philipe Gouveia
+    #region Character name's Handler
+    [SerializeField] private Text engineerDefault; 
+    [SerializeField] private Text sphereDefault;
+    [SerializeField] private Text engineerNew;
+    [SerializeField] private Text sphereNew;
+    private string engineerName; 
+    private string sphereName;
+    #endregion
 
 
     Resolution[] resolutions;
@@ -70,6 +77,10 @@ public class Settings : MonoBehaviour
         resolutiondropdown.RefreshShownValue();   // in order to display
 
 
+        engineerName = GameManager.engineerName; //philipe
+        engineerDefault.text = engineerName; //philipe
+        sphereName = GameManager.sphereName; //philipe
+        sphereDefault.text = sphereName; //philipe
     }
 
     //updating the resolution    
@@ -105,6 +116,19 @@ public class Settings : MonoBehaviour
     public void SetFullScreen(bool fullscreen)
     {
         Screen.fullScreen = !Screen.fullScreen;
+    }
 
+    public void SetEngineerName() //phil
+    {
+        GameManager.engineerName = engineerNew.text;
+        engineerNew.text = "";
+        engineerDefault.text = GameManager.engineerName;
+    }
+
+    public void SetSphereName() //phil
+    {
+        GameManager.sphereName = sphereNew.text;
+        sphereNew.text = "";
+        sphereDefault.text = GameManager.sphereName;
     }
 }
