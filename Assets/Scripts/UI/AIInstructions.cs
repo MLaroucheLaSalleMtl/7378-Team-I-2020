@@ -16,8 +16,8 @@ public class AIInstructions : MonoBehaviour
     {
         instruction.Enqueue("... ... ...");
         instruction.Enqueue($"Hello, {GameManager.engineerName}...");
-        instruction.Enqueue("<<You can SWITCH BETWEEN CAMERAS to explore the room using = keyboard [1] and [2] / Joystick [L] and [R] shoulder>>          ");
-        instruction.Enqueue("<<to INTERACT with switches you must use -> keyboard [E]  / Joystick [Y] >>        ");
+        instruction.Enqueue("You can SWITCH BETWEEN CAMERAS to explore the room using = keyboard [1] and [2] / Joystick [L] and [R] shoulder>>          ");
+        instruction.Enqueue("to INTERACT with switches you must use -> keyboard [E]  / Joystick [Y] >>        ");
         instruction.Enqueue("... ... ...");
 
         history.Enqueue("My system shows that we are at the year 287 D.M.; what means we were switched off for about 13 years... ... ...");

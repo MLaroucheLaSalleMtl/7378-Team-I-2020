@@ -27,7 +27,7 @@ public class CarHandler : MonoBehaviour
     #region Movement Variables
     [SerializeField] [Range(1f, 45f)] private float steeringAngle;
     [SerializeField] [Range(1f, 45f)] private float maxSteeringAngle = 30f;
-    [SerializeField] [Range(1f, 1500f)] private float maxTorque = 1500f;
+    [SerializeField] [Range(500f, 10000f)] private float maxTorque = 1500f;
     [SerializeField] [Range(1f, 100000f)] private float brakeTorque = 9000f;
     private float maxSpeed = 50f;
     internal bool carMove; //phil: variable to control whether the Engineer or the Sphere sphereMove

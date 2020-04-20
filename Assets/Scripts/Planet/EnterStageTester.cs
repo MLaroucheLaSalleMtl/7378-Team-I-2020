@@ -8,10 +8,15 @@ public class EnterStageTester : MonoBehaviour
     private bool doOnce = true;
     public string sceneName;
     public string stageName;
-    private Queue<string> phare = new Queue<string>();
-    public bool isFirstStage;
+    private Queue<string> phares = new Queue<string>();
+    private string enterPhase;
+    public bool FirstStage;
     public bool noStage;
-
+    public bool SecondStage;
+    public bool LastStage;
+    [SerializeField] private bool canEnter;
+    public int stageNumber = 0;
+    [SerializeField] SpiderAI[] SpiderList;
     [SerializeField] GameObject SpiderAgent;
     public bombExplosion b;
 
@@ -25,22 +30,31 @@ public class EnterStageTester : MonoBehaviour
     {
         asour = GetComponent<AudioSource>();
         doOnce = true;
-        if (isFirstStage)
+        if (FirstStage)
         {
             b = FindObjectOfType<bombExplosion>();
-            //phare.Enqueue($"Now you entered the {stageName} zone to move to next stage. But, you cannot go inside the spaceship.                        ");
-            phare.Enqueue($"Now are at the {stageName} zone. But, you cannot go further.                        ");
-            phare.Enqueue("There are spiders protecting them. If you go deeper inside, the spiders will follow and beleaguer you.                      ");
-            phare.Enqueue("To use your bomb towards spiders, press the PICK UP button (Q / X).                                     ");
+            phares.Enqueue($"You are at the {stageName} zone. But, you cannot go further.                        ");
+            phares.Enqueue("There are spiders protecting them. If you go deeper inside, the spiders will follow and beleaguer you.                      ");
+            phares.Enqueue("To use your bomb towards spiders, press the PICK UP button (Q / X).                                     ");
         }
+
         else
         {
-            phare.Enqueue($"Now you entered the {stageName} zone. press ACT ON button (E / Y) to enter the stage                         ");
+            enterPhase = ($"You entered the {stageName} zone. press ACT ON button (E / Y) to enter the stage                         ");
         }
     }
 
     private void Update()
     {
+        foreach (SpiderAI spd in SpiderList)
+        {
+            if (spd.isDead == true) canEnter = true;
+            else
+            {
+                canEnter = false;
+                break;
+            }
+        }
         //if (spiderList.Count <= 0) canEnter = true;
     }
 
@@ -48,9 +62,34 @@ public class EnterStageTester : MonoBehaviour
     {
         if (other.gameObject.tag == GameManager.carTag)
         {
-            SpiderAgent.SetActive(true);
-            if (!isFirstStage) b = FindObjectOfType<bombExplosion>();
-            FindObjectOfType<AIUI>().ShowText(phare);
+
+            if (!canEnter)
+                FindObjectOfType<AIUI>().ShowText(phares);
+            else if (canEnter)
+                FindObjectOfType<AIUI>().ShowText(enterPhase);
+
+            if (!FirstStage)
+            {
+                PlanetHandler.spawnerPos = spawnPlaceHolder.transform;
+                SpiderAgent.SetActive(true);
+                b = FindObjectOfType<bombExplosion>();
+            }
+            else if (SecondStage)
+            {
+                if (bombExplosion.secondSpidersDead == true) canEnter = true;
+                else canEnter = false;
+            }
+            else if (LastStage)
+            {
+                if (bombExplosion.lastSpidersDead == true) canEnter = true;
+                else canEnter = false;
+            }
+            if (noStage)
+            {
+                canEnter = false;
+            }
+
+            b.stageNumber = stageNumber;
         }
     }
 
@@ -58,15 +97,11 @@ public class EnterStageTester : MonoBehaviour
     {
         if (other.gameObject.tag == GameManager.carTag)
         {
-            if (b.SpiderIsDead)
-            {
-                FindObjectOfType<AIUI>().ShowText("You have slained the spiders. Press ACT ON (E / Y) button to enter the spaceship.                             ");
-            }
             if (Input.GetButtonDown("Action4"))
             {
                 if (!noStage)
                 {
-                    if (b.SpiderIsDead)
+                    if (canEnter)
                     {
                         asour.PlayOneShot(enterStageSound);
                         Invoke("GoInsideShip", 2f);
@@ -85,6 +120,13 @@ public class EnterStageTester : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == GameManager.carTag)
+        {
+            SpiderAgent.SetActive(false);
+        }
+    }
 
     void GoInsideShip()
     {

@@ -7,30 +7,42 @@ public class bombExplosion : MonoBehaviour
 {
     [SerializeField] private float force = 10f;
     [SerializeField] private GameObject bombProjectile;
-    
+
     [SerializeField] private AudioSource ExplosionSound;
     [SerializeField] private AudioSource DeadSound;
-    [SerializeField] private GameObject[] Spiders;
+    [SerializeField] private GameObject[] SpidersSecond;
+    [SerializeField] private GameObject[] SpidersFinal;
+    [SerializeField] private GameObject[] SpidersFirst;
+    [SerializeField] private GameObject[] SpidersThirdStage;
     [SerializeField] private Animator[] SpiderAnim;
     public bool SpiderIsDead = false;
+    public static bool firstSpidersDead = false;
+    public static bool secondSpidersDead = false;
+    public static bool lastSpidersDead = false;
+    public int stageNumber;
+
+    private void Awake()
+    {
+        stageNumber = 1;
+    }
 
     void Start()
     {
-        for (int i = 0; i < Spiders.Length; i++)
-        {
-            SpiderAnim[i] = Spiders[i].GetComponent<Animator>();
-        }
+        //for (int i = 0; i < Spiders.Length; i++)
+        //{
+        //    SpiderAnim[i] = Spiders[i].GetComponent<Animator>();
+        //}
     }
     void Update()
     {
-        if(Input.GetButtonDown("Action3"))
+        if (Input.GetButtonDown("Action3"))
         {
             ExplodeBomb();
-            
+
             Invoke("Boom", 3f);
             Invoke("SpiderDead", 10f);
         }
-        
+
     }
     void ExplodeBomb()
     {
@@ -45,15 +57,44 @@ public class bombExplosion : MonoBehaviour
         {
             SpiderAnim[i].SetTrigger("Dead");
         }
-        SpiderIsDead = true;
+        //SpiderIsDead = true;
     }
+
     void SpiderDead()
     {
-        for(int i=0; i<Spiders.Length; i++)
-        {
-            Destroy(Spiders[i]);
-        }
         DeadSound.Play();
+        FindObjectOfType<AIUI>().ShowText("You have slained the spiders. Press ACT ON (E / Y) button to enter the spaceship.                             ");
+        if (stageNumber == 1)
+        {
+            firstSpidersDead = true;
+            for (int i = 0; i < SpidersFirst.Length; i++)
+            {
+                Destroy(SpidersFirst[i]);
+            }
+        }
+        else if (stageNumber == 2)
+        {
+            secondSpidersDead = true;
+            for (int i = 0; i < SpidersFirst.Length; i++)
+            {
+                Destroy(SpidersSecond[i]);
+            }
+        }
+        else if (stageNumber == 3)
+        {
+            lastSpidersDead = true;
+            for (int i = 0; i < SpidersFirst.Length; i++)
+            {
+                Destroy(SpidersFinal[i]);
+            }
+        }
+        else if (stageNumber == 0)
+        {
+            for (int i = 0; i < SpidersFirst.Length - 1; i++)
+            {
+                Destroy(SpidersThirdStage[i]);
+            }
+        }
     }
 
     /*

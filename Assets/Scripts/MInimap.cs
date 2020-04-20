@@ -25,6 +25,7 @@ public class MInimap : MonoBehaviour
     private void Update()
     {
         carIcon.transform.position = FollowCar.position + new Vector3(1, 600, 1);
+        carIcon.transform.rotation = FollowCar.rotation.normalized * Quaternion.Euler(90, 0, FollowCar.rotation.y); //phil
         carIcon.transform.parent = FollowCar.transform;
 
         for (int i = 0; i < poiStages.Length; i++)

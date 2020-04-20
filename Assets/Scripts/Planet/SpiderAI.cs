@@ -11,8 +11,9 @@ public class SpiderAI : MonoBehaviour
     int AgentNumber = 10;
     Transform OriginalPosition = null;
     [SerializeField] Transform PlayerPosition = null;
-    private bombExplosion b;
+    private bombExplosion b = null;
     public float speed = 3f;
+    public bool isDead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,10 +25,21 @@ public class SpiderAI : MonoBehaviour
         PlayerPosition = FindObjectOfType<CarHandler>().transform;
     }
 
+    private void Update()
+    {
+        if (b != null)
+        {
+            if (Input.GetButtonDown("Action3"))
+            {
+                isDead = true;
+            }
+        }
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!b.SpiderIsDead)
+        if (!isDead)
         {
             MoveSpider();
         }
@@ -78,7 +90,6 @@ public class SpiderAI : MonoBehaviour
         PlayerPosition = null;
         playerPosition = null;
         InvokeRepeating("MoveSpider", 0f, 0.5f);
-
     }
 
 
