@@ -1,10 +1,12 @@
+![PSY](./Manual/PSY.png?Style=centerme)
+
 # INTO THE UNKNOWN - UNITY ENGINE PROJECT #
-
-Demo - https://www.icloud.com/iclouddrive/0wOAY8lTG9uRzvKf-Rvy0oK5g#DemoBuild
-
 
 ![Cover](./Manual/Background.png?Style=centerme)
 
+#######################################################################
+
+Build - 
 
 #######################################################################
 
@@ -24,6 +26,7 @@ Demo - https://www.icloud.com/iclouddrive/0wOAY8lTG9uRzvKf-Rvy0oK5g#DemoBuild
 
 - Sidakpreet Singh
 
+
 #######################################################################
 
 **Section 1: About the Game**
@@ -42,46 +45,130 @@ Demo - https://www.icloud.com/iclouddrive/0wOAY8lTG9uRzvKf-Rvy0oK5g#DemoBuild
 
 ![ControlScheme2](./Manual/ControlScheme2.png)
 
+![ControlScheme3](./Manual/ControlScheme3.png)
+
       2.2 - Important Visuals:
       
 ![Iconography](./Manual/Iconography.png)
 
+![Iconography2](./Manual/Iconography2.png)
+
+
+**Section 3: Development Process**
+
+https://trello.com/b/18JjtMkI/7378-teami-2020
+
 **Section 4: References**
+
+*4.0 - Game Design*
+
+-by Phil go, https://github.com/philipe-go
+
+-by Sohyun Yi, https://github.com/s2ohyun
+
+-by Sidakpreet Singh, https://github.com/Sidak27
+
+*4.1 - Graphical Designs*
+
+-Game Studio Design:
+by Phil Go, https://github.com/philipe-go
+
+-Game icon Design:
+by Phil go, https://github.com/philipe-go
 
 -Engineer Character Design:
 by Papa_Dragon, http://www.blendswap.com/blends/view/75153.
 
 -Sphere Character Design:
-By 3DHaupt, https://www.blendswap.com/blend/21770
+by 3DHaupt, https://www.blendswap.com/blend/21770
 
 -Car Vehicle Design:
-By Mikel007, http://www.blendswap.com/blends/view/77885
+by Mikel007, http://www.blendswap.com/blends/view/77885
 
--Keyboard, mouse and joystick icons:
+-Mech Robot Design:
+by Triplebrick, https://assetstore.unity.com/packages/3d/characters/robots/the-assault-mech-90395
+
+-Keyboard icon:
+by hxtremechaos, https://www.deviantart.com/hxtremechaos/art/Hexagon-Keyboard-494072667
+
+-Joystick icon:
 SihanLiu, https://www.iconfinder.com/icons/1536922/controller_elite_gamer_xbox_one_icon
 
--In-Game Fonts:
+-In-Game Font:
 Earth 2072 by Lukas Krakora, http://www.typewriterfonts.net
 
--First level environmental assets:
+-Environmental assets:
+
 3D Sci-fi Starter Kit, https://assetstore.unity.com/packages/3d/environments/3d-scifi-kit-starter-kit-92152
+
 Sci-Fi Modular Pack, https://assetstore.unity.com/packages/3d/environments/sci-fi/sci-fi-modular-pack-free-39538
+
 3D Free modular kit, https://assetstore.unity.com/packages/3d/environments/3d-free-modular-kit-85732
+
 Modular Sci-Fi Corridor, https://assetstore.unity.com/packages/3d/environments/sci-fi/modular-sci-fi-corridor-142811
+
 Sci-Fi Styled Modular Pack, https://assetstore.unity.com/packages/3d/environments/sci-fi/sci-fi-styled-modular-pack-82913
+
+Modular Sci-Fi Corridor, https://assetstore.unity.com/packages/3d/environments/sci-fi/modular-sci-fi-corridor-142811
+
+Sci-Fi Styled Modular Pack, https://assetstore.unity.com/packages/3d/environments/sci-fi/sci-fi-styled-modular-pack-82913
+
+Terrain Tools, by MGEAR, https://assetstore.unity.com/packages/tools/terrain/terrain-tools-64852
+
+Hi-Rez Spaceships Creator Free Sample, by Ebal Studios, https://assetstore.unity.com/packages/3d/vehicles/space/hi-rez-spaceships-creator-free-sample-153363
+
+SpaceShip Free Model, by thomasmattia, https://free3d.com/ko/3d-model/spacecraft-54534.html
+Space Station Scene, by 3dhaupt, https://free3d.com/ko/3d-model/spacestation-scene-520279.html
+
+Sci-Fi TopDown view Pack, https://assetstore.unity.com/packages/3d/environments/sci-fi/top-down-scifi-modular-environment-100524
+
+
+-Skybox for space: 
+SpaceSkies Free, by PUSAR BYTES, https://assetstore.unity.com/packages/2d/textures-materials/sky/spaceskies-free-80503
+
+-Bomb design: 
+by Yughues Free Bomb, by Nobiax / Yughues, https://assetstore.unity.com/packages/3d/props/weapons/yughues-free-bombs-13147
+
+-Particle Systems:
+Explosion - by Unity Particle Pack, by Unity Technologies, https://assetstore.unity.com/packages/essentials/tutorial-projects/unity-particle-pack-127325
 
 -Spider Design:
 By Kalamona, https://assetstore.unity.com/packages/3d/characters/creatures/free-fantasy-spider-10104
 
 -Spider Web Design: 
-by Vul Gerstal, UNITY 3D - SPIDER WEBS IN CORNERS & PLANTS [TUTORIAL], https://www.youtube.com/watch?v=kMM9q0I8mFE
-By Vul Gerstal, UNITY 3D - SPIDER WEB, PLANT AND BLOOD, https://www.youtube.com/watch?v=4cQoSpV0-MQ
+by Vul Gerstal, [TUTORIAL] https://www.youtube.com/watch?v=kMM9q0I8mFE, https://www.youtube.com/watch?v=4cQoSpV0-MQ
 
 -Door Design:
 By Highground Assets, https://assetstore.unity.com/packages/3d/environments/sci-fi-environment-84496
 
+-Engineer Robot Background:
+by Papa_Dragon, http://www.blendswap.com/blends/view/75153.
+
+-Bomb explosion:
+Throwing and add particle system to the bomb: GRENADES / BOMBS 
+by Brackeys [TUTORIAL] https://www.youtube.com/watch?v=BYL6JtUdEY0
+
+*4.2 - UI Design*
 -In-Game UI:
 SlimUI, https://assetstore.unity.com/packages/tools/gui/slimui-tech-menu-133049
 
--Engineer Robot Background:
-by Papa_Dragon, http://www.blendswap.com/blends/view/75153.
+*4.3 - Sound Effects and Musics*
+
+-Background Main Menu Music:
+by Sound Engineer Champollion, instagram: @champs.music 
+
+-Background Stages Music Pack:
+by Robson Cozendey, https://www.cozendey.com
+Planet by marcelofg55, https://opengameart.org/content/sci-fi-textures
+
+-SFX package I:
+by Sound Engineer Champollion, instagram: @champs.music
+
+-SFX package II:
+by Game Epic Media, http://epicstockmedia.com
+
+-Explosion sound: 
+explosion sounds, by Unnamed https://opengameart.org/content/9-explosion-sounds
+
+-Spider Dead sound:
+Ghost by marcelofg55, https://opengameart.org/content/ghost
