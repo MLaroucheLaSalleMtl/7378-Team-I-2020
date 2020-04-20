@@ -8,7 +8,8 @@ public class DoorTrigger : MonoBehaviour
 {
     private Animator anim;
     public bool test;
-    private bool hasKeys;
+    private bool hasKey1 = false;
+    private bool hasKey2 = false;
     public string aiText;
     private bool doOnce;
 
@@ -22,8 +23,13 @@ public class DoorTrigger : MonoBehaviour
 
     private void Start()
     {
-        if (test) hasKeys = true;
-        //else (hasKeys = GameManager.) to replace by the GameManager control of keys from others stages
+        if (test) hasKey1 = true;
+        if (test) hasKey2 = true;
+        else
+        {
+            hasKey1 = GameManager.hasKey1;
+            hasKey2 = GameManager.hasKey2;
+        }
         doOnce = false;
         anim = GetComponent<Animator>();
         sfx = GetComponent<AudioSource>();
@@ -31,13 +37,13 @@ public class DoorTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (hasKeys)
+        if (hasKey1 && hasKey2)
         {
             if (other.gameObject.tag == GameManager.engineerTag)
             { anim.SetBool("isOpen", true); }
             sfx.PlayOneShot(openSFX);
         }
-        if (!hasKeys)
+        else
         {
             if (!doOnce)
             {

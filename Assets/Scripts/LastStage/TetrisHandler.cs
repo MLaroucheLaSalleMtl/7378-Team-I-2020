@@ -6,14 +6,17 @@ using UnityEngine;
 
 public class TetrisHandler : MonoBehaviour
 {
+    #region Objects Control
     [SerializeField] private Transform cameraPlaceHolder;
     [SerializeField] private TetrisPCSpawner[] controls;
     [SerializeField] private GameObject bridge;
     [SerializeField] private GameObject[] grid;
     [SerializeField] private GameObject[] pieces;
     [SerializeField] private GameObject gap;
+    [SerializeField] private GameObject newGap;
     [SerializeField] private GameObject box;
     [SerializeField] private GameObject switchReset;
+    #endregion
 
     private Queue<string> talk = new Queue<string>();
     private float counter = 0;
@@ -77,7 +80,8 @@ public class TetrisHandler : MonoBehaviour
     private void EndPuzzle()
     {
         sfx.PlayOneShot(endSFX);
-        //gap.SetActive(false);
+        gap.SetActive(false);
+        newGap.SetActive(true);
         bridge.transform.position += new Vector3(0, 1, 0);
         foreach(GameObject obj in grid)
         {

@@ -318,7 +318,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Mech Fight
+  m_Text: Lets Fight
 --- !u!222 &65731465
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2113,7 +2113,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Planet 319.2
+  m_Text: Planet M282
 --- !u!222 &367310031
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5301,7 +5301,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1151298656
 RectTransform:
   m_ObjectHideFlags: 0

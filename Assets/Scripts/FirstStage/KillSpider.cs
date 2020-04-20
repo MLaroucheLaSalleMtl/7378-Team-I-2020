@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //by Sohyun Yi
-
 public class KillSpider : MonoBehaviour
 {
     [SerializeField] private Animator anim;
@@ -15,7 +14,7 @@ public class KillSpider : MonoBehaviour
     {
         anim.SetBool("Dead", true); //phil: isntead of trigger I changed to boolean
 
-        FindObjectOfType<AIUI>().ShowText("You killed the spider and the spider web is removed.");
+        FindObjectOfType<AIUI>().ShowText("The spider has died. spider and the spider web is removed.");
         //web.SetActive(false); //phil: is it not better to destroy the gameObject?
         Destroy(web);
         Invoke("Remove", 1.5f);

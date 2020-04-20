@@ -10,7 +10,7 @@ public class LoadLastStage : MonoBehaviour
     {
         if (other.gameObject.tag == GameManager.engineerTag)
         {
-            FindObjectOfType<GameManager>().LoadNewLevel(5);
+            FindObjectOfType<GameManager>().LoadNewLevel("FinalBoss");
             FindObjectOfType<AIUI>().ShowText("After passing through the teleport portal you will not be allowed to go back");
         }
     }

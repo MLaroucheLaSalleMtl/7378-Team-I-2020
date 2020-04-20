@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
     #region SceneManagement
     internal static string currentStage = "MainMenu";
     private AsyncOperation async;
+    internal static bool hasKey1 = false;
+    internal static bool hasKey2 = false;
     #endregion
 
     #region SFX

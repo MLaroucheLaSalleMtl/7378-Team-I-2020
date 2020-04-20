@@ -21,7 +21,7 @@ public class EngineerHandler : MonoBehaviour
     public bool canMove = true;
     internal bool engineerMove = true; //variable to be used by the GameManager.cs in order to control whether the Engineer Robot can move
     private Rigidbody rb;
-    internal static float speed = 2.2f;
+    internal static float speed = 2.4f;
     public float rateOfTurn = 5000f;
     private Vector3 pos;
     private Quaternion rot;
@@ -264,7 +264,7 @@ public class EngineerHandler : MonoBehaviour
 
     public void Turn()
     {
-        sfx.PlayOneShot(turnSFX);
+        sfx.PlayOneShot(turnSFX, 0.09f);
     }
 
     public void Finger()
